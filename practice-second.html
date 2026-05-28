@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2차 문제풀이 | 보상관리사 기출분석</title>
+    <meta name="description" content="보상관리사 2차 보상실무 객관식과 단답ㆍ약술형 연습 페이지">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="보상관리사 기출분석 홈">
+        <span class="brand-mark" aria-hidden="true">補</span>
+        <span>보상관리사 기출분석</span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="exam-map.html">시험지도</a>
+        <a href="archive.html">기출정리</a>
+        <a href="practice.html" aria-current="page">문제풀이</a>
+        <a href="law.html">이해하기</a>
+        <a href="frequency.html">출제빈도</a>
+        <a href="strategy.html">과목전략</a>
+        <a href="drill.html">실전점검</a>
+        <a href="plan.html">회독계획</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section id="practice" class="section page-section" data-round="2차" aria-labelledby="practice-title">
+        <div class="section-heading">
+          <p class="eyebrow">Second Round</p>
+          <h1 id="practice-title">2차 시험 문제풀이</h1>
+          <p>
+            보상실무 1ㆍ2 객관식 기출을 풉니다. 객관식 풀이 뒤에는 과목별 답안 해석이 표시되고,
+            아래에서 단답ㆍ약술형 핵심 키워드를 별도로 확인할 수 있습니다.
+          </p>
+        </div>
+        <div class="practice-shell">
+          <aside class="practice-controls" aria-label="2차 문제풀이 필터">
+            <label>
+              문제 구분
+              <select id="practice-bank"></select>
+            </label>
+            <label>
+              연도
+              <select id="practice-year"></select>
+            </label>
+            <label>
+              과목
+              <select id="practice-subject"></select>
+            </label>
+            <button id="practice-reset" type="button">다시 풀기</button>
+            <div class="practice-score" aria-live="polite">
+              <span>현재 점수</span>
+              <strong id="practice-score">0 / 0</strong>
+            </div>
+          </aside>
+          <div id="practice-card" class="practice-card"></div>
+        </div>
+      </section>
+
+      <section id="written-bank" class="section section-split muted-band" aria-labelledby="written-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Written Practice</p>
+          <h2 id="written-title">2차 단답ㆍ약술형 연습</h2>
+          <p>
+            2차 주관식은 정답 문장을 통째로 외우기보다 쟁점 키워드가 빠지지 않게 쓰는 훈련이 중요합니다.
+          </p>
+        </div>
+        <div id="written-list" class="written-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>2차 객관식은 현재 확보된 2022년 보상실무 1ㆍ2 기출 기준입니다.</p>
+      <p><a href="practice-first.html">1차 문제풀이로 이동</a></p>
+    </footer>
+
+    <script src="question-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

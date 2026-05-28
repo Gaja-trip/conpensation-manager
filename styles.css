@@ -368,6 +368,11 @@ h3 {
   font-size: 14px;
 }
 
+.practice-menu-grid {
+  max-width: 760px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .section {
   padding: 56px 0;
 }
@@ -650,8 +655,9 @@ h3 {
   color: var(--ink);
 }
 
-.answer-explanation p:last-child {
+.answer-explanation .explanation-body {
   color: var(--muted);
+  white-space: pre-line;
 }
 
 .practice-nav {

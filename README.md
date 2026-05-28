@@ -11,7 +11,9 @@
 - `index.html`: 페이지 구조
 - `exam-map.html`: 시험지도
 - `archive.html`: 2018~2025 기출 확보 현황
-- `practice.html`: 기출ㆍ예상 문제풀이와 답안 해석
+- `practice.html`: 1차ㆍ2차 문제풀이 선택
+- `practice-first.html`: 1차 기출ㆍ예상 문제풀이와 문항별 답안 해석
+- `practice-second.html`: 2차 객관식 문제풀이와 단답ㆍ약술형 연습
 - `law.html`: 토지보상법 이해하기 패널과 법령 노트
 - `frequency.html`: 반복 출제 주제
 - `strategy.html`: 과목별 전략, 오답 신호, 2차 답안 프레임
@@ -20,6 +22,7 @@
 - `styles.css`: 반응형 스타일
 - `question-data.js`: 구조화한 객관식 문제, 주관식 연습 주제, 연도별 확보 현황
 - `adapted-question-data.js`: 민법과 부동산관계법규 1차 예상 문제
+- `first-exam-explanations.js`: 2018ㆍ2022년 1차 문항별 해설 데이터
 - `law-guide-data.js`: 토지보상법 이해하기 패널과 법령 노트 링크
 - `script.js`: 분석 데이터, 탭, 필터, 체크리스트, 문제풀이 인터랙션
 - `laws/`: 토지보상법, 시행령, 시행규칙 핵심 조문 노트

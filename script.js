@@ -311,22 +311,26 @@ function fillSelect(select, values, allLabel = "전체") {
 
 function setupPracticeFilters() {
   if (!$("#practice-year")) return;
-  fillSelect($("#practice-bank"), uniqueValues(questionBank, "bank"));
-  fillSelect($("#practice-year"), uniqueValues(questionBank, "year"));
-  fillSelect($("#practice-round"), uniqueValues(questionBank, "round"));
-  fillSelect($("#practice-subject"), uniqueValues(questionBank, "subject"));
+  const lockedRound = $("#practice")?.dataset.round || "";
+  const filterPool = lockedRound ? questionBank.filter((item) => item.round === lockedRound) : questionBank;
+  fillSelect($("#practice-bank"), uniqueValues(filterPool, "bank"));
+  fillSelect($("#practice-year"), uniqueValues(filterPool, "year"));
+  if ($("#practice-round")) fillSelect($("#practice-round"), uniqueValues(filterPool, "round"));
+  fillSelect($("#practice-subject"), uniqueValues(filterPool, "subject"));
 
   ["#practice-bank", "#practice-year", "#practice-round", "#practice-subject"].forEach((selector) => {
-    $(selector).addEventListener("change", resetPractice);
+    const control = $(selector);
+    if (control) control.addEventListener("change", resetPractice);
   });
   $("#practice-reset").addEventListener("click", resetPractice);
   resetPractice();
 }
 
 function selectedPracticeItems() {
+  const lockedRound = $("#practice")?.dataset.round || "";
   const bank = $("#practice-bank").value;
   const year = $("#practice-year").value;
-  const round = $("#practice-round").value;
+  const round = lockedRound || $("#practice-round")?.value || "전체";
   const subject = $("#practice-subject").value;
 
   return questionBank.filter((item) => {
@@ -428,11 +432,13 @@ function createAnswerExplanation(item, chosen) {
   box.append(createElement("h3", "", "답안 해석"));
   box.append(createElement("p", "", `내가 고른 답: ${chosen}번 ${chosenChoice}`));
   box.append(createElement("p", "", `정답: ${item.answer}번 ${correctChoice}`));
-  box.append(createElement("p", "", getQuestionExplanation(item, correctChoice)));
+  box.append(createElement("p", "explanation-body", getQuestionExplanation(item, correctChoice)));
   return box;
 }
 
 function getQuestionExplanation(item, correctChoice) {
+  const mappedExplanation = window.QUESTION_EXPLANATIONS?.[item.id];
+  if (mappedExplanation) return mappedExplanation;
   if (item.explanation) return item.explanation;
 
   const guides = {
