@@ -1,2 +1,14 @@
-# conpensation-manager
-problem
+# 보상관리사 기출분석 웹페이지
+
+2018년, 2022년 보상관리사 기출 PDF 4개를 분석해 만든 정적 웹페이지입니다.
+
+## 열기
+
+`index.html` 파일을 브라우저에서 열면 됩니다. 별도 서버나 설치 과정은 필요하지 않습니다.
+
+## 구성
+
+- `index.html`: 페이지 구조
+- `styles.css`: 반응형 스타일
+- `script.js`: 분석 데이터, 탭, 필터, 체크리스트, 퀴즈 인터랙션
+- `analysis/extracted/`: PDF에서 추출한 분석용 텍스트
