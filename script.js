@@ -237,7 +237,15 @@ const adaptedQuestions = (window.ADAPTED_QUESTIONS || []).map((item) => ({
   ...item,
   bank: item.bank === "변형문제" ? "예상문제" : item.bank || "예상문제",
 }));
-const questionBank = [...baseQuestions, ...adaptedQuestions];
+const crawledFirstQuestions = (window.CRAWLED_FIRST_QUESTIONS || []).map((item) => ({
+  ...item,
+  bank: item.bank || "사이트크롤링",
+}));
+const cbtbankAdaptedQuestions = (window.CBTBANK_ADAPTED_QUESTIONS || []).map((item) => ({
+  ...item,
+  bank: item.bank || "CBTBank변환",
+}));
+const questionBank = [...baseQuestions, ...adaptedQuestions, ...crawledFirstQuestions, ...cbtbankAdaptedQuestions];
 const writtenBank = window.WRITTEN_PROMPTS || [];
 const yearArchive = window.YEAR_STATUS || [];
 const lawUnderstanding = window.LAW_UNDERSTANDING || [];
@@ -430,10 +438,114 @@ function createAnswerExplanation(item, chosen) {
   const chosenChoice = item.choices?.[chosen - 1] || "";
   const box = createElement("div", "answer-explanation");
   box.append(createElement("h3", "", "답안 해석"));
-  box.append(createElement("p", "", `내가 고른 답: ${chosen}번 ${chosenChoice}`));
-  box.append(createElement("p", "", `정답: ${item.answer}번 ${correctChoice}`));
-  box.append(createElement("p", "explanation-body", getQuestionExplanation(item, correctChoice)));
+
+  const summary = createElement("div", "answer-summary");
+  summary.append(createAnswerSummaryCard("내가 고른 답", `${chosen}번`, chosenChoice, chosen === item.answer ? "good" : "bad"));
+  summary.append(createAnswerSummaryCard("정답", `${item.answer}번`, correctChoice, "good"));
+  box.append(summary);
+
+  box.append(createFormattedExplanation(getQuestionExplanation(item, correctChoice)));
   return box;
+}
+
+function createAnswerSummaryCard(label, number, text, tone) {
+  const card = createElement("div", `answer-summary-card ${tone}`);
+  card.append(createElement("span", "", label));
+  card.append(createElement("strong", "", number));
+  card.append(createElement("p", "", text));
+  return card;
+}
+
+function createFormattedExplanation(text) {
+  const root = createElement("div", "explanation-body");
+  const normalized = normalizeExplanationText(text);
+  if (!normalized) return root;
+
+  const blocks = normalized.split(/\n{2,}/).map((block) => block.trim()).filter(Boolean);
+  blocks.forEach((block) => appendExplanationBlock(root, block));
+  return root;
+}
+
+function normalizeExplanationText(text) {
+  return String(text || "")
+    .replace(/\r/g, "")
+    .replace(/\*\*(문제 요약|해설 및 풀이|실생활 예시|오답 노트)\s*:\*\*/g, "$1:")
+    .replace(/\*\*오답 노트\*\*/g, "오답 노트:")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function appendExplanationBlock(root, block) {
+  const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
+  if (!lines.length) return;
+
+  const first = lines[0];
+  const labelMatch = first.match(/^(공유 페이지 크롤링 해설|보완 해설|문제 요약|해설 및 풀이|실생활 예시|오답 노트):?\s*(.*)$/);
+  if (labelMatch) {
+    const section = createElement("section", "explanation-section");
+    section.append(createElement("h4", "", labelMatch[1]));
+    const bodyLines = [labelMatch[2], ...lines.slice(1)].filter(Boolean);
+    appendExplanationLines(section, bodyLines);
+    root.append(section);
+    return;
+  }
+
+  const titleLine = lines.length === 1 && first.length <= 70 && !/[.다요]$/.test(first);
+  if (titleLine) {
+    root.append(createElement("h4", "explanation-title", first));
+    return;
+  }
+
+  const section = createElement("section", "explanation-section");
+  appendExplanationLines(section, lines);
+  root.append(section);
+}
+
+function appendExplanationLines(parent, lines) {
+  const listItems = [];
+  const paragraphs = [];
+
+  lines.forEach((line) => {
+    const listMatch = line.match(/^(\d+\.|[①②③④⑤⑥⑦⑧⑨⑩]|[-•])\s*(.*)$/);
+    if (listMatch) {
+      listItems.push(listMatch[2] || line);
+    } else {
+      paragraphs.push(line);
+    }
+  });
+
+  if (paragraphs.length) {
+    paragraphs.forEach((line) => {
+      const p = createElement("p");
+      p.innerHTML = formatInlineExplanation(line);
+      parent.append(p);
+    });
+  }
+
+  if (listItems.length) {
+    const list = createElement("ul", "explanation-list");
+    listItems.forEach((line) => {
+      const item = createElement("li");
+      item.innerHTML = formatInlineExplanation(line);
+      list.append(item);
+    });
+    parent.append(list);
+  }
+}
+
+function formatInlineExplanation(text) {
+  return escapeHtml(text)
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(정답|핵심|주의|오답|판례|요건|효과|절차)/g, "<mark>$1</mark>");
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function getQuestionExplanation(item, correctChoice) {

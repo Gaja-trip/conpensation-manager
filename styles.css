@@ -639,7 +639,7 @@ h3 {
 
 .answer-explanation {
   margin-top: 14px;
-  padding: 16px;
+  padding: 18px;
   border: 1px solid #cddedb;
   border-left: 4px solid var(--teal);
   border-radius: 8px;
@@ -647,17 +647,127 @@ h3 {
 }
 
 .answer-explanation h3 {
+  margin: 0;
   font-size: 17px;
 }
 
-.answer-explanation p {
-  margin: 8px 0 0;
+.answer-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.answer-summary-card {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.answer-summary-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.answer-summary-card strong {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 19px;
+}
+
+.answer-summary-card.good strong {
+  color: var(--teal);
+}
+
+.answer-summary-card.bad strong {
+  color: var(--coral);
+}
+
+.answer-summary-card p {
+  margin: 6px 0 0;
   color: var(--ink);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .answer-explanation .explanation-body {
-  color: var(--muted);
-  white-space: pre-line;
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+  color: var(--ink);
+}
+
+.explanation-title,
+.explanation-section {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #d8e6e3;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.explanation-title,
+.explanation-section h4 {
+  color: var(--teal);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.explanation-section h4 {
+  margin: 0 0 8px;
+}
+
+.explanation-section p {
+  margin: 7px 0 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.62;
+}
+
+.explanation-section p:first-child {
+  margin-top: 0;
+}
+
+.explanation-list {
+  display: grid;
+  gap: 7px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.explanation-list li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.explanation-list li::before {
+  position: absolute;
+  top: 0.7em;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  content: "";
+}
+
+.explanation-section strong {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.explanation-section mark {
+  padding: 0 3px;
+  border-radius: 4px;
+  background: #fff0c9;
+  color: inherit;
 }
 
 .practice-nav {
@@ -1225,6 +1335,10 @@ h3 {
   }
 
   .topic-row {
+    grid-template-columns: 1fr;
+  }
+
+  .answer-summary {
     grid-template-columns: 1fr;
   }
 
