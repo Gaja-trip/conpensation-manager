@@ -6,10 +6,23 @@ const sourceDir = path.join(root, "analysis", "extracted", "cbtbank");
 const outputPath = path.join(sourceDir, "cbtbank-relevant-topics.json");
 
 const files = [
-  { file: "labor-civil-2024.html", label: "공인노무사 1차(민법) 2024", url: "https://cbtbank.kr/exam/cgg20240525" },
   { file: "g1-2024.html", label: "공인중개사 1차 2024", url: "https://cbtbank.kr/exam/g120241026" },
+  { file: "g1-2023.html", label: "공인중개사 1차 2023", url: "https://cbtbank.kr/exam/g120231028" },
+  { file: "g1-2022.html", label: "공인중개사 1차 2022", url: "https://cbtbank.kr/exam/g120221029" },
+  { file: "g1-2021.html", label: "공인중개사 1차 2021", url: "https://cbtbank.kr/exam/g120211030" },
+  { file: "g1-2020.html", label: "공인중개사 1차 2020", url: "https://cbtbank.kr/exam/g120201031" },
   { file: "g2-2024.html", label: "공인중개사 2차 2024", url: "https://cbtbank.kr/exam/g220241026" },
+  { file: "g2-2023.html", label: "공인중개사 2차 2023", url: "https://cbtbank.kr/exam/g220231028" },
+  { file: "g2-2022.html", label: "공인중개사 2차 2022", url: "https://cbtbank.kr/exam/g220221029" },
+  { file: "g2-2021.html", label: "공인중개사 2차 2021", url: "https://cbtbank.kr/exam/g220211030" },
+  { file: "g2-2020.html", label: "공인중개사 2차 2020", url: "https://cbtbank.kr/exam/g220201031" },
   { file: "appraiser-2025-1.html", label: "감정평가사 1차 1교시 2025", url: "https://cbtbank.kr/exam/cek20250405" },
+  { file: "appraiser-2024-1.html", label: "감정평가사 1차 1교시 2024", url: "https://cbtbank.kr/exam/cek20240406" },
+  { file: "appraiser-2023-1.html", label: "감정평가사 1차 1교시 2023", url: "https://cbtbank.kr/exam/cek20230408" },
+  { file: "appraiser-2022-1.html", label: "감정평가사 1차 1교시 2022", url: "https://cbtbank.kr/exam/cek20220402" },
+  { file: "appraiser-2021-1.html", label: "감정평가사 1차 1교시 2021", url: "https://cbtbank.kr/exam/cek20210424" },
+  { file: "labor-civil-2025.html", label: "공인노무사 1차(민법) 2025", url: "https://cbtbank.kr/exam/cgg20250524" },
+  { file: "labor-civil-2024.html", label: "공인노무사 1차(민법) 2024", url: "https://cbtbank.kr/exam/cgg20240525" },
 ];
 
 const subjectRules = [
