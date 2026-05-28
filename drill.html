@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>실전점검 | 보상관리사 기출분석</title>
+    <meta name="description" content="보상관리사 실전 점검 카드로 약점을 확인하는 페이지">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="보상관리사 기출분석 홈">
+        <span class="brand-mark" aria-hidden="true">補</span>
+        <span>보상관리사 기출분석</span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="exam-map.html">시험지도</a>
+        <a href="archive.html">기출정리</a>
+        <a href="practice.html">문제풀이</a>
+        <a href="law.html">이해하기</a>
+        <a href="frequency.html">출제빈도</a>
+        <a href="strategy.html">과목전략</a>
+        <a href="drill.html" aria-current="page">실전점검</a>
+        <a href="plan.html">회독계획</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section id="drill" class="section page-section" aria-labelledby="drill-title">
+        <div class="section-heading">
+          <p class="eyebrow">Drill</p>
+          <h1 id="drill-title">실전 점검 카드</h1>
+          <p>기출 문장을 그대로 외우기보다 판단 기준을 짧은 질문으로 확인합니다.</p>
+        </div>
+        <div id="quiz-filters" class="segmented" role="tablist" aria-label="실전 점검 필터"></div>
+        <div id="quiz-list" class="quiz-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>정답 카드는 핵심 기준을 빠르게 회독하기 위한 보조 자료입니다.</p>
+      <p><a href="plan.html">회독계획으로 이동</a></p>
+    </footer>
+
+    <script src="question-data.js"></script>
+    <script src="adapted-question-data.js"></script>
+    <script src="law-guide-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

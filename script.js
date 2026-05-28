@@ -229,9 +229,19 @@ const planItems = [
 ];
 
 const $ = (selector) => document.querySelector(selector);
-const questionBank = window.PAST_QUESTIONS || [];
+const baseQuestions = (window.PAST_QUESTIONS || []).map((item) => ({
+  ...item,
+  bank: item.bank || "기출문제",
+}));
+const adaptedQuestions = (window.ADAPTED_QUESTIONS || []).map((item) => ({
+  ...item,
+  bank: item.bank === "변형문제" ? "예상문제" : item.bank || "예상문제",
+}));
+const questionBank = [...baseQuestions, ...adaptedQuestions];
 const writtenBank = window.WRITTEN_PROMPTS || [];
 const yearArchive = window.YEAR_STATUS || [];
+const lawUnderstanding = window.LAW_UNDERSTANDING || [];
+const lawNoteFiles = window.LAW_NOTE_FILES || [];
 let practiceItems = [];
 let practiceIndex = 0;
 let practiceAnswers = new Map();
@@ -245,6 +255,7 @@ function createElement(tag, className, text) {
 
 function renderExamMap() {
   const root = $("#exam-map");
+  if (!root) return;
   root.innerHTML = "";
 
   examPapers.forEach((paper) => {
@@ -300,11 +311,12 @@ function fillSelect(select, values, allLabel = "전체") {
 
 function setupPracticeFilters() {
   if (!$("#practice-year")) return;
+  fillSelect($("#practice-bank"), uniqueValues(questionBank, "bank"));
   fillSelect($("#practice-year"), uniqueValues(questionBank, "year"));
   fillSelect($("#practice-round"), uniqueValues(questionBank, "round"));
   fillSelect($("#practice-subject"), uniqueValues(questionBank, "subject"));
 
-  ["#practice-year", "#practice-round", "#practice-subject"].forEach((selector) => {
+  ["#practice-bank", "#practice-year", "#practice-round", "#practice-subject"].forEach((selector) => {
     $(selector).addEventListener("change", resetPractice);
   });
   $("#practice-reset").addEventListener("click", resetPractice);
@@ -312,12 +324,14 @@ function setupPracticeFilters() {
 }
 
 function selectedPracticeItems() {
+  const bank = $("#practice-bank").value;
   const year = $("#practice-year").value;
   const round = $("#practice-round").value;
   const subject = $("#practice-subject").value;
 
   return questionBank.filter((item) => {
     return (
+      (bank === "전체" || item.bank === bank) &&
       (year === "전체" || String(item.year) === year) &&
       (round === "전체" || item.round === round) &&
       (subject === "전체" || item.subject === subject)
@@ -347,7 +361,7 @@ function renderPractice() {
   const chosen = practiceAnswers.get(item.id);
 
   const meta = createElement("div", "practice-meta");
-  [item.source, `${practiceIndex + 1} / ${practiceItems.length}`, `문항 ${item.no}`].forEach((text) => {
+  [item.bank, item.source, `${practiceIndex + 1} / ${practiceItems.length}`, `문항 ${item.no}`].forEach((text) => {
     meta.append(createElement("span", "tag", text));
   });
   root.append(meta);
@@ -384,6 +398,10 @@ function renderPractice() {
   }
   root.append(result);
 
+  if (chosen !== undefined) {
+    root.append(createAnswerExplanation(item, chosen));
+  }
+
   const nav = createElement("div", "practice-nav");
   const prev = createElement("button", "", "이전");
   prev.type = "button";
@@ -401,6 +419,31 @@ function renderPractice() {
   });
   nav.append(prev, next);
   root.append(nav);
+}
+
+function createAnswerExplanation(item, chosen) {
+  const correctChoice = item.choices?.[item.answer - 1] || "";
+  const chosenChoice = item.choices?.[chosen - 1] || "";
+  const box = createElement("div", "answer-explanation");
+  box.append(createElement("h3", "", "답안 해석"));
+  box.append(createElement("p", "", `내가 고른 답: ${chosen}번 ${chosenChoice}`));
+  box.append(createElement("p", "", `정답: ${item.answer}번 ${correctChoice}`));
+  box.append(createElement("p", "", getQuestionExplanation(item, correctChoice)));
+  return box;
+}
+
+function getQuestionExplanation(item, correctChoice) {
+  if (item.explanation) return item.explanation;
+
+  const guides = {
+    민법: "민법 문제는 등기 필요 여부, 물권변동의 원인, 점유의 성질, 상속 효과처럼 ‘원칙과 예외’를 가르는 방식으로 해석하면 오답을 줄일 수 있습니다.",
+    부동산관계법규: "부동산관계법규 문제는 정의, 허가권자, 절차 순서, 제한 효과를 분리해서 보아야 합니다. 선택지가 법률명은 맞더라도 주체나 요건을 바꿔 틀리게 만드는 경우가 많습니다.",
+    관계법규: "관계법규 문제는 정의, 허가권자, 절차 순서, 제한 효과를 분리해서 보아야 합니다. 선택지가 법률명은 맞더라도 주체나 요건을 바꿔 틀리게 만드는 경우가 많습니다.",
+    토지보상법규: "토지보상법규 문제는 주체, 통지ㆍ공고, 협의, 재결, 보상금 지급 또는 공탁 순서로 읽으면 됩니다. 특히 토지소유자, 관계인, 사업시행자, 수용위원회의 역할을 구분해야 합니다.",
+    보상실무: "보상실무 문제는 현황, 적법성, 기준일, 보상방법을 차례로 확인해야 합니다. 무허가, 불법형질변경, 사실상 사도, 영업손실처럼 예외 요건이 자주 정답을 가릅니다.",
+  };
+  const guide = guides[item.subject] || "이 문제는 정답 선택지의 핵심 표현과 다른 보기의 주체ㆍ요건ㆍ효과를 비교해서 해석하면 됩니다.";
+  return `정답 선택지의 핵심은 “${correctChoice}”입니다. ${guide}`;
 }
 
 function updatePracticeScore() {
@@ -443,8 +486,43 @@ function renderWrittenBank() {
   });
 }
 
+function renderLawUnderstanding() {
+  const panelRoot = $("#law-panel-grid");
+  if (panelRoot) {
+    panelRoot.innerHTML = "";
+
+    lawUnderstanding.forEach((panel) => {
+      const card = createElement("article", "law-panel");
+      card.append(createElement("h3", "", panel.title));
+      card.append(createElement("p", "law-subtitle", panel.subtitle));
+
+      const list = createElement("ul");
+      panel.points.forEach((point) => list.append(createElement("li", "", point)));
+      card.append(list);
+
+      const linked = createElement("div", "law-linked");
+      panel.linked.forEach((label) => linked.append(createElement("span", "tag", label)));
+      card.append(linked);
+      panelRoot.append(card);
+    });
+  }
+
+  const noteRoot = $("#law-note-links");
+  if (!noteRoot) return;
+  noteRoot.innerHTML = "";
+
+  lawNoteFiles.forEach((file) => {
+    const link = createElement("a", "law-note-card");
+    link.href = file.href;
+    link.append(createElement("h3", "", file.title));
+    link.append(createElement("p", "", file.description));
+    noteRoot.append(link);
+  });
+}
+
 function renderHeatmap(active = "전체") {
   const root = $("#heatmap-list");
+  if (!root) return;
   root.innerHTML = "";
 
   heatmap
@@ -472,6 +550,7 @@ function renderHeatmap(active = "전체") {
 
 function renderFilterButtons(rootSelector, values, onSelect) {
   const root = $(rootSelector);
+  if (!root) return;
   root.innerHTML = "";
 
   values.forEach((value, index) => {
@@ -491,6 +570,7 @@ function renderFilterButtons(rootSelector, values, onSelect) {
 function renderSubject(subjectName = "민법") {
   const data = subjects[subjectName];
   const panel = $("#subject-panel");
+  if (!panel || !data) return;
   panel.innerHTML = "";
 
   panel.append(createElement("h3", "", data.headline));
@@ -514,6 +594,7 @@ function renderSubject(subjectName = "민법") {
 
 function renderTraps() {
   const root = $("#trap-grid");
+  if (!root) return;
   root.innerHTML = "";
 
   traps.forEach((trap) => {
@@ -526,6 +607,7 @@ function renderTraps() {
 
 function renderEssays() {
   const root = $("#essay-prompts");
+  if (!root) return;
   root.innerHTML = "";
 
   essays.forEach((essay) => {
@@ -542,6 +624,7 @@ function renderEssays() {
 
 function renderQuiz(active = "전체") {
   const root = $("#quiz-list");
+  if (!root) return;
   root.innerHTML = "";
 
   quizCards
@@ -574,6 +657,7 @@ function renderQuiz(active = "전체") {
 
 function renderPlan() {
   const root = $("#plan-list");
+  if (!root) return;
   const saved = JSON.parse(localStorage.getItem("compensationPlan") || "{}");
   root.innerHTML = "";
 
@@ -617,6 +701,7 @@ function init() {
   renderExamMap();
   renderArchive();
   setupPracticeFilters();
+  renderLawUnderstanding();
   renderWrittenBank();
   renderHeatmap();
   renderFilterButtons("#heatmap-filters", ["전체", "민법", "관계법규", "토지보상법규", "보상실무"], renderHeatmap);

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>출제빈도 | 보상관리사 기출분석</title>
+    <meta name="description" content="보상관리사 기출 반복 출제 주제와 우선순위 정리">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="보상관리사 기출분석 홈">
+        <span class="brand-mark" aria-hidden="true">補</span>
+        <span>보상관리사 기출분석</span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="exam-map.html">시험지도</a>
+        <a href="archive.html">기출정리</a>
+        <a href="practice.html">문제풀이</a>
+        <a href="law.html">이해하기</a>
+        <a href="frequency.html" aria-current="page">출제빈도</a>
+        <a href="strategy.html">과목전략</a>
+        <a href="drill.html">실전점검</a>
+        <a href="plan.html">회독계획</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section id="heatmap" class="section section-split page-section" aria-labelledby="heatmap-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Frequency</p>
+          <h1 id="heatmap-title">반복 출제 주제</h1>
+          <p>
+            추출한 문제 제목과 정답 해설의 반복 키워드를 묶어 우선순위를 잡았습니다.
+            막대가 길수록 반복 노출이 큽니다.
+          </p>
+          <div id="heatmap-filters" class="segmented" role="tablist" aria-label="출제빈도 필터"></div>
+        </div>
+        <div id="heatmap-list" class="heatmap-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>빈도는 확보된 2018ㆍ2022 기출과 반복 주제 분석을 기준으로 합니다.</p>
+      <p><a href="strategy.html">과목전략 보기</a></p>
+    </footer>
+
+    <script src="question-data.js"></script>
+    <script src="adapted-question-data.js"></script>
+    <script src="law-guide-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

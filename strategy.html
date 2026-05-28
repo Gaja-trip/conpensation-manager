@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>과목전략 | 보상관리사 기출분석</title>
+    <meta name="description" content="보상관리사 과목별 공략법, 오답 신호, 2차 약술형 답안 프레임">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="보상관리사 기출분석 홈">
+        <span class="brand-mark" aria-hidden="true">補</span>
+        <span>보상관리사 기출분석</span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="exam-map.html">시험지도</a>
+        <a href="archive.html">기출정리</a>
+        <a href="practice.html">문제풀이</a>
+        <a href="law.html">이해하기</a>
+        <a href="frequency.html">출제빈도</a>
+        <a href="strategy.html" aria-current="page">과목전략</a>
+        <a href="drill.html">실전점검</a>
+        <a href="plan.html">회독계획</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section id="subjects" class="section page-section" aria-labelledby="subjects-title">
+        <div class="section-heading">
+          <p class="eyebrow">Strategy</p>
+          <h1 id="subjects-title">과목별 공략법</h1>
+          <p>기출에서 반복된 묻는 방식과 공부 순서를 과목별로 정리했습니다.</p>
+        </div>
+        <div id="subject-tabs" class="segmented wide" role="tablist" aria-label="과목 선택"></div>
+        <div id="subject-panel" class="subject-panel"></div>
+      </section>
+
+      <section id="traps" class="section muted-band" aria-labelledby="traps-title">
+        <div class="section-heading">
+          <p class="eyebrow">Wrong Answer Signals</p>
+          <h2 id="traps-title">오답으로 자주 흔드는 지점</h2>
+          <p>기출의 선택지는 대부분 “원칙은 맞지만 예외가 틀린 문장”으로 만들어졌습니다.</p>
+        </div>
+        <div id="trap-grid" class="trap-grid"></div>
+      </section>
+
+      <section id="essay" class="section section-split" aria-labelledby="essay-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Written Answer</p>
+          <h2 id="essay-title">2차 약술형 답안 프레임</h2>
+          <p>
+            2차는 조문 암기보다 “정의, 요건, 예외, 절차, 결론” 순서로 현장 적용을 쓰는 문제가 반복됩니다.
+          </p>
+          <ol class="answer-frame">
+            <li><b>정의</b><span>개념과 법적 성격을 한 문장으로 고정</span></li>
+            <li><b>요건</b><span>시간, 장소, 시설, 허가, 계속성 등 체크</span></li>
+            <li><b>예외</b><span>불법, 무허가, 현황 상이, 보상 제외 사유 분리</span></li>
+            <li><b>절차</b><span>조사, 열람, 협의, 재결, 공탁, 소송 순서화</span></li>
+            <li><b>결론</b><span>보상 여부와 산정 기준을 짧게 마무리</span></li>
+          </ol>
+        </div>
+        <div id="essay-prompts" class="essay-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>전략은 확보 기출의 반복 주제와 선택지 함정을 기준으로 정리했습니다.</p>
+      <p><a href="drill.html">실전점검으로 이동</a></p>
+    </footer>
+
+    <script src="question-data.js"></script>
+    <script src="adapted-question-data.js"></script>
+    <script src="law-guide-data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

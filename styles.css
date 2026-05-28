@@ -100,7 +100,8 @@ input {
 }
 
 .nav a:hover,
-.nav a:focus-visible {
+.nav a:focus-visible,
+.nav a[aria-current="page"] {
   background: var(--surface);
   color: var(--ink);
   outline: none;
@@ -284,6 +285,7 @@ h3 {
 }
 
 .stat-card,
+.menu-card,
 .exam-card,
 .subject-panel,
 .trap-card,
@@ -294,6 +296,8 @@ h3 {
 .archive-row,
 .practice-card,
 .practice-controls,
+.law-panel,
+.law-note-card,
 .written-card {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -323,6 +327,44 @@ h3 {
 
 .stat-card p {
   margin: 12px 0 0;
+  font-size: 14px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.menu-card {
+  display: block;
+  min-height: 190px;
+  padding: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.menu-card:hover,
+.menu-card:focus-visible {
+  border-color: var(--teal);
+  outline: none;
+  box-shadow: var(--shadow);
+}
+
+.menu-card span {
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.menu-card h3 {
+  margin-top: 10px;
+}
+
+.menu-card p {
+  margin: 10px 0 0;
+  color: var(--muted);
   font-size: 14px;
 }
 
@@ -590,6 +632,28 @@ h3 {
   color: var(--coral);
 }
 
+.answer-explanation {
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid #cddedb;
+  border-left: 4px solid var(--teal);
+  border-radius: 8px;
+  background: #f3f8f7;
+}
+
+.answer-explanation h3 {
+  font-size: 17px;
+}
+
+.answer-explanation p {
+  margin: 8px 0 0;
+  color: var(--ink);
+}
+
+.answer-explanation p:last-child {
+  color: var(--muted);
+}
+
 .practice-nav {
   display: flex;
   justify-content: space-between;
@@ -599,6 +663,92 @@ h3 {
 
 .practice-nav button {
   padding: 0 14px;
+}
+
+.law-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.law-panel {
+  min-height: 270px;
+  padding: 18px;
+}
+
+.law-panel h3 {
+  color: var(--teal);
+}
+
+.law-subtitle {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.law-panel ul {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.law-panel li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.law-panel li::before {
+  position: absolute;
+  top: 0.66em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--coral);
+  content: "";
+}
+
+.law-linked {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.law-note-shell {
+  margin-top: 22px;
+}
+
+.law-note-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.law-note-card {
+  display: block;
+  padding: 16px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.law-note-card:hover,
+.law-note-card:focus-visible {
+  border-color: var(--teal);
+  outline: none;
+}
+
+.law-note-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.law-sources {
+  margin-top: 16px;
 }
 
 .written-list {
@@ -999,7 +1149,10 @@ h3 {
   }
 
   .stats,
+  .menu-grid,
   .exam-grid,
+  .law-panel-grid,
+  .law-note-links,
   .trap-grid,
   .quiz-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1052,7 +1205,10 @@ h3 {
   }
 
   .stats,
+  .menu-grid,
   .exam-grid,
+  .law-panel-grid,
+  .law-note-links,
   .trap-grid,
   .quiz-list {
     grid-template-columns: 1fr;
