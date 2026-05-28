@@ -290,7 +290,11 @@ h3 {
 .essay-card,
 .quiz-card,
 .progress-box,
-.plan-item {
+.plan-item,
+.archive-row,
+.practice-card,
+.practice-controls,
+.written-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
@@ -358,6 +362,268 @@ h3 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
+}
+
+.archive-table {
+  display: grid;
+  gap: 10px;
+}
+
+.archive-row {
+  display: grid;
+  grid-template-columns: 82px 130px minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 12px;
+  align-items: center;
+  padding: 14px;
+}
+
+.archive-year {
+  color: var(--blue);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.archive-status {
+  display: inline-flex;
+  justify-content: center;
+  min-height: 30px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #eef1f5;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.archive-status[data-status="확보"] {
+  background: #e8f4f2;
+  color: var(--teal);
+}
+
+.archive-status[data-status*="공고"] {
+  background: #f7efe2;
+  color: var(--gold);
+}
+
+.source-note {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.source-note strong {
+  margin-right: 4px;
+}
+
+.source-note a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.practice-shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.practice-controls {
+  position: sticky;
+  top: 88px;
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.practice-controls label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.practice-controls select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.practice-controls button,
+.practice-nav button,
+.choice-button,
+.written-card button {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.practice-controls button:hover,
+.practice-controls button:focus-visible,
+.practice-nav button:hover,
+.practice-nav button:focus-visible,
+.choice-button:hover,
+.choice-button:focus-visible,
+.written-card button:hover,
+.written-card button:focus-visible {
+  border-color: var(--teal);
+  outline: none;
+}
+
+.practice-score {
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.practice-score span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.practice-score strong {
+  color: var(--coral);
+  font-size: 28px;
+}
+
+.practice-card {
+  min-height: 430px;
+  padding: 22px;
+}
+
+.practice-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.practice-question {
+  margin: 0 0 20px;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.45;
+}
+
+.choice-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.choice-button {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  width: 100%;
+  min-height: 54px;
+  padding: 12px;
+  text-align: left;
+}
+
+.choice-button .number {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: #eef1f5;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.choice-button.correct {
+  border-color: var(--teal);
+  background: #edf8f6;
+}
+
+.choice-button.correct .number {
+  background: var(--teal);
+  color: #fff;
+}
+
+.choice-button.wrong {
+  border-color: var(--coral);
+  background: #fff2ed;
+}
+
+.choice-button.wrong .number {
+  background: var(--coral);
+  color: #fff;
+}
+
+.practice-result {
+  min-height: 44px;
+  margin: 16px 0 0;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.practice-result.good {
+  color: var(--teal);
+}
+
+.practice-result.bad {
+  color: var(--coral);
+}
+
+.practice-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.practice-nav button {
+  padding: 0 14px;
+}
+
+.written-list {
+  display: grid;
+  gap: 12px;
+}
+
+.written-card {
+  padding: 16px;
+}
+
+.written-card h3 {
+  margin: 10px 0;
+}
+
+.written-answer {
+  margin: 12px 0 0;
+  padding: 12px;
+  border-left: 4px solid var(--teal);
+  background: #f3f8f7;
+  color: var(--muted);
+}
+
+.written-answer[hidden] {
+  display: none;
 }
 
 .exam-card {
@@ -723,7 +989,8 @@ h3 {
 
   .hero,
   .section-split,
-  .plan-shell {
+  .plan-shell,
+  .practice-shell {
     grid-template-columns: 1fr;
   }
 
@@ -744,6 +1011,14 @@ h3 {
 
   .progress-box {
     position: static;
+  }
+
+  .practice-controls {
+    position: static;
+  }
+
+  .archive-row {
+    grid-template-columns: 72px minmax(0, 1fr);
   }
 }
 

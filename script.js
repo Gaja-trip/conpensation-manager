@@ -229,6 +229,12 @@ const planItems = [
 ];
 
 const $ = (selector) => document.querySelector(selector);
+const questionBank = window.PAST_QUESTIONS || [];
+const writtenBank = window.WRITTEN_PROMPTS || [];
+const yearArchive = window.YEAR_STATUS || [];
+let practiceItems = [];
+let practiceIndex = 0;
+let practiceAnswers = new Map();
 
 function createElement(tag, className, text) {
   const el = document.createElement(tag);
@@ -251,6 +257,188 @@ function renderExamMap() {
     const list = createElement("ul");
     paper.points.forEach((point) => list.append(createElement("li", "", point)));
     card.append(list);
+    root.append(card);
+  });
+}
+
+function renderArchive() {
+  const root = $("#archive-table");
+  if (!root) return;
+  root.innerHTML = "";
+
+  yearArchive.forEach((item) => {
+    const row = createElement("article", "archive-row");
+    row.append(createElement("div", "archive-year", String(item.year)));
+
+    const status = createElement("div", "archive-status", item.status);
+    status.dataset.status = item.status;
+    row.append(status);
+
+    row.append(createElement("div", "", item.available));
+    row.append(createElement("div", "topic-note", item.note));
+    root.append(row);
+  });
+}
+
+function uniqueValues(items, key) {
+  return [...new Set(items.map((item) => item[key]))].sort((a, b) => String(a).localeCompare(String(b), "ko"));
+}
+
+function fillSelect(select, values, allLabel = "전체") {
+  const current = select.value;
+  select.innerHTML = "";
+  [allLabel, ...values].forEach((value) => {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = value;
+    select.append(option);
+  });
+  if ([...select.options].some((option) => option.value === current)) {
+    select.value = current;
+  }
+}
+
+function setupPracticeFilters() {
+  if (!$("#practice-year")) return;
+  fillSelect($("#practice-year"), uniqueValues(questionBank, "year"));
+  fillSelect($("#practice-round"), uniqueValues(questionBank, "round"));
+  fillSelect($("#practice-subject"), uniqueValues(questionBank, "subject"));
+
+  ["#practice-year", "#practice-round", "#practice-subject"].forEach((selector) => {
+    $(selector).addEventListener("change", resetPractice);
+  });
+  $("#practice-reset").addEventListener("click", resetPractice);
+  resetPractice();
+}
+
+function selectedPracticeItems() {
+  const year = $("#practice-year").value;
+  const round = $("#practice-round").value;
+  const subject = $("#practice-subject").value;
+
+  return questionBank.filter((item) => {
+    return (
+      (year === "전체" || String(item.year) === year) &&
+      (round === "전체" || item.round === round) &&
+      (subject === "전체" || item.subject === subject)
+    );
+  });
+}
+
+function resetPractice() {
+  practiceItems = selectedPracticeItems();
+  practiceIndex = 0;
+  practiceAnswers = new Map();
+  renderPractice();
+}
+
+function renderPractice() {
+  const root = $("#practice-card");
+  if (!root) return;
+  root.innerHTML = "";
+  updatePracticeScore();
+
+  if (!practiceItems.length) {
+    root.append(createElement("p", "topic-note", "선택한 조건에 해당하는 구조화 문제는 아직 없습니다."));
+    return;
+  }
+
+  const item = practiceItems[practiceIndex];
+  const chosen = practiceAnswers.get(item.id);
+
+  const meta = createElement("div", "practice-meta");
+  [item.source, `${practiceIndex + 1} / ${practiceItems.length}`, `문항 ${item.no}`].forEach((text) => {
+    meta.append(createElement("span", "tag", text));
+  });
+  root.append(meta);
+  root.append(createElement("p", "practice-question", item.question));
+
+  const list = createElement("ol", "choice-list");
+  item.choices.forEach((choice, index) => {
+    const choiceNo = index + 1;
+    const li = createElement("li");
+    const button = createElement("button", "choice-button");
+    button.type = "button";
+    button.disabled = chosen !== undefined;
+    button.innerHTML = `<span class="number">${choiceNo}</span><span>${choice}</span>`;
+    if (chosen !== undefined && choiceNo === item.answer) button.classList.add("correct");
+    if (chosen === choiceNo && choiceNo !== item.answer) button.classList.add("wrong");
+    button.addEventListener("click", () => {
+      practiceAnswers.set(item.id, choiceNo);
+      renderPractice();
+    });
+    li.append(button);
+    list.append(li);
+  });
+  root.append(list);
+
+  const result = createElement("p", "practice-result");
+  if (chosen !== undefined) {
+    const isCorrect = chosen === item.answer;
+    result.classList.add(isCorrect ? "good" : "bad");
+    result.textContent = isCorrect
+      ? `정답입니다. ${item.answer}번`
+      : `오답입니다. 정답은 ${item.answer}번입니다.`;
+  } else {
+    result.textContent = "보기를 선택하면 바로 채점됩니다.";
+  }
+  root.append(result);
+
+  const nav = createElement("div", "practice-nav");
+  const prev = createElement("button", "", "이전");
+  prev.type = "button";
+  prev.disabled = practiceIndex === 0;
+  prev.addEventListener("click", () => {
+    practiceIndex = Math.max(0, practiceIndex - 1);
+    renderPractice();
+  });
+  const next = createElement("button", "", "다음");
+  next.type = "button";
+  next.disabled = practiceIndex === practiceItems.length - 1;
+  next.addEventListener("click", () => {
+    practiceIndex = Math.min(practiceItems.length - 1, practiceIndex + 1);
+    renderPractice();
+  });
+  nav.append(prev, next);
+  root.append(nav);
+}
+
+function updatePracticeScore() {
+  const answered = practiceItems.filter((item) => practiceAnswers.has(item.id));
+  const correct = answered.filter((item) => practiceAnswers.get(item.id) === item.answer).length;
+  $("#practice-score").textContent = `${correct} / ${answered.length}`;
+}
+
+function renderWrittenBank() {
+  const root = $("#written-list");
+  if (!root) return;
+  root.innerHTML = "";
+
+  writtenBank.forEach((item, index) => {
+    const card = createElement("article", "written-card");
+    const meta = createElement("div", "practice-meta");
+    [`${item.year}년 ${item.round}`, item.subject, item.type].forEach((text) => {
+      meta.append(createElement("span", "tag", text));
+    });
+    card.append(meta);
+    card.append(createElement("h3", "", item.prompt));
+
+    const answerId = `written-answer-${index}`;
+    const answer = createElement("p", "written-answer", item.answer);
+    answer.id = answerId;
+    answer.hidden = true;
+
+    const button = createElement("button", "", "핵심 키워드 보기");
+    button.type = "button";
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", answerId);
+    button.addEventListener("click", () => {
+      const open = button.getAttribute("aria-expanded") === "true";
+      button.setAttribute("aria-expanded", String(!open));
+      button.textContent = open ? "핵심 키워드 보기" : "키워드 닫기";
+      answer.hidden = open;
+    });
+    card.append(button, answer);
     root.append(card);
   });
 }
@@ -427,6 +615,9 @@ function updatePlanProgress() {
 
 function init() {
   renderExamMap();
+  renderArchive();
+  setupPracticeFilters();
+  renderWrittenBank();
   renderHeatmap();
   renderFilterButtons("#heatmap-filters", ["전체", "민법", "관계법규", "토지보상법규", "보상실무"], renderHeatmap);
   renderFilterButtons("#subject-tabs", Object.keys(subjects), renderSubject);

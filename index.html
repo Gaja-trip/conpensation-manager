@@ -18,6 +18,8 @@
       </a>
       <nav class="nav" aria-label="주요 섹션">
         <a href="#map">시험지도</a>
+        <a href="#archive">기출정리</a>
+        <a href="#practice">문제풀이</a>
         <a href="#heatmap">출제빈도</a>
         <a href="#subjects">과목전략</a>
         <a href="#drill">실전점검</a>
@@ -35,8 +37,8 @@
             구성했습니다.
           </p>
           <div class="hero-actions" aria-label="빠른 이동">
-            <a class="button primary" href="#heatmap">빈출 주제 보기</a>
-            <a class="button secondary" href="#plan">30일 계획 보기</a>
+            <a class="button primary" href="#practice">문제 풀기</a>
+            <a class="button secondary" href="#archive">2018-2025 정리 보기</a>
           </div>
         </div>
         <div class="hero-visual" aria-label="기출분석 요약 시트">
@@ -59,19 +61,19 @@
 
       <section class="stats section" aria-label="분석 요약 수치">
         <div class="stat-card">
-          <span>분석 파일</span>
-          <strong>4</strong>
-          <p>2018 1차·2차, 2022 1차·2차</p>
+          <span>정리 범위</span>
+          <strong>8</strong>
+          <p>2018년부터 2025년까지</p>
         </div>
         <div class="stat-card">
-          <span>객관식</span>
-          <strong>175</strong>
-          <p>1차 135문, 2차 40문</p>
+          <span>풀이 가능 객관식</span>
+          <strong>152</strong>
+          <p>2018·2022 확보본 기준</p>
         </div>
         <div class="stat-card">
-          <span>주관식</span>
-          <strong>24</strong>
-          <p>단답형 8문, 약술형 16문</p>
+          <span>주관식 연습</span>
+          <strong>18</strong>
+          <p>단답형·약술형 핵심 주제</p>
         </div>
         <div class="stat-card">
           <span>핵심 반복축</span>
@@ -90,6 +92,72 @@
           </p>
         </div>
         <div id="exam-map" class="exam-grid"></div>
+      </section>
+
+      <section id="archive" class="section muted-band" aria-labelledby="archive-title">
+        <div class="section-heading">
+          <p class="eyebrow">Archive Status</p>
+          <h2 id="archive-title">2018-2025 기출 확보 현황</h2>
+          <p>
+            공식 Q&A 기준 협회는 기출문제를 공개하지 않습니다. 공개 검색으로 확인되지 않은
+            연도는 “미확보”로 분리하고, 현재 로컬에 있는 2018·2022 PDF만 실제 문제풀이
+            데이터로 만들었습니다.
+          </p>
+        </div>
+        <div id="archive-table" class="archive-table" aria-label="연도별 기출 확보 현황"></div>
+        <div class="source-note">
+          <strong>확인한 공개 출처</strong>
+          <a href="https://www.klcma.or.kr/sub_customer/qna.php?b_name=qna&mode=view&number=775&page=1" target="_blank" rel="noreferrer">협회 Q&A: 기출문제 비공개 답변</a>
+          <a href="https://www.klcma.or.kr/sub_customer/notice.php?b_name=notice&mode=view&number=530&page=1&wr_id=admin" target="_blank" rel="noreferrer">2023 제12회 시행 공고</a>
+          <a href="https://klcma.or.kr/sub_customer/notice.php?mode=view&number=658" target="_blank" rel="noreferrer">2024 제13회 시행 공고</a>
+          <a href="https://www.klcma.or.kr/sub_customer/notice.php?mode=view&number=778" target="_blank" rel="noreferrer">2025 시행계획 공고</a>
+          <a href="https://www.klcma.or.kr/sub_customer/notice.php?b_name=notice&mode=view&number=1056&page=1" target="_blank" rel="noreferrer">2025 제14회 2차 합격자 공고</a>
+        </div>
+      </section>
+
+      <section id="practice" class="section" aria-labelledby="practice-title">
+        <div class="section-heading">
+          <p class="eyebrow">Question Bank</p>
+          <h2 id="practice-title">기출 문제풀이</h2>
+          <p>
+            연도, 차수, 과목을 고르면 실제 기출을 한 문제씩 풀 수 있습니다. 정답 확인 후
+            다음 문제로 넘어가며, 점수는 현재 필터 범위 안에서 계산됩니다.
+          </p>
+        </div>
+        <div class="practice-shell">
+          <aside class="practice-controls" aria-label="문제풀이 필터">
+            <label>
+              연도
+              <select id="practice-year"></select>
+            </label>
+            <label>
+              차수
+              <select id="practice-round"></select>
+            </label>
+            <label>
+              과목
+              <select id="practice-subject"></select>
+            </label>
+            <button id="practice-reset" type="button">다시 풀기</button>
+            <div class="practice-score" aria-live="polite">
+              <span>현재 점수</span>
+              <strong id="practice-score">0 / 0</strong>
+            </div>
+          </aside>
+          <div id="practice-card" class="practice-card"></div>
+        </div>
+      </section>
+
+      <section id="written-bank" class="section section-split" aria-labelledby="written-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Written Practice</p>
+          <h2 id="written-title">단답·약술형 연습</h2>
+          <p>
+            2차 주관식은 정답 문장을 통째로 외우기보다 쟁점 키워드가 빠지지 않게 쓰는
+            훈련이 중요합니다.
+          </p>
+        </div>
+        <div id="written-list" class="written-list"></div>
       </section>
 
       <section id="heatmap" class="section section-split" aria-labelledby="heatmap-title">
@@ -183,6 +251,7 @@
       </p>
     </footer>
 
+    <script src="question-data.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
