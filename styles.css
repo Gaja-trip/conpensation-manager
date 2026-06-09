@@ -1248,6 +1248,205 @@ h3 {
   font-weight: 800;
 }
 
+.lecture-hero {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.breadcrumb a {
+  color: var(--teal);
+  text-decoration: none;
+}
+
+.lecture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.lecture-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lecture-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lecture-card {
+  display: block;
+  min-height: 210px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.lecture-card.compact {
+  min-height: 180px;
+}
+
+.lecture-card:hover,
+.lecture-card:focus-visible {
+  border-color: var(--teal);
+  box-shadow: var(--shadow);
+  outline: none;
+}
+
+.lecture-card span {
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.lecture-card h3 {
+  margin-top: 10px;
+}
+
+.lecture-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.lecture-summary-band {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.lecture-summary-band span {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.lesson-page h1 {
+  max-width: 900px;
+}
+
+.lesson-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 24px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+.lesson-main {
+  display: grid;
+  gap: 16px;
+}
+
+.lesson-block {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.lesson-block h2 {
+  font-size: 22px;
+}
+
+.preface-block p {
+  margin: 12px 0 0;
+  color: var(--ink);
+}
+
+.preface-block p:first-of-type {
+  margin-top: 16px;
+}
+
+.lecture-list {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+  padding-left: 20px;
+}
+
+.lecture-list li {
+  color: var(--ink);
+}
+
+.lesson-aside {
+  position: sticky;
+  top: 88px;
+  display: grid;
+  gap: 6px;
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.lesson-aside h2 {
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.lesson-aside a {
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.lesson-aside a:hover,
+.lesson-aside a:focus-visible,
+.lesson-aside a[aria-current="page"] {
+  background: var(--surface-2);
+  color: var(--ink);
+  outline: none;
+}
+
+.inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.lesson-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.lesson-nav a {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.lesson-nav a:last-child {
+  text-align: right;
+}
+
 @media (max-width: 980px) {
   h1 {
     font-size: 38px;
@@ -1256,7 +1455,8 @@ h3 {
   .hero,
   .section-split,
   .plan-shell,
-  .practice-shell {
+  .practice-shell,
+  .lesson-layout {
     grid-template-columns: 1fr;
   }
 
@@ -1266,6 +1466,9 @@ h3 {
 
   .stats,
   .menu-grid,
+  .lecture-grid,
+  .lecture-grid.two,
+  .lecture-grid.three,
   .exam-grid,
   .law-panel-grid,
   .law-note-links,
@@ -1284,6 +1487,11 @@ h3 {
 
   .practice-controls {
     position: static;
+  }
+
+  .lesson-aside {
+    position: static;
+    max-height: none;
   }
 
   .archive-row {
@@ -1322,6 +1530,9 @@ h3 {
 
   .stats,
   .menu-grid,
+  .lecture-grid,
+  .lecture-grid.two,
+  .lecture-grid.three,
   .exam-grid,
   .law-panel-grid,
   .law-note-links,
@@ -1344,5 +1555,13 @@ h3 {
 
   .answer-frame li {
     grid-template-columns: 1fr;
+  }
+
+  .lesson-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .lesson-nav a:last-child {
+    text-align: left;
   }
 }
