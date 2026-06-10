@@ -18,9 +18,9 @@ const navItems = [
 const introPages = [
   {
     slug: "lecture-intro-exam",
-    title: "보상관리사 시험에 도전하는 여러분께",
+    title: "보상관리사 시험의 구성과 과목별 출제 경향",
     eyebrow: "머리말",
-    lead: "보상관리사 시험은 부동산을 둘러싼 민법적 권리와 의무, 국토와 건축에 관한 법률, 토지보상 제도 등 다양한 법령과 제도를 바탕으로 출제됩니다.",
+    lead: "보상관리사 시험의 큰 틀과 1차 과목별 출제 흐름을 먼저 이해하면 각 단원을 왜 공부하는지 분명해집니다.",
     sections: [
       {
         title: "보상관리사 시험에 도전하는 여러분께",
@@ -63,9 +63,9 @@ const introPages = [
   },
   {
     slug: "lecture-intro-study",
-    title: "학습 방법 및 조언",
+    title: "학습 방법 안내 및 교재 활용법",
     eyebrow: "머리말",
-    lead: "법률 공부는 처음 접하면 어렵게 느껴질 수 있습니다. 그러나 기본 개념을 차근차근 쌓아가면 논리적인 사고력과 문제 해결 능력이 함께 향상됩니다.",
+    lead: "기본 개념, 사례, 기출문제, 복습표를 어떤 순서로 활용할지 정리해 회독 효율을 높이는 안내 페이지입니다.",
     sections: [
       {
         title: "핵심 개념 이해",
@@ -113,28 +113,31 @@ const parts = [
     subject: "민법",
     lead: "민법은 보상대상 토지와 물건의 권리자를 판단하는 기본 언어입니다. 물권과 채권을 구분하고, 등기와 점유, 공유관계와 상속관계를 보상절차에 연결해 읽는 것이 핵심입니다.",
     examFocus: ["물권변동과 등기 필요 여부", "점유와 취득시효의 요건", "공유ㆍ합유ㆍ총유의 관리와 처분", "상속인 범위와 상속재산분할"],
-    lessons: [
-      "민법 기초와 법의 분류",
-      "민법의 체계와 기본 원칙",
-      "물권과 채권의 구분, 물건의 종류",
-      "물권의 유형과 내용",
-      "소유권ㆍ점유권의 개념과 기능",
-      "용익물권: 지상권, 지역권, 전세권 등",
-      "담보물권: 유치권, 질권, 저당권과 가등기의 효력",
-      "물권의 변동과 등기",
-      "부동산 물권의 설정ㆍ변경ㆍ소멸과 등기 제도",
-      "등기의 종류, 절차와 공신력",
-      "물권 취득시효와 점유",
-      "점유취득시효, 등기부취득시효의 요건과 효과",
-      "선의ㆍ악의 점유 및 필요비ㆍ유익비의 상환",
-      "공유, 합유, 총유",
-      "공유지분의 관리ㆍ처분 및 분할",
-      "합유ㆍ총유의 개념과 차이점",
-      "상속법",
-      "상속의 의의와 효력, 상속인의 범위",
-      "법정상속분과 유류분, 유언 상속",
-      "상속재산분할과 상속포기ㆍ한정승인 절차",
-      "부동산 상속 등기의 방법과 유의점",
+    groups: [
+      {
+        title: "민법 기초와 법의 분류",
+        children: ["민법의 체계와 기본 원칙", "물권과 채권의 구분, 물건의 종류"],
+      },
+      {
+        title: "물권의 유형과 내용",
+        children: ["소유권ㆍ점유권의 개념과 기능", "용익물권: 지상권, 지역권, 전세권 등", "담보물권: 유치권, 질권, 저당권과 가등기의 효력"],
+      },
+      {
+        title: "물권의 변동과 등기",
+        children: ["부동산 물권의 설정ㆍ변경ㆍ소멸과 등기 제도", "등기의 종류, 절차와 공신력"],
+      },
+      {
+        title: "물권 취득시효와 점유",
+        children: ["점유취득시효, 등기부취득시효의 요건과 효과", "선의ㆍ악의 점유 및 필요비ㆍ유익비의 상환"],
+      },
+      {
+        title: "공유, 합유, 총유",
+        children: ["공유지분의 관리ㆍ처분 및 분할", "합유ㆍ총유의 개념과 차이점"],
+      },
+      {
+        title: "상속법",
+        children: ["상속의 의의와 효력, 상속인의 범위", "법정상속분과 유류분, 유언 상속", "상속재산분할과 상속포기ㆍ한정승인 절차", "부동산 상속 등기의 방법과 유의점"],
+      },
     ],
   },
   {
@@ -145,29 +148,31 @@ const parts = [
     subject: "부동산관계법규",
     lead: "부동산관계법규는 토지의 이용 가능성과 제한을 읽는 과목입니다. 보상평가와 협의 과정에서 용도지역, 허가, 공시, 농지와 산지 제한이 어떻게 작동하는지 확인해야 합니다.",
     examFocus: ["용도지역ㆍ지구ㆍ구역의 규제 비교", "개발행위허가와 도시ㆍ군계획시설사업", "건축허가와 대지ㆍ도로 기준", "농지전용과 산지전용의 허가 체계"],
-    lessons: [
-      "국토의 계획 및 이용에 관한 법률",
-      "국토계획 체계와 도시ㆍ군 계획",
-      "용도지역ㆍ지구ㆍ구역의 종류와 규제",
-      "개발행위허가와 도시ㆍ군계획시설사업",
-      "국유재산법",
-      "국유재산의 유형과 관리",
-      "사용ㆍ대부, 무상사용, 매각 절차와 제한",
-      "건축법",
-      "건축물의 정의와 건축행위",
-      "건축허가ㆍ신고, 대지와 도로, 용적률ㆍ건폐율 등 건축 기준",
-      "부동산공시법",
-      "지적제도와 토지ㆍ건물등기 제도의 개요",
-      "부동산가격공시 및 감정평가 제도",
-      "실거래가 신고와 공시제도의 활용",
-      "농지법",
-      "농지의 정의와 농지 소유ㆍ이용 요건",
-      "농지전용허가, 농업진흥지역과 농지보전부담금",
-      "농지의 임대차 및 전용에 관한 규제",
-      "산지관리법: 산지보전관리규정",
-      "산지의 구분과 보전관리 기본원칙",
-      "산지전용허가ㆍ신고, 보전협력금 및 복구 명령",
-      "산지관리계획과 산지보전관리구역의 지정ㆍ규제",
+    groups: [
+      {
+        title: "국토의 계획 및 이용에 관한 법률",
+        children: ["국토계획 체계와 도시ㆍ군 계획", "용도지역ㆍ지구ㆍ구역의 종류와 규제", "개발행위허가와 도시ㆍ군계획시설사업"],
+      },
+      {
+        title: "국유재산법",
+        children: ["국유재산의 유형과 관리", "사용ㆍ대부, 무상사용, 매각 절차와 제한"],
+      },
+      {
+        title: "건축법",
+        children: ["건축물의 정의와 건축행위", "건축허가ㆍ신고, 대지와 도로, 용적률ㆍ건폐율 등 건축 기준"],
+      },
+      {
+        title: "부동산공시법",
+        children: ["지적제도와 토지ㆍ건물등기 제도의 개요", "부동산가격공시 및 감정평가 제도", "실거래가 신고와 공시제도의 활용"],
+      },
+      {
+        title: "농지법",
+        children: ["농지의 정의와 농지 소유ㆍ이용 요건", "농지전용허가, 농업진흥지역과 농지보전부담금", "농지의 임대차 및 전용에 관한 규제"],
+      },
+      {
+        title: "산지관리법: 산지보전관리규정",
+        children: ["산지의 구분과 보전관리 기본원칙", "산지전용허가ㆍ신고, 보전협력금 및 복구 명령", "산지관리계획과 산지보전관리구역의 지정ㆍ규제"],
+      },
     ],
   },
   {
@@ -178,21 +183,23 @@ const parts = [
     subject: "토지보상법규",
     lead: "토지보상법규는 공익사업이 토지와 물건을 취득하거나 사용하는 절차와 손실보상 기준을 정리하는 과목입니다. 절차 순서, 권리자 범위, 보상항목, 불복절차를 함께 보아야 합니다.",
     examFocus: ["공익사업과 사업인정 절차", "보상계획 공고와 협의 절차", "재결과 수용개시일의 효과", "손실보상 기준과 권리구제"],
-    lessons: [
-      "토지보상법의 기초",
-      "토지보상법의 목적과 기본원칙",
-      "공익사업 범위와 사업인정 절차",
-      "보상 절차",
-      "사전조사와 보상계획 공고, 협의절차",
-      "재결 신청ㆍ재결서 송달, 수용개시일과 권리 변동",
-      "손실보상 기준과 산정",
-      "토지ㆍ건물ㆍ입목 등 보상 대상과 평가 기준",
-      "영업손실, 이주대책, 잔여지 보상",
-      "환매권과 사용보상",
-      "쟁송과 권리구제",
-      "이의신청, 행정심판, 행정소송",
-      "보상금 증액청구와 재결의 취소 소송",
-      "분쟁 조정 사례와 판례 해설",
+    groups: [
+      {
+        title: "토지보상법의 기초",
+        children: ["토지보상법의 목적과 기본원칙", "공익사업 범위와 사업인정 절차"],
+      },
+      {
+        title: "보상 절차",
+        children: ["사전조사와 보상계획 공고, 협의절차", "재결 신청ㆍ재결서 송달, 수용개시일과 권리 변동"],
+      },
+      {
+        title: "손실보상 기준과 산정",
+        children: ["토지ㆍ건물ㆍ입목 등 보상 대상과 평가 기준", "영업손실, 이주대책, 잔여지 보상", "환매권과 사용보상"],
+      },
+      {
+        title: "쟁송과 권리구제",
+        children: ["이의신청, 행정심판, 행정소송", "보상금 증액청구와 재결의 취소 소송", "분쟁 조정 사례와 판례 해설"],
+      },
     ],
   },
   {
@@ -203,7 +210,12 @@ const parts = [
     subject: "기출문제 해설과 연습문제",
     lead: "기출문제와 연습문제는 기본강의에서 배운 개념이 실제 선택지로 어떻게 바뀌는지 확인하는 단계입니다. 단원별 복습과 모의고사를 통해 속도와 정확도를 함께 끌어올립니다.",
     examFocus: ["기출 선택지의 변형 패턴", "단원별 복습문제", "오답 해설 정리", "모의고사 시간 관리"],
-    lessons: ["기출문제 해설과 연습문제", "물권ㆍ상속, 각 법규별 기출문제 수록과 상세 해설", "단원별 복습문제 및 모의고사"],
+    groups: [
+      {
+        title: "기출문제 해설과 연습문제",
+        children: ["물권ㆍ상속, 각 법규별 기출문제 수록과 상세 해설", "단원별 복습문제 및 모의고사"],
+      },
+    ],
   },
   {
     slug: "appendix",
@@ -213,17 +225,36 @@ const parts = [
     subject: "부록",
     lead: "부록은 마지막 회독 때 가장 자주 펼치는 참고자료입니다. 주요 법령 전문, 개정 연혁, 용어정리, 법령별 비교표, 시험 준비 체크리스트를 한곳에서 확인하도록 구성합니다.",
     examFocus: ["법령 전문과 개정 연혁", "핵심 용어 정리", "법령별 비교표", "시험 준비 체크리스트"],
-    lessons: ["부록", "주요 법령 전문 및 개정 연혁", "용어정리, 법령별 비교표, 시험 준비 체크리스트"],
+    groups: [
+      {
+        title: "부록",
+        children: ["주요 법령 전문 및 개정 연혁", "용어정리, 법령별 비교표, 시험 준비 체크리스트"],
+      },
+    ],
   },
 ];
 
 const lessonPages = [];
 for (const part of parts) {
-  part.lessons = part.lessons.map((title, index) => {
-    const lesson = buildLesson(part, title, index);
-    lessonPages.push(lesson);
-    return lesson;
+  let lessonIndex = 0;
+  part.groups = part.groups.map((group, groupIndex) => {
+    const groupItems = [group.title, ...(group.children || [])];
+    const lessons = groupItems.map((title, itemIndex) => {
+      const lesson = buildLesson(part, {
+        title,
+        index: lessonIndex,
+        groupIndex,
+        groupTitle: group.title,
+        groupChildren: group.children || [],
+        isGroupParent: itemIndex === 0,
+      });
+      lessonIndex += 1;
+      lessonPages.push(lesson);
+      return lesson;
+    });
+    return { ...group, index: groupIndex, lessons };
   });
+  part.lessons = part.groups.flatMap((group) => group.lessons);
 }
 
 writePage("lecture.html", renderLectureHome());
@@ -233,13 +264,18 @@ for (const lesson of lessonPages) writePage(`${lesson.slug}.html`, renderLessonP
 
 console.log(JSON.stringify({ generated: 1 + introPages.length + parts.length + lessonPages.length }, null, 2));
 
-function buildLesson(part, title, index) {
+function buildLesson(part, item) {
+  const { title, index, groupIndex, groupTitle, groupChildren, isGroupParent } = item;
   const slug = `lecture-${part.slug}-${String(index + 1).padStart(2, "0")}`;
   return {
     slug,
     title,
     part,
     index,
+    groupIndex,
+    groupTitle,
+    groupChildren,
+    isGroupParent,
     eyebrow: part.title,
     lead: makeLead(part, title),
     detailSections: makeDetailSections(part, title),
@@ -627,10 +663,12 @@ function renderIntroPage(page) {
               ${page.sections ? renderIntroSections(page.sections) : `${renderBlock("핵심 안내", page.points)}${renderBlock("학습 체크리스트", page.checklist)}`}
             </article>
             <aside class="lesson-aside">
-              <h2>다음 이동</h2>
-              <a href="lecture-civil.html">민법 기본강의</a>
-              <a href="lecture-real-estate.html">부동산관계법규 기본강의</a>
-              <a href="lecture-compensation-law.html">토지보상법규 기본강의</a>
+              <h2>머리말 목차</h2>
+              ${renderIntroAside(page.slug)}
+              <h2 class="aside-section-title">과목 이동</h2>
+              <a class="lesson-aside-main" href="lecture-civil.html">제1부 민법</a>
+              <a class="lesson-aside-main" href="lecture-real-estate.html">제2부 부동산 관계법규</a>
+              <a class="lesson-aside-main" href="lecture-compensation-law.html">제3부 토지보상법규</a>
             </aside>
           </div>
         </section>
@@ -664,15 +702,75 @@ function renderLessonTable(table) {
                 </div>`;
 }
 
+function renderIntroAside(currentSlug) {
+  return introPages.map((page, index) => `<a class="lesson-aside-main" href="${page.slug}.html"${page.slug === currentSlug ? ' aria-current="page"' : ""}>${index + 1}. ${page.title}</a>`).join("");
+}
+
+function renderLessonSummaryBand(group) {
+  const items = group.lessons.map((lesson) => lesson.title);
+  return `<div class="lecture-summary-band">
+            ${items.map((item) => `<span>${item}</span>`).join("")}
+          </div>`;
+}
+
+function renderSubtopicBlock(group) {
+  if (!group || group.lessons.length <= 1) return "";
+  return `<section class="lesson-block subtopic-block">
+                <h2>이 단원의 세부 목차</h2>
+                <p>${group.title} 단원은 아래 항목을 한 흐름으로 묶어 공부합니다. 상위 개념을 먼저 잡고, 하위 주제를 차례로 확인하면 선택지 변형을 더 쉽게 읽을 수 있습니다.</p>
+                <ol class="subtopic-list">
+                  ${group.lessons
+                    .slice(1)
+                    .map((lesson) => `<li><a href="${lesson.slug}.html">${lesson.title}</a></li>`)
+                    .join("")}
+                </ol>
+              </section>`;
+}
+
+function renderParentBlock(group) {
+  if (!group || group.lessons.length <= 1) return "";
+  const parent = group.lessons[0];
+  return `<section class="lesson-block subtopic-block">
+                <h2>상위 단원</h2>
+                <p>이 페이지는 <a href="${parent.slug}.html">${parent.title}</a> 단원에 포함됩니다. 오른쪽 목차에서 같은 묶음의 앞뒤 주제를 함께 확인하세요.</p>
+              </section>`;
+}
+
+function renderGroupedAside(groups, currentLesson) {
+  return groups
+    .map((group) => {
+      const parent = group.lessons[0];
+      const children = group.lessons.slice(1);
+      return `<div class="lesson-aside-group">
+                <a class="lesson-aside-main" href="${parent.slug}.html"${parent.slug === currentLesson.slug ? ' aria-current="page"' : ""}>${String(parent.index + 1).padStart(2, "0")} ${parent.title}</a>
+                ${
+                  children.length
+                    ? `<ul class="lesson-aside-subtopics">
+                        ${children
+                          .map((lesson) => `<li><a href="${lesson.slug}.html"${lesson.slug === currentLesson.slug ? ' aria-current="page"' : ""}>${lesson.title}</a></li>`)
+                          .join("")}
+                      </ul>`
+                    : ""
+                }
+              </div>`;
+    })
+    .join("");
+}
+
 function renderPartHub(part) {
-  const lessonCards = part.lessons
+  const lessonCards = part.groups
     .map(
-      (lesson) => `
-          <a class="lecture-card lesson-link" href="${lesson.slug}.html">
-            <span>${String(lesson.index + 1).padStart(2, "0")}</span>
-            <h3>${lesson.title}</h3>
-            <p>${lesson.lead}</p>
-          </a>`
+      (group) => {
+        const parent = group.lessons[0];
+        const children = group.lessons.slice(1);
+        return `
+          <section class="lecture-card lesson-group-card">
+            <span>${String(group.index + 1).padStart(2, "0")}</span>
+            <h3><a href="${parent.slug}.html">${group.title}</a></h3>
+            <p>${parent.lead}</p>
+            ${children.length ? `<ul class="lecture-subtopics">${children.map((lesson) => `<li><a href="${lesson.slug}.html">${lesson.title}</a></li>`).join("")}</ul>` : ""}
+          </section>`;
+      }
     )
     .join("");
   return layout({
@@ -706,6 +804,7 @@ function renderLessonPage(lesson) {
   const siblings = lesson.part.lessons;
   const prev = siblings[lesson.index - 1];
   const next = siblings[lesson.index + 1];
+  const currentGroup = lesson.part.groups[lesson.groupIndex];
   return layout({
     title: `${lesson.title} | ${lesson.part.shortTitle}`,
     description: lesson.lead,
@@ -717,8 +816,10 @@ function renderLessonPage(lesson) {
           <p class="eyebrow">${lesson.eyebrow}</p>
           <h1>${lesson.title}</h1>
           <p class="hero-text">${lesson.lead}</p>
+          ${currentGroup ? renderLessonSummaryBand(currentGroup) : ""}
           <div class="lesson-layout">
             <article class="lesson-main">
+              ${lesson.isGroupParent ? renderSubtopicBlock(currentGroup) : renderParentBlock(currentGroup)}
               ${lesson.detailSections ? renderIntroSections(lesson.detailSections) : ""}
               ${renderBlock("핵심 개념", lesson.concepts)}
               ${renderBlock("시험 포인트", lesson.examPoints)}
@@ -734,9 +835,7 @@ function renderLessonPage(lesson) {
             </article>
             <aside class="lesson-aside">
               <h2>${lesson.part.shortTitle} 목차</h2>
-              ${siblings
-                .map((item) => `<a href="${item.slug}.html"${item.slug === lesson.slug ? ' aria-current="page"' : ""}>${String(item.index + 1).padStart(2, "0")} ${item.title}</a>`)
-                .join("")}
+              ${renderGroupedAside(lesson.part.groups, lesson)}
             </aside>
           </div>
           <nav class="lesson-nav" aria-label="이전 다음 강의">
