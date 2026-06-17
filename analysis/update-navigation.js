@@ -9,7 +9,7 @@ const navGroups = [
     label: "기본강의",
     items: [
       ["lecture.html", "강의 홈"],
-      ["lecture-civil.html", "민법"],
+      ["lecture-civil.html", "민법강의"],
       ["lecture-real-estate.html", "부동산관계법규"],
       ["lecture-compensation-law.html", "토지보상법규"],
       ["lecture-practice-guide.html", "기출·연습"],

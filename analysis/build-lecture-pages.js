@@ -10,7 +10,7 @@ const navGroups = [
     current: ["lecture.html"],
     items: [
       ["lecture.html", "강의 홈"],
-      ["lecture-civil.html", "민법"],
+      ["lecture-civil.html", "민법강의"],
       ["lecture-real-estate.html", "부동산관계법규"],
       ["lecture-compensation-law.html", "토지보상법규"],
       ["lecture-practice-guide.html", "기출·연습"],
@@ -135,8 +135,8 @@ const parts = [
     slug: "civil",
     hub: "lecture-civil.html",
     title: "제1부 민법: 총칙, 물권과 상속",
-    shortTitle: "민법",
-    subject: "민법",
+    shortTitle: "민법강의",
+    subject: "민법강의",
     lead: "민법은 보상대상 토지와 물건의 권리자를 판단하는 기본 언어입니다. 민법총칙에서 법률행위의 기본 틀을 잡고, 물권과 채권, 등기와 점유, 공유관계와 상속관계를 보상절차에 연결해 읽는 것이 핵심입니다.",
     examFocus: ["법률행위와 의사표시", "대리와 무권대리 구분", "무효ㆍ취소와 조건ㆍ기한", "물권변동과 상속관계"],
     groups: [
@@ -1060,7 +1060,19 @@ function makePractice(part, title) {
 }
 
 function renderLectureHome() {
-  const partCards = parts
+  const subjectParts = parts.filter((part) => ["civil", "real-estate", "compensation-law"].includes(part.slug));
+  const supportParts = parts.filter((part) => ["practice-guide", "appendix"].includes(part.slug));
+  const subjectCards = subjectParts
+    .map(
+      (part) => `
+          <a class="lecture-card" href="${part.hub}">
+            <span>${part.title}</span>
+            <h3>${lectureHomeLabel(part)}</h3>
+            <p>${part.lead}</p>
+          </a>`
+    )
+    .join("");
+  const supportCards = supportParts
     .map(
       (part) => `
           <a class="lecture-card" href="${part.hub}">
@@ -1090,11 +1102,20 @@ function renderLectureHome() {
         <section class="section lecture-hero" aria-labelledby="lecture-title">
           <p class="eyebrow">Basic Lecture</p>
           <h1 id="lecture-title">보상관리사 기본강의</h1>
-          <p class="hero-text">1차 세 과목을 교재 목차처럼 나누고, 각 단원을 별도 페이지로 열어 볼 수 있게 구성했습니다. 먼저 머리말을 읽고 과목별 강의로 들어가면 흐름이 자연스럽습니다.</p>
+          <p class="hero-text">민법강의, 부동산관계법규, 토지보상법규를 과목별 강의실처럼 분리했습니다. 각 과목을 클릭하면 단원별 강의 제목을 먼저 보고, 단원 안에서 세부 주제로 들어갈 수 있습니다.</p>
           <div class="hero-actions">
-            <a class="button primary" href="lecture-civil.html">민법 강의</a>
-            <a class="button secondary" href="practice-first.html">1차 문제풀이</a>
+            <a class="button primary" href="lecture-civil.html">민법강의 보기</a>
+            <a class="button secondary" href="lecture-real-estate.html">부동산관계법규</a>
+            <a class="button secondary" href="lecture-compensation-law.html">토지보상법규</a>
           </div>
+        </section>
+        <section class="section muted-band" aria-labelledby="subjects-title">
+          <div class="section-heading">
+            <p class="eyebrow">Course Entrance</p>
+            <h2 id="subjects-title">과목별 기본강의</h2>
+            <p>아래 세 과목 중 하나를 선택하면 해당 과목의 단원별 강의 제목과 세부 목차를 먼저 확인할 수 있습니다.</p>
+          </div>
+          <div class="lecture-grid three">${subjectCards}</div>
         </section>
         <section class="section" aria-labelledby="preface-title">
           <div class="section-heading">
@@ -1106,14 +1127,19 @@ function renderLectureHome() {
         </section>
         <section class="section muted-band" aria-labelledby="parts-title">
           <div class="section-heading">
-            <p class="eyebrow">Course Map</p>
-            <h2 id="parts-title">강의 목차</h2>
-            <p>민법, 부동산관계법규, 토지보상법규, 기출문제, 부록을 각각 별도 페이지 묶음으로 구성했습니다.</p>
+            <p class="eyebrow">Review Materials</p>
+            <h2 id="parts-title">보충 강의와 자료</h2>
+            <p>기출·연습과 부록은 과목별 기본강의를 들은 뒤 복습과 최종 점검에 활용합니다.</p>
           </div>
-          <div class="lecture-grid">${partCards}</div>
+          <div class="lecture-grid two">${supportCards}</div>
         </section>
       </main>`,
   });
+}
+
+function lectureHomeLabel(part) {
+  if (part.slug === "civil") return "민법강의";
+  return part.shortTitle;
 }
 
 function renderIntroPage(page) {
@@ -1261,13 +1287,25 @@ function renderPartHub(part) {
         <section class="section" aria-labelledby="toc-${part.slug}">
           <div class="section-heading">
             <p class="eyebrow">Table of Contents</p>
-            <h2 id="toc-${part.slug}">단원별 강의</h2>
-            <p>각 항목을 클릭하면 해당 강의 페이지로 이동합니다.</p>
+            <h2 id="toc-${part.slug}">${partTocTitle(part)}</h2>
+            <p>${partTocDescription(part)}</p>
           </div>
           <div class="lecture-grid three">${lessonCards}</div>
         </section>
       </main>`,
   });
+}
+
+function partTocTitle(part) {
+  if (part.slug === "civil") return "단원별 강의 제목";
+  return "단원별 강의";
+}
+
+function partTocDescription(part) {
+  if (part.slug === "civil") {
+    return "각 단원 카드를 클릭하면 해당 강의로 이동하고, 카드 안의 세부 목차에서 장별·주제별 내용을 바로 열 수 있습니다.";
+  }
+  return "각 항목을 클릭하면 해당 강의 페이지로 이동합니다.";
 }
 
 function renderLessonPage(lesson) {
