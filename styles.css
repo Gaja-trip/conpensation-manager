@@ -1441,6 +1441,26 @@ h3 {
   outline: none;
 }
 
+.lesson-figure {
+  margin: 18px 0 0;
+}
+
+.lesson-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.lesson-figure figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .lesson-table-wrap {
   margin-top: 18px;
   overflow-x: auto;
