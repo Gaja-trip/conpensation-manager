@@ -245,7 +245,17 @@ const cbtbankAdaptedQuestions = (window.CBTBANK_ADAPTED_QUESTIONS || []).map((it
   ...item,
   bank: item.bank || "CBTBank변환",
 }));
-const questionBank = [...baseQuestions, ...adaptedQuestions, ...crawledFirstQuestions, ...cbtbankAdaptedQuestions];
+const driveYearlyQuestions = (window.DRIVE_YEARLY_QUESTIONS || []).map((item) => ({
+  ...item,
+  bank: item.bank || "Drive 기출분석 변형",
+}));
+const questionBank = [
+  ...baseQuestions,
+  ...adaptedQuestions,
+  ...crawledFirstQuestions,
+  ...cbtbankAdaptedQuestions,
+  ...driveYearlyQuestions,
+];
 const writtenBank = window.WRITTEN_PROMPTS || [];
 const yearArchive = window.YEAR_STATUS || [];
 const lawUnderstanding = window.LAW_UNDERSTANDING || [];
@@ -815,6 +825,76 @@ function updatePlanProgress() {
   localStorage.setItem("compensationPlan", JSON.stringify(state));
 }
 
+function setupImageLightbox() {
+  const images = [...document.querySelectorAll(".lesson-figure img, img[data-lightbox-image]")];
+  if (!images.length) return;
+
+  let previouslyFocused = null;
+  const lightbox = createElement("div", "image-lightbox");
+  lightbox.hidden = true;
+  lightbox.setAttribute("role", "dialog");
+  lightbox.setAttribute("aria-modal", "true");
+  lightbox.setAttribute("aria-label", "이미지 크게 보기");
+  lightbox.setAttribute("aria-hidden", "true");
+
+  const backdrop = createElement("div", "image-lightbox-backdrop");
+  const panel = createElement("div", "image-lightbox-panel");
+  const closeButton = createElement("button", "image-lightbox-close", "x");
+  closeButton.type = "button";
+  closeButton.setAttribute("aria-label", "확대 이미지 닫기");
+
+  const zoomedImage = document.createElement("img");
+  const caption = createElement("p", "image-lightbox-caption");
+
+  panel.append(closeButton, zoomedImage, caption);
+  lightbox.append(backdrop, panel);
+  document.body.append(lightbox);
+
+  const close = () => {
+    lightbox.hidden = true;
+    lightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("lightbox-open");
+    zoomedImage.removeAttribute("src");
+    if (previouslyFocused) previouslyFocused.focus({ preventScroll: true });
+  };
+
+  const open = (sourceImage) => {
+    previouslyFocused = document.activeElement;
+    const figureCaption = sourceImage.closest("figure")?.querySelector("figcaption")?.textContent?.trim();
+    const captionText = figureCaption || sourceImage.alt || "";
+
+    zoomedImage.src = sourceImage.currentSrc || sourceImage.src;
+    zoomedImage.alt = sourceImage.alt || "";
+    caption.textContent = captionText;
+    caption.hidden = !captionText;
+
+    lightbox.hidden = false;
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("lightbox-open");
+    closeButton.focus({ preventScroll: true });
+  };
+
+  images.forEach((image) => {
+    image.dataset.lightboxImage = "true";
+    image.tabIndex = 0;
+    image.setAttribute("role", "button");
+    image.setAttribute("aria-label", `${image.alt || "강의 이미지"} 크게 보기`);
+    image.addEventListener("click", () => open(image));
+    image.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      open(image);
+    });
+  });
+
+  closeButton.addEventListener("click", close);
+  backdrop.addEventListener("click", close);
+  zoomedImage.addEventListener("click", close);
+  document.addEventListener("keydown", (event) => {
+    if (!lightbox.hidden && event.key === "Escape") close();
+  });
+}
+
 function init() {
   renderExamMap();
   renderArchive();
@@ -830,6 +910,7 @@ function init() {
   renderFilterButtons("#quiz-filters", ["전체", "민법", "부동산관계법규", "토지보상법규", "보상실무"], renderQuiz);
   renderQuiz();
   renderPlan();
+  setupImageLightbox();
 }
 
 init();

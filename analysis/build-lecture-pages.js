@@ -141,17 +141,12 @@ const parts = [
     examFocus: ["법률행위와 의사표시", "대리와 무권대리 구분", "무효ㆍ취소와 조건ㆍ기한", "물권변동과 상속관계"],
     groups: [
       {
-<<<<<<< HEAD
         title: "법률행위",
         children: ["권리변동의 의의와 원인", "법률행위의 의의 및 종류"],
       },
       {
         title: "민법 기초와 법의 분류",
         children: ["민법의 체계와 기본 원칙", "물권과 채권의 구분, 물건의 종류"],
-=======
-        title: "민법총칙",
-        children: ["제1장 법률행위", "제2장 대리", "제3장 무효와 취소", "제4장 조건과 기한", "민법의 체계와 기본 원칙", "물권과 채권의 구분, 물건의 종류"],
->>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
       },
       {
         title: "물권의 유형과 내용",
@@ -755,7 +750,6 @@ function getCivilGeneralContent(part, title) {
 }
 
 function makeLead(part, title) {
-<<<<<<< HEAD
   if (part.slug === "civil" && title === "법률행위") {
     return "법률행위는 권리가 왜 생기고, 어떻게 바뀌며, 언제 사라지는지를 이해한 뒤 당사자의 의사표시로 이루어지는 권리변동을 공부하는 민법 총칙의 출발 단원입니다.";
   }
@@ -765,10 +759,6 @@ function makeLead(part, title) {
   if (part.slug === "civil" && title === "법률행위의 의의 및 종류") {
     return "법률행위의 의의 및 종류는 사람의 의사표시가 법률효과를 만드는 구조와 단독행위, 계약, 합동행위의 차이를 정리하는 단원입니다.";
   }
-=======
-  const civilGeneral = getCivilGeneralContent(part, title);
-  if (civilGeneral) return civilGeneral.lead;
->>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
   if (part.slug === "civil" && title === "민법 기초와 법의 분류") {
     return "민법 기초와 법의 분류는 민법이 어떤 생활관계를 다루는 법인지, 공법과 사법은 어떻게 구분되는지, 민법의 전체 체계와 기본 원칙은 무엇인지를 잡는 도입 단원입니다.";
   }
@@ -1105,7 +1095,6 @@ function makeDetailSections(part, title) {
 }
 
 function makeConcepts(part, title) {
-<<<<<<< HEAD
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "권리변동은 권리의 발생, 변경, 소멸을 말합니다.",
@@ -1131,10 +1120,6 @@ function makeConcepts(part, title) {
       "법률행위의 종류는 이름보다 의사표시 구조와 법률효과를 기준으로 구분합니다.",
     ];
   }
-=======
-  const civilGeneral = getCivilGeneralContent(part, title);
-  if (civilGeneral) return civilGeneral.concepts;
->>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
   if (part.slug === "civil" && title === "민법 기초와 법의 분류") {
     return [
       "민법은 사적 생활관계, 즉 개인 사이의 재산관계와 가족관계를 규율합니다.",
@@ -1167,7 +1152,6 @@ function makeConcepts(part, title) {
 }
 
 function makeExamPoints(part, title) {
-<<<<<<< HEAD
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "법률행위 문제는 권리변동 전체 그림에서 출발해야 합니다.",
@@ -1193,10 +1177,6 @@ function makeExamPoints(part, title) {
       "재산행위와 신분행위는 권리변동의 대상이 재산관계인지 가족관계인지로 구분합니다.",
     ];
   }
-=======
-  const civilGeneral = getCivilGeneralContent(part, title);
-  if (civilGeneral) return civilGeneral.examPoints;
->>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
   if (part.slug === "civil" && title === "민법 기초와 법의 분류") {
     return [
       "공법과 사법을 구분하고, 토지보상법은 공법 절차이나 권리자 판단에는 민법이 필요하다는 점을 기억합니다.",
@@ -1251,7 +1231,6 @@ function makeExamPoints(part, title) {
 }
 
 function makePractice(part, title) {
-<<<<<<< HEAD
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "매매, 상속, 변제, 시효취득, 저당권 설정을 권리의 발생ㆍ변경ㆍ소멸로 분류합니다.",
@@ -1274,10 +1253,6 @@ function makePractice(part, title) {
       "각 법률행위가 권리의 발생, 변경, 소멸 중 어떤 효과와 연결되는지 표시합니다.",
     ];
   }
-=======
-  const civilGeneral = getCivilGeneralContent(part, title);
-  if (civilGeneral) return civilGeneral.practice;
->>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
   if (part.slug === "civil" && title === "민법 기초와 법의 분류") {
     return [
       "공법과 사법의 예를 각각 3개씩 적어 봅니다.",
@@ -1447,7 +1422,7 @@ function renderLessonTable(table) {
 
 function renderLessonImage(image) {
   return `<figure class="lesson-figure">
-                  <img src="${image.src}" alt="${image.alt}">
+                  <img src="${image.src}" alt="${image.alt}" data-lightbox-image>
                   ${image.caption ? `<figcaption>${image.caption}</figcaption>` : ""}
                 </figure>`;
 }
@@ -1626,6 +1601,7 @@ function layout({ title, description, current, body }) {
       <p>보상관리사 기본강의는 기출분석, 예상문제, 법령 이해하기 페이지와 함께 회독하도록 구성했습니다.</p>
       <p><a href="lecture.html">기본강의 홈</a> · <a href="practice.html">문제풀이</a> · <a href="law.html">토지보상법 이해하기</a></p>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>
 `;
