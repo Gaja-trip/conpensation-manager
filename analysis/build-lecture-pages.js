@@ -3,16 +3,42 @@ const path = require("path");
 
 const root = path.resolve(__dirname, "..");
 
-const navItems = [
-  ["lecture.html", "기본강의"],
-  ["exam-map.html", "시험지도"],
-  ["archive.html", "기출정리"],
-  ["practice.html", "문제풀이"],
-  ["law.html", "이해하기"],
-  ["frequency.html", "출제빈도"],
-  ["strategy.html", "과목전략"],
-  ["drill.html", "실전평가"],
-  ["plan.html", "회독계획"],
+const navGroups = [
+  {
+    href: "lecture.html",
+    label: "기본강의",
+    current: ["lecture.html"],
+    items: [
+      ["lecture.html", "강의 홈"],
+      ["lecture-civil.html", "민법강의"],
+      ["lecture-real-estate.html", "부동산관계법규"],
+      ["lecture-compensation-law.html", "토지보상법규"],
+      ["lecture-practice-guide.html", "기출·연습"],
+      ["lecture-appendix.html", "부록"],
+    ],
+  },
+  {
+    href: "practice.html",
+    label: "문제풀이",
+    current: ["practice.html", "practice-first.html", "practice-second.html", "exam-map.html", "archive.html"],
+    items: [
+      ["practice.html", "문제풀이"],
+      ["exam-map.html", "시험지도"],
+      ["archive.html", "기출정리"],
+    ],
+  },
+  {
+    href: "analysis.html",
+    label: "분석자료",
+    current: ["analysis.html", "law.html", "frequency.html", "strategy.html", "drill.html", "plan.html"],
+    items: [
+      ["law.html", "이해하기"],
+      ["frequency.html", "출제빈도"],
+      ["strategy.html", "과목전략"],
+      ["drill.html", "실전점검"],
+      ["plan.html", "회독계획"],
+    ],
+  },
 ];
 
 const introPages = [
@@ -108,19 +134,24 @@ const parts = [
   {
     slug: "civil",
     hub: "lecture-civil.html",
-    title: "제1부 민법: 물권과 상속",
-    shortTitle: "민법",
-    subject: "민법",
-    lead: "민법은 보상대상 토지와 물건의 권리자를 판단하는 기본 언어입니다. 물권과 채권을 구분하고, 등기와 점유, 공유관계와 상속관계를 보상절차에 연결해 읽는 것이 핵심입니다.",
-    examFocus: ["물권변동과 등기 필요 여부", "점유와 취득시효의 요건", "공유ㆍ합유ㆍ총유의 관리와 처분", "상속인 범위와 상속재산분할"],
+    title: "제1부 민법: 총칙, 물권과 상속",
+    shortTitle: "민법강의",
+    subject: "민법강의",
+    lead: "민법은 보상대상 토지와 물건의 권리자를 판단하는 기본 언어입니다. 민법총칙에서 법률행위의 기본 틀을 잡고, 물권과 채권, 등기와 점유, 공유관계와 상속관계를 보상절차에 연결해 읽는 것이 핵심입니다.",
+    examFocus: ["법률행위와 의사표시", "대리와 무권대리 구분", "무효ㆍ취소와 조건ㆍ기한", "물권변동과 상속관계"],
     groups: [
       {
+<<<<<<< HEAD
         title: "법률행위",
         children: ["권리변동의 의의와 원인", "법률행위의 의의 및 종류"],
       },
       {
         title: "민법 기초와 법의 분류",
         children: ["민법의 체계와 기본 원칙", "물권과 채권의 구분, 물건의 종류"],
+=======
+        title: "민법총칙",
+        children: ["제1장 법률행위", "제2장 대리", "제3장 무효와 취소", "제4장 조건과 기한", "민법의 체계와 기본 원칙", "물권과 채권의 구분, 물건의 종류"],
+>>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
       },
       {
         title: "물권의 유형과 내용",
@@ -238,6 +269,430 @@ const parts = [
   },
 ];
 
+const civilLessonSlugs = {
+  민법총칙: "lecture-civil-01",
+  "제1장 법률행위": "lecture-civil-general-act",
+  "제2장 대리": "lecture-civil-general-agency",
+  "제3장 무효와 취소": "lecture-civil-general-nullity",
+  "제4장 조건과 기한": "lecture-civil-general-condition",
+  "민법의 체계와 기본 원칙": "lecture-civil-02",
+  "물권과 채권의 구분, 물건의 종류": "lecture-civil-03",
+  "물권의 유형과 내용": "lecture-civil-04",
+  "소유권ㆍ점유권의 개념과 기능": "lecture-civil-05",
+  "용익물권: 지상권, 지역권, 전세권 등": "lecture-civil-06",
+  "담보물권: 유치권, 질권, 저당권과 가등기의 효력": "lecture-civil-07",
+  "물권의 변동과 등기": "lecture-civil-08",
+  "부동산 물권의 설정ㆍ변경ㆍ소멸과 등기 제도": "lecture-civil-09",
+  "등기의 종류, 절차와 공신력": "lecture-civil-10",
+  "물권 취득시효와 점유": "lecture-civil-11",
+  "점유취득시효, 등기부취득시효의 요건과 효과": "lecture-civil-12",
+  "선의ㆍ악의 점유 및 필요비ㆍ유익비의 상환": "lecture-civil-13",
+  "공유, 합유, 총유": "lecture-civil-14",
+  "공유지분의 관리ㆍ처분 및 분할": "lecture-civil-15",
+  "합유ㆍ총유의 개념과 차이점": "lecture-civil-16",
+  상속법: "lecture-civil-17",
+  "상속의 의의와 효력, 상속인의 범위": "lecture-civil-18",
+  "법정상속분과 유류분, 유언 상속": "lecture-civil-19",
+  "상속재산분할과 상속포기ㆍ한정승인 절차": "lecture-civil-20",
+  "부동산 상속 등기의 방법과 유의점": "lecture-civil-21",
+};
+
+const civilGeneralContent = {
+  민법총칙: {
+    lead: "민법총칙은 민법 전체에 공통으로 적용되는 기본 규칙입니다. 법률행위, 대리, 무효와 취소, 조건과 기한을 먼저 잡아야 물권ㆍ채권ㆍ상속 단원에서 권리 변동을 정확히 읽을 수 있습니다.",
+    sections: [
+      {
+        title: "1. 민법총칙을 먼저 공부하는 이유",
+        paragraphs: [
+          "민법총칙은 민법 전반의 공통 언어입니다. 계약이 성립했는지, 누가 대신 계약했는지, 잘못된 계약은 처음부터 효력이 없는지 또는 취소해야 없어지는지, 효력이 언제 발생하거나 사라지는지를 판단하는 기준을 제공합니다.",
+          "보상관리사 시험에서는 총칙 지식이 권리자 판단의 출발점이 됩니다. 토지 매매, 임대차, 상속재산 분할, 보상금 수령 위임처럼 실제 사례는 대부분 법률행위와 대리, 효력 문제를 함께 포함합니다.",
+        ],
+        table: {
+          headers: ["장", "핵심 질문", "쉬운 예시"],
+          rows: [
+            ["제1장 법률행위", "의사표시로 권리와 의무가 생기는가", "토지를 팔겠다는 의사와 사겠다는 의사가 합치하면 매매계약이 됩니다."],
+            ["제2장 대리", "다른 사람이 한 행위가 본인에게 효력을 미치는가", "토지소유자가 대리인에게 보상협의 권한을 주면 대리인의 의사표시가 본인에게 귀속됩니다."],
+            ["제3장 무효와 취소", "하자 있는 행위의 효력을 어떻게 정리하는가", "강행규정 위반은 무효이고, 미성년자의 계약은 취소될 수 있습니다."],
+            ["제4장 조건과 기한", "효력이 언제 발생하거나 사라지는가", "인허가가 나면 매매 효력이 생긴다는 약정은 조건 문제로 볼 수 있습니다."],
+          ],
+        },
+      },
+      {
+        title: "2. 공부 순서",
+        paragraphs: [
+          "먼저 법률행위에서 의사표시와 효력 요건을 익히고, 다음으로 대리에서 행위자와 효과 귀속자를 분리해 봅니다. 그 다음 무효와 취소에서 하자의 효과를 정리하고, 마지막으로 조건과 기한에서 시간적 제한을 붙여 읽으면 됩니다.",
+        ],
+        items: [
+          "법률행위: 권리 변동의 기본 공식입니다.",
+          "대리: 누가 표시했고 누구에게 효과가 돌아가는지를 구분합니다.",
+          "무효와 취소: 하자가 있으면 효력이 당연히 없는지, 취소해야 없어지는지를 나눕니다.",
+          "조건과 기한: 효력 발생이나 소멸을 장래 사실 또는 시점과 연결합니다.",
+        ],
+      },
+      {
+        title: "3. 보상사례로 보는 민법총칙",
+        paragraphs: [
+          "예를 들어 토지소유자 A가 대리인 B에게 보상협의 권한을 주고, B가 사업시행자와 협의서를 작성했다고 해 봅시다. 이때 B의 행위는 대리 규칙에 따라 A에게 효력이 귀속될 수 있습니다.",
+          "그런데 B에게 권한이 없었거나, A가 착오로 중요한 내용을 잘못 이해했다면 무권대리, 취소, 무효 문제가 이어집니다. 민법총칙은 이런 상황을 단계적으로 정리하는 도구입니다.",
+        ],
+        items: [
+          "먼저 행위가 법률행위인지 확인합니다.",
+          "다음으로 행위자가 본인인지 대리인인지 확인합니다.",
+          "그 다음 효력에 하자가 있는지, 무효인지 취소인지 구분합니다.",
+          "마지막으로 조건이나 기한이 붙어 효력 발생 시점이 달라지는지 확인합니다.",
+        ],
+      },
+    ],
+    concepts: [
+      "민법총칙은 민법 전 영역에 공통으로 적용되는 일반 규칙입니다.",
+      "법률행위는 의사표시를 핵심 요소로 하여 권리 변동을 발생시키는 행위입니다.",
+      "대리는 대리인의 의사표시 효과가 본인에게 귀속되는 제도입니다.",
+      "무효는 처음부터 효력이 없는 것이고, 취소는 취소권 행사로 효력을 잃게 하는 제도입니다.",
+      "조건과 기한은 법률행위의 효력 발생 또는 소멸을 장래 사실이나 시점에 연결합니다.",
+    ],
+    examPoints: [
+      "총칙 문제는 정의보다 효과 구분에서 자주 틀립니다.",
+      "법률행위, 대리, 무효ㆍ취소, 조건ㆍ기한은 서로 연결되어 사례형 선택지로 출제될 수 있습니다.",
+      "무효와 취소, 조건과 기한처럼 이름이 비슷한 개념은 비교표로 정리합니다.",
+    ],
+    practice: [
+      "매매계약 사례 하나를 정해 법률행위, 의사표시, 효과를 표시합니다.",
+      "대리인이 등장하는 사례에서 본인, 대리인, 상대방을 각각 표시합니다.",
+      "무효와 취소의 차이를 ‘처음부터’, ‘취소권’, ‘추인’이라는 단어를 넣어 설명합니다.",
+      "조건과 기한의 차이를 직접 예문으로 하나씩 만들어 봅니다.",
+    ],
+  },
+  "제1장 법률행위": {
+    lead: "법률행위는 사람이 일정한 법률효과를 원해서 의사표시를 하고, 그 의사표시에 따라 권리와 의무가 생기는 행위입니다. 매매, 임대차, 증여, 보상협의서 작성처럼 권리 변동을 일으키는 기본 틀입니다.",
+    sections: [
+      {
+        title: "1. 법률행위의 기본 구조",
+        paragraphs: [
+          "법률행위는 권리 변동을 목적으로 하는 의사표시를 핵심으로 합니다. 사람의 행위가 모두 법률행위는 아니고, 당사자가 법률효과를 발생시키려는 의사를 표시해야 합니다.",
+          "예를 들어 단순히 ‘저 땅이 마음에 든다’고 말하는 것은 법률행위가 아닙니다. 그러나 ‘그 토지를 3억 원에 사겠다’고 청약하고 상대방이 승낙하면 매매계약이라는 법률행위가 됩니다.",
+        ],
+        table: {
+          headers: ["구분", "뜻", "예시"],
+          rows: [
+            ["법률요건", "법률효과가 발생하기 위해 필요한 사실의 묶음", "매매계약 체결, 사망, 불법행위"],
+            ["법률효과", "권리의 발생ㆍ변경ㆍ소멸", "소유권이전청구권 발생, 대금지급의무 발생"],
+            ["법률행위", "의사표시를 중심으로 법률효과를 발생시키는 행위", "매매, 임대차, 증여, 위임"],
+            ["의사표시", "일정한 법률효과를 원한다는 뜻을 밖으로 나타내는 행위", "팔겠다, 사겠다, 임대하겠다"],
+          ],
+        },
+      },
+      {
+        title: "2. 성립요건과 효력요건",
+        paragraphs: [
+          "법률행위는 먼저 성립해야 하고, 그 다음 유효해야 합니다. 성립요건은 법률행위가 존재한다고 볼 수 있는 최소 요건이고, 효력요건은 성립한 법률행위가 실제로 효력을 낼 수 있는 요건입니다.",
+          "계약서를 작성했더라도 내용이 강행규정에 위반되거나 사회질서에 반하면 효력이 부정될 수 있습니다. 따라서 시험에서는 ‘성립하지 않는다’와 ‘성립하지만 무효다’를 구분해야 합니다.",
+        ],
+        table: {
+          headers: ["구분", "확인할 내용", "예시"],
+          rows: [
+            ["성립요건", "당사자, 목적, 의사표시가 있는가", "매도인과 매수인이 목적 토지와 가격에 합의"],
+            ["효력요건", "당사자 능력, 목적의 가능ㆍ적법ㆍ확정성, 의사표시에 하자가 없는가", "불법 목적으로 한 계약은 효력이 문제됨"],
+            ["계약 성립", "청약과 승낙이 합치하는가", "A가 팔겠다고 하고 B가 같은 조건으로 사겠다고 함"],
+            ["계약 효력", "강행규정 위반이나 의사표시 하자가 없는가", "착오, 사기, 강박, 반사회질서 여부 검토"],
+          ],
+        },
+      },
+      {
+        title: "3. 의사표시와 표시의 불일치",
+        paragraphs: [
+          "의사표시는 마음속 효과의사와 외부 표시가 연결되어야 합니다. 그런데 실제 의사와 표시가 어긋나면 착오, 비진의표시, 통정허위표시 같은 문제가 생깁니다.",
+          "예를 들어 토지 면적을 잘못 알고 가격을 제시했다면 착오가 문제될 수 있습니다. 당사자들이 실제로는 매매할 생각이 없으면서 형식상 매매계약서를 작성했다면 통정허위표시가 문제됩니다.",
+        ],
+        items: [
+          "비진의표시: 표시한 사람이 진의가 아님을 알면서 표시한 경우입니다.",
+          "통정허위표시: 상대방과 짜고 거짓 의사표시를 한 경우입니다.",
+          "착오: 중요 부분을 잘못 알고 의사표시를 한 경우입니다.",
+          "사기ㆍ강박: 속임수나 위협으로 의사표시를 한 경우입니다.",
+        ],
+      },
+      {
+        title: "4. 쉬운 예시",
+        paragraphs: [
+          "A가 B에게 ‘내 토지를 3억 원에 팔겠다’고 말하고 B가 ‘그 가격에 사겠다’고 답하면 매매계약이 성립합니다. 이때 A와 B의 의사표시는 권리와 의무를 만들기 때문에 법률행위입니다.",
+          "반면 A가 친구에게 ‘언젠가 저 땅을 팔 수도 있다’고 말한 정도라면 법률효과를 확정적으로 발생시키려는 의사표시가 아니므로 법률행위로 보기 어렵습니다.",
+        ],
+        items: [
+          "매매계약: 매도인은 소유권 이전 의무, 매수인은 대금 지급 의무를 부담합니다.",
+          "임대차계약: 임대인은 사용ㆍ수익하게 할 의무, 임차인은 차임 지급 의무를 부담합니다.",
+          "보상협의서: 권리자가 협의 내용에 동의하면 보상금 지급과 권리 이전 절차가 이어질 수 있습니다.",
+        ],
+      },
+    ],
+    concepts: [
+      "법률행위는 의사표시를 요소로 하여 권리 변동을 발생시키는 행위입니다.",
+      "법률요건이 충족되면 법률효과가 발생합니다.",
+      "계약은 청약과 승낙의 합치로 성립합니다.",
+      "성립요건과 효력요건을 구분해야 합니다.",
+      "의사표시 하자는 착오, 사기, 강박, 통정허위표시 등으로 정리합니다.",
+    ],
+    examPoints: [
+      "단순한 사실행위와 법률행위를 구분합니다.",
+      "법률요건과 법률효과를 바꾸어 설명하는 선택지를 주의합니다.",
+      "계약 성립 문제에서는 청약과 승낙의 내용이 일치하는지 봅니다.",
+      "효력요건 문제에서는 목적의 적법성, 사회질서 위반, 의사표시 하자를 확인합니다.",
+    ],
+    practice: [
+      "매매계약 사례에서 법률요건과 법률효과를 각각 표시합니다.",
+      "성립요건과 효력요건을 두 칸 표로 정리합니다.",
+      "착오, 사기, 강박의 예를 하나씩 직접 만들어 봅니다.",
+      "보상협의서 작성 사례가 왜 법률행위인지 한 문장으로 설명합니다.",
+    ],
+  },
+  "제2장 대리": {
+    lead: "대리는 대리인이 본인을 위하여 의사표시를 하거나 받으면 그 효과가 본인에게 직접 귀속되는 제도입니다. 보상협의, 매매계약, 위임장 사례에서 본인ㆍ대리인ㆍ상대방의 구조를 정확히 구분해야 합니다.",
+    sections: [
+      {
+        title: "1. 대리의 3면 구조",
+        paragraphs: [
+          "대리에는 본인, 대리인, 상대방이 등장합니다. 대리인은 직접 의사표시를 하지만, 효과는 본인에게 돌아갑니다.",
+          "예를 들어 토지소유자 A가 B에게 매매계약 체결 권한을 주고, B가 C와 계약하면 계약 효과는 원칙적으로 A와 C 사이에 발생합니다.",
+        ],
+        table: {
+          headers: ["당사자", "역할", "예시"],
+          rows: [
+            ["본인", "법률효과가 귀속되는 사람", "토지소유자 A"],
+            ["대리인", "본인을 위하여 의사표시를 하는 사람", "위임장을 받은 B"],
+            ["상대방", "대리인의 의사표시를 받거나 대리인에게 표시하는 사람", "매수인 C 또는 사업시행자"],
+            ["효과 귀속", "대리행위의 효과가 본인에게 직접 발생", "A가 계약상 권리ㆍ의무를 부담"],
+          ],
+        },
+      },
+      {
+        title: "2. 대리권과 현명주의",
+        paragraphs: [
+          "대리행위가 본인에게 효력을 미치려면 대리권이 있어야 하고, 대리인이 본인을 위한 것임을 표시해야 합니다. 이를 현명주의라고 합니다.",
+          "권한이 있는 대리인이 ‘A의 대리인 B입니다’라고 밝히고 계약하면 유권대리가 됩니다. 반대로 자기 이름으로만 계약하면 원칙적으로 대리 효과가 문제될 수 있습니다.",
+        ],
+        items: [
+          "대리권: 본인에게 효과를 귀속시킬 수 있는 권한입니다.",
+          "임의대리: 본인의 수권행위, 즉 위임 등으로 생기는 대리입니다.",
+          "법정대리: 법률 규정에 따라 생기는 대리입니다. 친권자, 후견인 등이 대표적입니다.",
+          "현명주의: 대리인이 본인을 위한 행위임을 상대방에게 표시해야 한다는 원칙입니다.",
+        ],
+      },
+      {
+        title: "3. 유권대리, 무권대리, 표현대리",
+        paragraphs: [
+          "유권대리는 대리권이 있는 경우입니다. 무권대리는 대리권 없이 대리행위를 한 경우이고, 본인이 추인하지 않으면 원칙적으로 본인에게 효력이 생기지 않습니다.",
+          "표현대리는 실제 권한이 없더라도 본인에게 일정한 귀책 사유가 있어 상대방의 신뢰를 보호하는 제도입니다. 시험에서는 무권대리와 표현대리를 구분하는 선택지가 자주 나옵니다.",
+        ],
+        table: {
+          headers: ["구분", "핵심", "효과"],
+          rows: [
+            ["유권대리", "대리권이 있고 현명도 있는 경우", "효과가 본인에게 귀속"],
+            ["무권대리", "대리권 없이 한 대리행위", "본인이 추인하면 유효, 거절하면 본인에게 효력 없음"],
+            ["표현대리", "권한이 있는 것처럼 보인 데 본인의 귀책이 있는 경우", "상대방 보호를 위해 본인이 책임질 수 있음"],
+            ["추인", "본인이 나중에 무권대리행위를 인정", "원칙적으로 처음부터 유효했던 것처럼 취급"],
+          ],
+        },
+      },
+      {
+        title: "4. 쉬운 예시",
+        paragraphs: [
+          "A가 B에게 ‘내 토지 보상협의를 대신해도 된다’고 위임장을 주었습니다. B가 사업시행자에게 A의 대리인임을 밝히고 협의했다면 그 효과는 A에게 귀속될 수 있습니다.",
+          "반대로 B가 권한 없이 A의 대리인이라고 하며 협의했다면 무권대리입니다. A가 나중에 그 협의를 인정하면 추인이 되고, 인정하지 않으면 A에게 효력이 생기지 않는 것이 원칙입니다.",
+        ],
+        items: [
+          "위임장 범위를 확인합니다. 보상금 수령 권한까지 있는지, 협의 권한만 있는지 구분합니다.",
+          "대리인이 본인을 표시했는지 확인합니다.",
+          "상대방이 대리권 존재를 믿을 만한 사정이 있었는지 확인합니다.",
+        ],
+      },
+    ],
+    concepts: [
+      "대리는 대리인의 행위 효과가 본인에게 직접 귀속되는 제도입니다.",
+      "대리에는 본인, 대리인, 상대방이 등장합니다.",
+      "대리권은 임의대리 또는 법정대리로 생길 수 있습니다.",
+      "현명주의는 본인을 위한 대리행위임을 표시해야 한다는 원칙입니다.",
+      "무권대리는 본인의 추인 여부에 따라 효력이 달라질 수 있습니다.",
+    ],
+    examPoints: [
+      "대리인이 한 행위의 효과가 누구에게 귀속되는지 묻는 선택지를 주의합니다.",
+      "대리권 유무와 현명 여부를 분리해서 판단합니다.",
+      "무권대리와 표현대리는 상대방 보호 여부에서 구분합니다.",
+      "추인의 효과는 원칙적으로 소급효가 있다는 점을 기억합니다.",
+    ],
+    practice: [
+      "본인, 대리인, 상대방이 나오는 사례를 직접 하나 만들고 화살표로 효과 귀속을 표시합니다.",
+      "유권대리, 무권대리, 표현대리를 세 칸 표로 비교합니다.",
+      "위임장에 적힌 권한 범위를 읽고 가능한 행위와 불가능한 행위를 나눠 봅니다.",
+      "보상협의 사례에서 현명주의가 드러나는 문장을 만들어 봅니다.",
+    ],
+  },
+  "제3장 무효와 취소": {
+    lead: "무효와 취소는 하자 있는 법률행위의 효력을 정리하는 핵심 개념입니다. 무효는 처음부터 효력이 없는 것이고, 취소는 취소권자가 취소해야 효력을 잃는다는 점을 구분해야 합니다.",
+    sections: [
+      {
+        title: "1. 무효와 취소의 차이",
+        paragraphs: [
+          "무효는 법률행위가 처음부터 효력을 발생하지 않는 경우입니다. 누구의 의사표시가 없어도 법률상 당연히 효력이 없습니다.",
+          "취소는 일단 유효하게 성립했지만, 취소권자가 취소하면 처음부터 효력이 없었던 것처럼 되는 경우입니다. 따라서 취소권자, 취소기간, 추인이 중요합니다.",
+        ],
+        table: {
+          headers: ["구분", "무효", "취소"],
+          rows: [
+            ["효력 상태", "처음부터 효력이 없음", "취소 전에는 일단 유효"],
+            ["주장 주체", "원칙적으로 누구나 무효를 주장할 수 있음", "취소권자만 취소 가능"],
+            ["추인", "원칙적으로 추인해도 새 행위로 볼 뿐", "추인하면 더 이상 취소할 수 없음"],
+            ["예시", "반사회질서 법률행위, 불공정한 법률행위", "미성년자의 법률행위, 사기ㆍ강박에 의한 의사표시"],
+          ],
+        },
+      },
+      {
+        title: "2. 무효의 대표 사례",
+        paragraphs: [
+          "민법상 무효는 강한 하자가 있어 법률이 효력을 인정하지 않는 경우입니다. 반사회질서 법률행위, 강행규정 위반, 통정허위표시 등이 대표적으로 다뤄집니다.",
+          "예를 들어 허위로 토지를 매매한 것처럼 꾸며 채권자를 해하려는 계약은 통정허위표시가 문제될 수 있습니다. 법률이 금지하는 목적의 계약은 무효가 될 수 있습니다.",
+        ],
+        items: [
+          "반사회질서 법률행위: 선량한 풍속 기타 사회질서에 반하는 행위입니다.",
+          "불공정한 법률행위: 궁박, 경솔, 무경험을 이용해 현저하게 공정을 잃은 행위입니다.",
+          "통정허위표시: 상대방과 짜고 한 거짓 의사표시입니다.",
+          "강행규정 위반: 법이 반드시 지키도록 한 규정을 위반한 경우입니다.",
+        ],
+      },
+      {
+        title: "3. 취소의 대표 사례와 효과",
+        paragraphs: [
+          "취소는 제한능력자, 착오, 사기, 강박처럼 보호할 필요가 있는 하자에서 문제됩니다. 취소권자가 취소하면 그 법률행위는 처음부터 무효였던 것처럼 취급됩니다.",
+          "예를 들어 미성년자가 법정대리인의 동의 없이 중요한 매매계약을 했다면 취소할 수 있습니다. 사기로 토지 가격이나 권리관계를 잘못 믿고 계약했다면 취소 문제가 생길 수 있습니다.",
+        ],
+        table: {
+          headers: ["취소 사유", "핵심", "예시"],
+          rows: [
+            ["제한능력자", "미성년자 등 보호가 필요한 자의 행위", "미성년자가 동의 없이 고가 부동산 계약 체결"],
+            ["착오", "중요 부분을 잘못 알고 의사표시", "토지 면적이나 권리 제한을 중대하게 오인"],
+            ["사기", "속임수로 의사표시를 하게 함", "개발 가능성을 허위로 알려 매매계약 체결"],
+            ["강박", "위협으로 의사표시를 하게 함", "불이익을 주겠다고 압박해 계약서 작성"],
+          ],
+        },
+      },
+      {
+        title: "4. 추인과 기간",
+        paragraphs: [
+          "취소할 수 있는 법률행위는 추인하면 더 이상 취소할 수 없습니다. 추인은 하자를 알고도 그 행위를 유효한 것으로 인정하는 의사표시입니다.",
+          "취소권은 영원히 행사할 수 있는 권리가 아닙니다. 법에서 정한 기간이 지나면 취소할 수 없으므로 시험에서는 ‘취소할 수 있다’와 ‘언제까지 취소할 수 있다’를 함께 봐야 합니다.",
+        ],
+        items: [
+          "추인하려면 취소 원인이 소멸한 뒤에 해야 합니다.",
+          "취소권자가 추인하면 그 행위는 확정적으로 유효가 됩니다.",
+          "취소권은 일정 기간 내에 행사해야 합니다.",
+          "무효는 기간이 지나 유효가 되는 것이 아니라는 점을 취소와 구분합니다.",
+        ],
+      },
+    ],
+    concepts: [
+      "무효는 처음부터 법률효과가 발생하지 않는 경우입니다.",
+      "취소는 취소권자가 취소해야 효력을 잃는 경우입니다.",
+      "취소할 수 있는 법률행위는 취소 전까지는 일단 유효합니다.",
+      "추인은 취소할 수 있는 행위를 확정적으로 유효하게 만드는 행위입니다.",
+      "미성년자, 착오, 사기, 강박은 취소 사유로 자주 정리됩니다.",
+    ],
+    examPoints: [
+      "무효와 취소의 가장 큰 차이는 취소 전 효력 상태입니다.",
+      "무효 사유와 취소 사유를 서로 바꾼 선택지를 주의합니다.",
+      "추인은 무효와 취소에서 효과가 다르게 설명됩니다.",
+      "취소권자는 누구인지, 기간 제한이 있는지 함께 확인합니다.",
+    ],
+    practice: [
+      "무효와 취소를 네 항목 표로 비교합니다.",
+      "미성년자 계약 사례와 반사회질서 계약 사례를 각각 하나씩 만들어 구분합니다.",
+      "사기와 착오의 차이를 ‘상대방의 속임수’ 여부로 설명합니다.",
+      "취소 전과 취소 후의 법률효과를 시간순으로 써 봅니다.",
+    ],
+  },
+  "제4장 조건과 기한": {
+    lead: "조건과 기한은 법률행위의 효력 발생 또는 소멸을 장래의 사실이나 시점에 연결하는 장치입니다. 정지조건ㆍ해제조건, 시기ㆍ종기, 기한의 이익을 구분하면 사례형 문제를 쉽게 읽을 수 있습니다.",
+    sections: [
+      {
+        title: "1. 조건의 의미",
+        paragraphs: [
+          "조건은 장래에 발생할지 불확실한 사실에 법률행위의 효력을 연결하는 부관입니다. 그 사실이 발생할지 확실하지 않다는 점이 핵심입니다.",
+          "예를 들어 ‘개발행위허가가 나면 토지를 매매한다’는 약정은 허가 여부가 불확실하므로 조건으로 볼 수 있습니다.",
+        ],
+        table: {
+          headers: ["구분", "뜻", "예시"],
+          rows: [
+            ["정지조건", "조건이 성취되면 효력이 발생", "인허가가 나면 계약 효력이 발생"],
+            ["해제조건", "조건이 성취되면 효력이 소멸", "사업이 취소되면 계약 효력이 사라짐"],
+            ["조건성취", "불확실한 장래 사실이 실제로 발생", "허가가 실제로 발급됨"],
+            ["조건불성취", "그 사실이 발생하지 않음", "허가가 거부됨"],
+          ],
+        },
+      },
+      {
+        title: "2. 기한의 의미",
+        paragraphs: [
+          "기한은 장래에 반드시 도래할 사실에 법률행위의 효력을 연결하는 부관입니다. 언젠가 도래한다는 점에서 조건과 다릅니다.",
+          "예를 들어 ‘2026년 9월 1일부터 임대차가 시작된다’는 약정은 날짜가 반드시 오므로 기한입니다. ‘A가 사망하면’도 사망은 언젠가 반드시 발생하므로 기한으로 볼 수 있습니다.",
+        ],
+        table: {
+          headers: ["구분", "뜻", "예시"],
+          rows: [
+            ["시기", "기한이 도래하면 효력이 발생", "2026년 9월 1일부터 임대차 시작"],
+            ["종기", "기한이 도래하면 효력이 소멸", "2028년 8월 31일에 임대차 종료"],
+            ["확정기한", "도래 시점이 확정된 기한", "특정 날짜"],
+            ["불확정기한", "도래는 확실하지만 시점은 불확실한 기한", "사망 시"],
+          ],
+        },
+      },
+      {
+        title: "3. 조건과 기한의 비교",
+        paragraphs: [
+          "조건과 기한은 모두 법률행위의 효력을 제한하지만, 장래 사실의 확실성에서 구분합니다. 발생할지 불확실하면 조건, 발생은 확실하고 시기만 문제되면 기한입니다.",
+          "시험 선택지는 ‘허가가 나면’과 ‘언제부터’ 같은 표현을 섞어 냅니다. 문장 속 장래 사실이 반드시 발생하는지부터 확인하면 됩니다.",
+        ],
+        table: {
+          headers: ["비교", "조건", "기한"],
+          rows: [
+            ["장래성", "장래 사실", "장래 사실 또는 시점"],
+            ["확실성", "발생 여부가 불확실", "발생은 확실"],
+            ["대표 표현", "~하면, ~하지 않으면", "~부터, ~까지, 사망 시"],
+            ["판단 질문", "일어날 수도 있고 안 일어날 수도 있는가", "언젠가 반드시 오는가"],
+          ],
+        },
+      },
+      {
+        title: "4. 조건성취 방해와 기한의 이익",
+        paragraphs: [
+          "조건의 성취로 불이익을 받을 당사자가 신의성실에 반하여 조건 성취를 방해하면, 상대방은 조건이 성취된 것으로 주장할 수 있습니다. 반대로 조건 성취로 이익을 받을 사람이 부당하게 조건을 성취시킨 경우도 문제됩니다.",
+          "기한의 이익은 기한이 도래할 때까지 이행을 미룰 수 있는 이익입니다. 예를 들어 돈을 빌린 사람이 변제기 전까지 갚지 않아도 되는 이익은 채무자에게 있는 것이 보통입니다.",
+        ],
+        items: [
+          "조건성취 방해: 신의성실에 반해 조건 성취를 막으면 성취된 것으로 볼 수 있습니다.",
+          "조건성취의 부당한 유도: 조건 성취로 이익을 받는 사람이 부당하게 성취시킨 경우 문제가 됩니다.",
+          "기한의 이익: 기한 도래 전까지 이행을 거절하거나 미룰 수 있는 이익입니다.",
+          "기한의 이익 상실: 담보 훼손, 파산 등 일정 사유가 있으면 기한 전 이행을 요구받을 수 있습니다.",
+        ],
+      },
+    ],
+    concepts: [
+      "조건은 장래 불확실한 사실에 효력을 연결합니다.",
+      "정지조건은 성취되면 효력이 발생하고, 해제조건은 성취되면 효력이 소멸합니다.",
+      "기한은 장래 확실히 도래할 사실이나 시점에 효력을 연결합니다.",
+      "시기는 효력 발생 시점, 종기는 효력 소멸 시점입니다.",
+      "기한의 이익은 기한 도래 전까지 이행을 미룰 수 있는 이익입니다.",
+    ],
+    examPoints: [
+      "조건과 기한은 장래 사실의 확실성으로 구분합니다.",
+      "정지조건과 해제조건은 효력 발생과 소멸 방향이 반대입니다.",
+      "시기와 종기는 기한 도래 후 효력 발생 여부로 구분합니다.",
+      "조건성취 방해와 기한의 이익 상실은 사례형 선택지로 출제되기 쉽습니다.",
+    ],
+    practice: [
+      "정지조건, 해제조건, 시기, 종기의 예문을 하나씩 만듭니다.",
+      "‘허가가 나면’, ‘2026년 9월 1일부터’, ‘사업이 취소되면’을 조건 또는 기한으로 분류합니다.",
+      "조건과 기한의 차이를 ‘불확실’과 ‘확실’이라는 단어를 넣어 설명합니다.",
+      "기한의 이익이 누구에게 있는지 대여금 사례로 표시합니다.",
+    ],
+  },
+};
+
 const lessonPages = [];
 for (const part of parts) {
   let lessonIndex = 0;
@@ -270,7 +725,7 @@ console.log(JSON.stringify({ generated: 1 + introPages.length + parts.length + l
 
 function buildLesson(part, item) {
   const { title, index, groupIndex, groupTitle, groupChildren, isGroupParent } = item;
-  const slug = `lecture-${part.slug}-${String(index + 1).padStart(2, "0")}`;
+  const slug = resolveLessonSlug(part, title, index);
   return {
     slug,
     title,
@@ -289,7 +744,18 @@ function buildLesson(part, item) {
   };
 }
 
+function resolveLessonSlug(part, title, index) {
+  if (part.slug === "civil" && civilLessonSlugs[title]) return civilLessonSlugs[title];
+  return `lecture-${part.slug}-${String(index + 1).padStart(2, "0")}`;
+}
+
+function getCivilGeneralContent(part, title) {
+  if (part.slug !== "civil") return null;
+  return civilGeneralContent[title] || null;
+}
+
 function makeLead(part, title) {
+<<<<<<< HEAD
   if (part.slug === "civil" && title === "법률행위") {
     return "법률행위는 권리가 왜 생기고, 어떻게 바뀌며, 언제 사라지는지를 이해한 뒤 당사자의 의사표시로 이루어지는 권리변동을 공부하는 민법 총칙의 출발 단원입니다.";
   }
@@ -299,6 +765,10 @@ function makeLead(part, title) {
   if (part.slug === "civil" && title === "법률행위의 의의 및 종류") {
     return "법률행위의 의의 및 종류는 사람의 의사표시가 법률효과를 만드는 구조와 단독행위, 계약, 합동행위의 차이를 정리하는 단원입니다.";
   }
+=======
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral) return civilGeneral.lead;
+>>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
   if (part.slug === "civil" && title === "민법 기초와 법의 분류") {
     return "민법 기초와 법의 분류는 민법이 어떤 생활관계를 다루는 법인지, 공법과 사법은 어떻게 구분되는지, 민법의 전체 체계와 기본 원칙은 무엇인지를 잡는 도입 단원입니다.";
   }
@@ -315,6 +785,8 @@ function makeLead(part, title) {
 }
 
 function makeDetailSections(part, title) {
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral) return civilGeneral.sections;
   if (part.slug !== "civil") return null;
   if (title === "법률행위") {
     return [
@@ -633,6 +1105,7 @@ function makeDetailSections(part, title) {
 }
 
 function makeConcepts(part, title) {
+<<<<<<< HEAD
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "권리변동은 권리의 발생, 변경, 소멸을 말합니다.",
@@ -658,6 +1131,10 @@ function makeConcepts(part, title) {
       "법률행위의 종류는 이름보다 의사표시 구조와 법률효과를 기준으로 구분합니다.",
     ];
   }
+=======
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral) return civilGeneral.concepts;
+>>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
   if (part.slug === "civil" && title === "민법 기초와 법의 분류") {
     return [
       "민법은 사적 생활관계, 즉 개인 사이의 재산관계와 가족관계를 규율합니다.",
@@ -690,6 +1167,7 @@ function makeConcepts(part, title) {
 }
 
 function makeExamPoints(part, title) {
+<<<<<<< HEAD
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "법률행위 문제는 권리변동 전체 그림에서 출발해야 합니다.",
@@ -715,6 +1193,10 @@ function makeExamPoints(part, title) {
       "재산행위와 신분행위는 권리변동의 대상이 재산관계인지 가족관계인지로 구분합니다.",
     ];
   }
+=======
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral) return civilGeneral.examPoints;
+>>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
   if (part.slug === "civil" && title === "민법 기초와 법의 분류") {
     return [
       "공법과 사법을 구분하고, 토지보상법은 공법 절차이나 권리자 판단에는 민법이 필요하다는 점을 기억합니다.",
@@ -769,6 +1251,7 @@ function makeExamPoints(part, title) {
 }
 
 function makePractice(part, title) {
+<<<<<<< HEAD
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "매매, 상속, 변제, 시효취득, 저당권 설정을 권리의 발생ㆍ변경ㆍ소멸로 분류합니다.",
@@ -791,6 +1274,10 @@ function makePractice(part, title) {
       "각 법률행위가 권리의 발생, 변경, 소멸 중 어떤 효과와 연결되는지 표시합니다.",
     ];
   }
+=======
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral) return civilGeneral.practice;
+>>>>>>> bcfc4f22f868bbd88b1b9e8d4bf8f34716dcb1ed
   if (part.slug === "civil" && title === "민법 기초와 법의 분류") {
     return [
       "공법과 사법의 예를 각각 3개씩 적어 봅니다.",
@@ -819,7 +1306,19 @@ function makePractice(part, title) {
 }
 
 function renderLectureHome() {
-  const partCards = parts
+  const subjectParts = parts.filter((part) => ["civil", "real-estate", "compensation-law"].includes(part.slug));
+  const supportParts = parts.filter((part) => ["practice-guide", "appendix"].includes(part.slug));
+  const subjectCards = subjectParts
+    .map(
+      (part) => `
+          <a class="lecture-card" href="${part.hub}">
+            <span>${part.title}</span>
+            <h3>${lectureHomeLabel(part)}</h3>
+            <p>${part.lead}</p>
+          </a>`
+    )
+    .join("");
+  const supportCards = supportParts
     .map(
       (part) => `
           <a class="lecture-card" href="${part.hub}">
@@ -849,11 +1348,20 @@ function renderLectureHome() {
         <section class="section lecture-hero" aria-labelledby="lecture-title">
           <p class="eyebrow">Basic Lecture</p>
           <h1 id="lecture-title">보상관리사 기본강의</h1>
-          <p class="hero-text">1차 세 과목을 교재 목차처럼 나누고, 각 단원을 별도 페이지로 열어 볼 수 있게 구성했습니다. 먼저 머리말을 읽고 과목별 강의로 들어가면 흐름이 자연스럽습니다.</p>
+          <p class="hero-text">민법강의, 부동산관계법규, 토지보상법규를 과목별 강의실처럼 분리했습니다. 각 과목을 클릭하면 단원별 강의 제목을 먼저 보고, 단원 안에서 세부 주제로 들어갈 수 있습니다.</p>
           <div class="hero-actions">
-            <a class="button primary" href="lecture-civil.html">민법 강의</a>
-            <a class="button secondary" href="practice-first.html">1차 문제풀이</a>
+            <a class="button primary" href="lecture-civil.html">민법강의 보기</a>
+            <a class="button secondary" href="lecture-real-estate.html">부동산관계법규</a>
+            <a class="button secondary" href="lecture-compensation-law.html">토지보상법규</a>
           </div>
+        </section>
+        <section class="section muted-band" aria-labelledby="subjects-title">
+          <div class="section-heading">
+            <p class="eyebrow">Course Entrance</p>
+            <h2 id="subjects-title">과목별 기본강의</h2>
+            <p>아래 세 과목 중 하나를 선택하면 해당 과목의 단원별 강의 제목과 세부 목차를 먼저 확인할 수 있습니다.</p>
+          </div>
+          <div class="lecture-grid three">${subjectCards}</div>
         </section>
         <section class="section" aria-labelledby="preface-title">
           <div class="section-heading">
@@ -865,21 +1373,26 @@ function renderLectureHome() {
         </section>
         <section class="section muted-band" aria-labelledby="parts-title">
           <div class="section-heading">
-            <p class="eyebrow">Course Map</p>
-            <h2 id="parts-title">강의 목차</h2>
-            <p>민법, 부동산관계법규, 토지보상법규, 기출문제, 부록을 각각 별도 페이지 묶음으로 구성했습니다.</p>
+            <p class="eyebrow">Review Materials</p>
+            <h2 id="parts-title">보충 강의와 자료</h2>
+            <p>기출·연습과 부록은 과목별 기본강의를 들은 뒤 복습과 최종 점검에 활용합니다.</p>
           </div>
-          <div class="lecture-grid">${partCards}</div>
+          <div class="lecture-grid two">${supportCards}</div>
         </section>
       </main>`,
   });
+}
+
+function lectureHomeLabel(part) {
+  if (part.slug === "civil") return "민법강의";
+  return part.shortTitle;
 }
 
 function renderIntroPage(page) {
   return layout({
     title: `${page.title} | 기본강의`,
     description: page.lead,
-    current: "lecture.html",
+    current: `${page.slug}.html`,
     body: `
       <main id="top">
         <section class="section page-section lesson-page">
@@ -979,7 +1492,7 @@ function renderGroupedAside(groups, currentLesson) {
       const parent = group.lessons[0];
       const children = group.lessons.slice(1);
       return `<div class="lesson-aside-group">
-                <a class="lesson-aside-main" href="${parent.slug}.html"${parent.slug === currentLesson.slug ? ' aria-current="page"' : ""}>${String(parent.index + 1).padStart(2, "0")} ${parent.title}</a>
+                <a class="lesson-aside-main" href="${parent.slug}.html"${parent.slug === currentLesson.slug ? ' aria-current="page"' : ""}>${String(group.index + 1).padStart(2, "0")} ${parent.title}</a>
                 ${
                   children.length
                     ? `<ul class="lesson-aside-subtopics">
@@ -1013,7 +1526,7 @@ function renderPartHub(part) {
   return layout({
     title: `${part.title} | 기본강의`,
     description: part.lead,
-    current: "lecture.html",
+    current: part.hub,
     body: `
       <main id="top">
         <section class="section page-section">
@@ -1028,13 +1541,25 @@ function renderPartHub(part) {
         <section class="section" aria-labelledby="toc-${part.slug}">
           <div class="section-heading">
             <p class="eyebrow">Table of Contents</p>
-            <h2 id="toc-${part.slug}">단원별 강의</h2>
-            <p>각 항목을 클릭하면 해당 강의 페이지로 이동합니다.</p>
+            <h2 id="toc-${part.slug}">${partTocTitle(part)}</h2>
+            <p>${partTocDescription(part)}</p>
           </div>
           <div class="lecture-grid three">${lessonCards}</div>
         </section>
       </main>`,
   });
+}
+
+function partTocTitle(part) {
+  if (part.slug === "civil") return "단원별 강의 제목";
+  return "단원별 강의";
+}
+
+function partTocDescription(part) {
+  if (part.slug === "civil") {
+    return "각 단원 카드를 클릭하면 해당 강의로 이동하고, 카드 안의 세부 목차에서 장별·주제별 내용을 바로 열 수 있습니다.";
+  }
+  return "각 항목을 클릭하면 해당 강의 페이지로 이동합니다.";
 }
 
 function renderLessonPage(lesson) {
@@ -1045,7 +1570,7 @@ function renderLessonPage(lesson) {
   return layout({
     title: `${lesson.title} | ${lesson.part.shortTitle}`,
     description: lesson.lead,
-    current: "lecture.html",
+    current: `${lesson.slug}.html`,
     body: `
       <main id="top">
         <section class="section page-section lesson-page">
@@ -1113,9 +1638,40 @@ function header(current) {
         <span>보상관리사 기출분석</span>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
-        ${navItems.map(([href, label]) => `<a href="${href}"${href === current ? ' aria-current="page"' : ""}>${label}</a>`).join("\n        ")}
+        ${renderNavGroups(current)}
       </nav>
     </header>`;
+}
+
+function renderNavGroups(current) {
+  return navGroups.map((group) => renderNavGroup(group, current)).join("\n        ");
+}
+
+function renderNavGroup(group, current) {
+  const groupCurrent = isGroupCurrent(group, current);
+  return `<div class="nav-group">
+          <a class="nav-trigger" href="${group.href}"${groupCurrent ? ' aria-current="page"' : ""}>${group.label}</a>
+          <div class="nav-menu" aria-label="${group.label} 하위 메뉴">
+            ${group.items.map(([href, label]) => `<a href="${href}"${isItemCurrent(href, current) ? ' aria-current="page"' : ""}>${label}</a>`).join("\n            ")}
+          </div>
+        </div>`;
+}
+
+function isGroupCurrent(group, current) {
+  if (group.current.includes(current)) return true;
+  if (group.items.some(([href]) => isItemCurrent(href, current))) return true;
+  return group.href === "lecture.html" && current.startsWith("lecture-");
+}
+
+function isItemCurrent(href, current) {
+  if (href === current) return true;
+  if (href === "lecture-civil.html") return current.startsWith("lecture-civil-");
+  if (href === "lecture-real-estate.html") return current.startsWith("lecture-real-estate-");
+  if (href === "lecture-compensation-law.html") return current.startsWith("lecture-compensation-law-");
+  if (href === "lecture-practice-guide.html") return current.startsWith("lecture-practice-guide-");
+  if (href === "lecture-appendix.html") return current.startsWith("lecture-appendix-");
+  if (href === "practice.html") return current === "practice-first.html" || current === "practice-second.html";
+  return false;
 }
 
 function breadcrumb(items) {
