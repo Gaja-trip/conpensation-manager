@@ -1767,7 +1767,7 @@ h3 {
 .classroom-hero .hero-text {
   max-width: 1120px;
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .classroom-hero .hero-actions {
@@ -1926,7 +1926,7 @@ h3 {
 .classroom-explainer p {
   margin: 10px 0 0;
   color: var(--ink);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.65;
 }
 
@@ -1952,7 +1952,7 @@ h3 {
 .classroom-explainer-steps strong {
   display: block;
   margin-top: 4px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .classroom-panel-grid {
@@ -2055,14 +2055,14 @@ h3 {
 
 .lesson-block {
   min-width: 0;
-  padding: 20px;
+  padding: 22px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
 }
 
 .lesson-block h2 {
-  font-size: 22px;
+  font-size: 23px;
 }
 
 .structured-outline-block > p {
@@ -2154,7 +2154,7 @@ h3 {
 .deep-dive-grid p {
   margin-top: 8px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .lesson-3d-figure {
@@ -2355,6 +2355,8 @@ h3 {
 .preface-block p {
   margin: 12px 0 0;
   color: var(--ink);
+  font-size: 16px;
+  line-height: 1.72;
 }
 
 .preface-block p:first-of-type {
@@ -2370,6 +2372,89 @@ h3 {
 
 .lecture-list li {
   color: var(--ink);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.lesson-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.lesson-mini-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(217, 225, 231, 0.95);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(237, 243, 241, 0.82));
+  box-shadow: 0 12px 24px rgba(24, 33, 43, 0.06);
+}
+
+.lesson-mini-card span {
+  display: inline-grid;
+  min-height: 24px;
+  place-items: center;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: rgba(23, 107, 99, 0.12);
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.lesson-mini-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.lesson-mini-card p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.lesson-flow-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: flow-step;
+}
+
+.lesson-flow-list li {
+  position: relative;
+  min-height: 48px;
+  padding: 12px 14px 12px 52px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.6;
+  counter-increment: flow-step;
+}
+
+.lesson-flow-list li::before {
+  content: counter(flow-step);
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
 }
 
 .lesson-study-dock {
@@ -2404,7 +2489,7 @@ h3 {
 
 .lesson-study-dock li {
   color: var(--ink);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.55;
 }
 
@@ -2468,7 +2553,7 @@ h3 {
   margin: 12px 0 0;
   padding-left: 22px;
   color: var(--ink);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .problem-answer {
@@ -2644,7 +2729,7 @@ body.lightbox-open {
   border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.55;
 }
 
@@ -2691,7 +2776,7 @@ body.lightbox-open {
   padding: 8px 10px;
   border-radius: 6px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
   text-decoration: none;
 }
@@ -2714,6 +2799,22 @@ body.lightbox-open {
 
 .lesson-aside-subtopics a {
   padding: 6px 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.lesson-aside-deep {
+  display: grid;
+  gap: 2px;
+  margin: 2px 0 8px;
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid rgba(23, 107, 99, 0.2);
+  list-style: none;
+}
+
+.lesson-aside-deep a {
+  padding: 5px 8px;
+  color: var(--muted);
   font-size: 13px;
   font-weight: 700;
 }
@@ -2797,7 +2898,8 @@ body.lightbox-open {
 
   .classroom-panel-grid,
   .classroom-explainer-steps,
-  .deep-dive-grid {
+  .deep-dive-grid,
+  .lesson-card-grid {
     grid-template-columns: 1fr;
   }
 
