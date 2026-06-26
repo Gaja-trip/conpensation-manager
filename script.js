@@ -923,7 +923,56 @@ function setupClassroomTabs() {
   });
 }
 
+function setupNavDropdowns() {
+  const groups = [...document.querySelectorAll(".nav-group")];
+  if (!groups.length) return;
+
+  const closeAll = (except = null) => {
+    groups.forEach((group) => {
+      if (group === except) return;
+      group.classList.remove("is-open");
+      group.querySelector(".nav-trigger")?.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  groups.forEach((group) => {
+    const trigger = group.querySelector(".nav-trigger");
+    const menu = group.querySelector(".nav-menu");
+    if (!trigger || !menu) return;
+
+    trigger.setAttribute("aria-haspopup", "true");
+    trigger.setAttribute("aria-expanded", "false");
+
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      const willOpen = !group.classList.contains("is-open");
+      closeAll(group);
+      group.classList.toggle("is-open", willOpen);
+      trigger.setAttribute("aria-expanded", String(willOpen));
+    });
+
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowDown") return;
+      event.preventDefault();
+      closeAll(group);
+      group.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+      menu.querySelector("a")?.focus();
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".nav-group")) return;
+    closeAll();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeAll();
+  });
+}
+
 function init() {
+  setupNavDropdowns();
   renderExamMap();
   renderArchive();
   setupPracticeFilters();
