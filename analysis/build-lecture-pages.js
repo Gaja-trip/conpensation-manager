@@ -357,7 +357,27 @@ const civilGeneralContent = {
     lead: "법률행위는 사람이 일정한 법률효과를 원해서 의사표시를 하고, 그 의사표시에 따라 권리와 의무가 생기는 행위입니다. 매매, 임대차, 증여, 보상협의서 작성처럼 권리 변동을 일으키는 기본 틀입니다.",
     sections: [
       {
-        title: "1. 법률행위의 기본 구조",
+        title: "1. 권리변동을 먼저 이해하기",
+        paragraphs: [
+          "법률행위를 공부하기 전에 먼저 권리변동을 이해해야 합니다. 민법은 결국 누가 어떤 권리를 가지는지, 그 권리가 어떻게 바뀌는지, 언제 없어지는지를 정리하는 법이기 때문입니다.",
+          "권리변동이란 권리가 새로 생기거나, 권리의 내용이나 주체가 바뀌거나, 기존 권리가 없어지는 것을 말합니다. 이 흐름을 잡으면 매매, 증여, 상속, 변제, 시효취득 같은 개념이 훨씬 쉽게 연결됩니다.",
+        ],
+        image: {
+          src: "assets/legal-act-rights-change.png",
+          alt: "법률행위와 권리변동의 의의, 원인, 사례, 시험 포인트를 정리한 인포그래픽",
+          caption: "권리변동은 '권리의 발생, 변경, 소멸'을 먼저 보고, 그 원인이 법률행위인지 법률규정인지 나누어 이해하면 쉽습니다. 이미지를 클릭하면 크게 볼 수 있습니다.",
+        },
+        table: {
+          headers: ["구분", "뜻", "쉬운 예시"],
+          rows: [
+            ["권리의 발생", "없던 권리가 새로 생기는 것", "매매로 소유권을 취득하거나 전세권 설정으로 사용ㆍ수익 권리가 생기는 경우"],
+            ["권리의 변경", "권리의 주체, 내용, 범위가 달라지는 것", "채권자가 바뀌거나 저당권의 담보 범위가 변경되는 경우"],
+            ["권리의 소멸", "기존 권리가 없어지는 것", "채무 변제로 채권이 소멸하거나 담보권이 말소되는 경우"],
+          ],
+        },
+      },
+      {
+        title: "2. 법률행위의 기본 구조",
         paragraphs: [
           "법률행위는 권리 변동을 목적으로 하는 의사표시를 핵심으로 합니다. 사람의 행위가 모두 법률행위는 아니고, 당사자가 법률효과를 발생시키려는 의사를 표시해야 합니다.",
           "예를 들어 단순히 ‘저 땅이 마음에 든다’고 말하는 것은 법률행위가 아닙니다. 그러나 ‘그 토지를 3억 원에 사겠다’고 청약하고 상대방이 승낙하면 매매계약이라는 법률행위가 됩니다.",
@@ -373,7 +393,7 @@ const civilGeneralContent = {
         },
       },
       {
-        title: "2. 성립요건과 효력요건",
+        title: "3. 성립요건과 효력요건",
         paragraphs: [
           "법률행위는 먼저 성립해야 하고, 그 다음 유효해야 합니다. 성립요건은 법률행위가 존재한다고 볼 수 있는 최소 요건이고, 효력요건은 성립한 법률행위가 실제로 효력을 낼 수 있는 요건입니다.",
           "계약서를 작성했더라도 내용이 강행규정에 위반되거나 사회질서에 반하면 효력이 부정될 수 있습니다. 따라서 시험에서는 ‘성립하지 않는다’와 ‘성립하지만 무효다’를 구분해야 합니다.",
@@ -389,7 +409,7 @@ const civilGeneralContent = {
         },
       },
       {
-        title: "3. 의사표시와 표시의 불일치",
+        title: "4. 의사표시와 표시의 불일치",
         paragraphs: [
           "의사표시는 마음속 효과의사와 외부 표시가 연결되어야 합니다. 그런데 실제 의사와 표시가 어긋나면 착오, 비진의표시, 통정허위표시 같은 문제가 생깁니다.",
           "예를 들어 토지 면적을 잘못 알고 가격을 제시했다면 착오가 문제될 수 있습니다. 당사자들이 실제로는 매매할 생각이 없으면서 형식상 매매계약서를 작성했다면 통정허위표시가 문제됩니다.",
@@ -402,7 +422,7 @@ const civilGeneralContent = {
         ],
       },
       {
-        title: "4. 쉬운 예시",
+        title: "5. 쉬운 예시",
         paragraphs: [
           "A가 B에게 ‘내 토지를 3억 원에 팔겠다’고 말하고 B가 ‘그 가격에 사겠다’고 답하면 매매계약이 성립합니다. 이때 A와 B의 의사표시는 권리와 의무를 만들기 때문에 법률행위입니다.",
           "반면 A가 친구에게 ‘언젠가 저 땅을 팔 수도 있다’고 말한 정도라면 법률효과를 확정적으로 발생시키려는 의사표시가 아니므로 법률행위로 보기 어렵습니다.",
@@ -1592,56 +1612,38 @@ function renderLessonSummaryBand(group) {
           </div>`;
 }
 
-function renderLessonOutlineBlock(lesson) {
-  if (!lesson.outline) return "";
-  return `<section class="lesson-block structured-outline-block">
-                <h2>강의 목차</h2>
-                <p>${lesson.title}${topicParticle(lesson.title)} 아래 순서로 공부합니다. 먼저 큰 분류를 잡고, 각 항목의 요건과 효과를 사례에 연결해 보세요.</p>
-                ${renderStructuredOutline(lesson.outline)}
-              </section>`;
-}
-
-function renderStructuredOutline(outline) {
-  return `<ol class="structured-outline">
-                  ${outline
-                    .map(
-                      (section) => `<li>
-                        <h3>${section.title}</h3>
-                        <ul>
-                          ${section.items.map((item) => `<li>${item}</li>`).join("")}
-                        </ul>
-                      </li>`
-                    )
-                    .join("")}
-                </ol>`;
-}
-
-function summarizeOutlineItems(outline) {
-  return outline.slice(0, 4).map((section) => `${section.title}: ${section.items.slice(0, 3).join(", ")}`);
-}
-
 function renderLessonInfographic(lesson, mode = "detail") {
   const concepts = (lesson.concepts || []).slice(0, 3);
   const labels = concepts.length ? concepts : [lesson.title, lesson.groupTitle, lesson.part.shortTitle];
   const caption =
     mode === "classroom"
-      ? `${lesson.title}의 핵심 개념을 3D 카드 흐름으로 압축한 강의실 미리보기입니다.`
-      : `${lesson.title}${topicParticle(lesson.title)} 핵심 개념, 사례 적용, 시험 포인트를 한 덩어리로 묶어 이해하면 기억이 오래갑니다.`;
-  return `<figure class="lesson-3d-figure ${mode === "classroom" ? "compact" : ""}" role="img" aria-label="${escapeHtml(lesson.title)} 3D 인포그래픽">
-                <div class="infographic-stage" aria-hidden="true">
-                  <div class="info-axis"></div>
-                  ${labels
+      ? `${lesson.title}의 개념, 사례, 시험 판단을 아이소메트릭 흐름으로 압축했습니다.`
+      : `${lesson.title}${topicParticle(lesson.title)} 개념 정의에서 사례 판단, 시험 선택지 검토까지 한 흐름으로 이해하면 기억이 오래갑니다.`;
+  const flowLabels = [
+    { tag: "개념", text: labels[0] || lesson.title },
+    { tag: "요건", text: labels[1] || lesson.groupTitle },
+    { tag: "사례", text: labels[2] || lesson.part.shortTitle },
+    { tag: "시험", text: (lesson.examPoints || [lesson.title])[0] },
+  ];
+  return `<figure class="lesson-3d-figure ${mode === "classroom" ? "compact" : ""}" role="img" aria-label="${escapeHtml(lesson.title)} 아이소메트릭 3D 인포그래픽">
+                <div class="infographic-stage iso-stage" aria-hidden="true">
+                  <div class="iso-grid"></div>
+                  <div class="iso-road"></div>
+                  ${flowLabels
                     .map(
-                      (label, index) => `<div class="info-cube cube-${index + 1}">
-                        <span>0${index + 1}</span>
-                        <strong>${escapeHtml(shortenText(label, 28))}</strong>
+                      (item, index) => `<div class="iso-node iso-node-${index + 1}">
+                        <span>${item.tag}</span>
+                        <strong>${escapeHtml(shortenText(item.text, 34))}</strong>
                       </div>`
                     )
                     .join("")}
-                  <div class="info-platform">
+                  <div class="iso-tower">
                     <span>${escapeHtml(lesson.part.shortTitle)}</span>
-                    <strong>${escapeHtml(shortenText(lesson.title, 24))}</strong>
+                    <strong>${escapeHtml(shortenText(lesson.title, 26))}</strong>
                   </div>
+                  <div class="iso-arrow arrow-1"></div>
+                  <div class="iso-arrow arrow-2"></div>
+                  <div class="iso-arrow arrow-3"></div>
                 </div>
                 <figcaption>${caption}</figcaption>
               </figure>`;
@@ -1671,29 +1673,45 @@ function makeDeepDiveParagraphs(lesson) {
     ? ` 이 단원은 ${lesson.groupChildren.slice(0, 3).join(", ")}${lesson.groupChildren.length > 3 ? " 등" : ""}으로 이어지므로, 큰 제목을 먼저 잡고 세부 주제를 내려가며 읽는 것이 좋습니다.`
     : "";
   const base = `${lesson.title}${topicParticle(lesson.title)} ${lesson.part.shortTitle}에서 독립적으로 외울 항목이 아니라, 사례를 읽는 순서와 판단 기준을 함께 익혀야 하는 주제입니다.${childText}`;
+  const conceptText = (lesson.concepts || []).slice(0, 3).join(" / ");
+  const examText = (lesson.examPoints || []).slice(0, 2).join(" / ");
+  const focus = conceptText
+    ? `먼저 ${conceptText}를 한 묶음으로 잡으세요. 그런 다음 사례에서 사실관계를 읽고, 어느 요건이 충족되었는지 표시하면 긴 선택지도 짧은 판단 문제로 바뀝니다.`
+    : "먼저 정의와 적용 대상을 확인한 뒤, 요건과 효과를 분리해서 읽으면 긴 선택지도 짧은 판단 문제로 바뀝니다.";
+  const examGuide = examText
+    ? `기출형 선택지에서는 ${examText}처럼 주체, 요건, 효과 중 하나만 바꾸는 방식이 자주 쓰입니다. 따라서 정답을 고른 뒤에도 틀린 선택지가 왜 틀렸는지 한 줄로 적어 두는 것이 좋습니다.`
+    : "기출형 선택지는 주체, 요건, 절차, 효과 중 하나만 바꾸는 방식이 많습니다. 정답을 고른 뒤에도 틀린 선택지의 오답 이유를 한 줄로 적어 보세요.";
   if (lesson.part.slug === "civil") {
     return [
       base,
+      focus,
       "민법 단원은 먼저 권리의 주체와 객체를 찾고, 그다음 권리가 발생했는지, 변경됐는지, 소멸했는지를 나누어 읽습니다. 특히 부동산 보상 사례에서는 등기부, 점유 상태, 계약관계, 상속관계가 서로 맞물리므로 하나의 사례 안에서 여러 권리가 동시에 움직일 수 있습니다.",
+      examGuide,
       "공부할 때는 조문 문구를 바로 암기하기보다 ‘누가 누구에게 무엇을 주장할 수 있는가’라는 질문으로 바꾸어 보세요. 이 질문이 잡히면 물권과 채권의 차이, 무효와 취소의 차이, 상속과 등기의 연결이 훨씬 선명해집니다.",
     ];
   }
   if (lesson.part.slug === "real-estate") {
     return [
       base,
+      focus,
       "부동산관계법규는 토지를 실제로 어떻게 이용할 수 있는지 판단하는 법령 묶음입니다. 같은 토지라도 용도지역, 허가 여부, 공부상 표시, 건축 가능성, 농지ㆍ산지 제한에 따라 보상평가와 사업 진행 가능성이 달라집니다.",
+      examGuide,
       "각 법령을 공부할 때는 정의, 지정ㆍ허가권자, 절차, 제한 효과, 위반 시 처리 순서로 정리하세요. 시험 선택지는 법률명은 맞게 두고 주체나 효과만 바꾸는 경우가 많아, 표로 비교해 두면 오답을 빠르게 거를 수 있습니다.",
     ];
   }
   if (lesson.part.slug === "compensation-law") {
     return [
       base,
+      focus,
       "토지보상법규는 공익사업이 토지와 물건을 취득하거나 사용할 때 어떤 절차를 거쳐야 하는지 설명하는 과목입니다. 절차의 순서가 곧 문제풀이의 기준이므로 사전조사, 보상계획, 협의, 재결, 수용개시일, 불복 절차를 시간표처럼 연결해야 합니다.",
+      examGuide,
       "강의를 읽을 때는 사업시행자, 토지소유자, 관계인, 수용위원회가 각각 어느 단계에서 무엇을 할 수 있는지 표시해 보세요. 주체와 기간이 정리되면 손실보상 항목과 권리구제 절차도 같은 틀 안에서 이해됩니다.",
     ];
   }
   return [
     base,
+    focus,
+    examGuide,
     "이 단원은 기본강의에서 배운 개념을 문제풀이와 회독 자료로 연결하기 위한 보충 단원입니다. 핵심어를 짧게 정리하고, 같은 표현이 기출 선택지에서 어떻게 바뀌는지 확인하는 방식으로 활용하세요.",
   ];
 }
@@ -1746,7 +1764,7 @@ function renderParentBlock(group) {
   const parent = group.lessons[0];
   return `<section class="lesson-block subtopic-block">
                 <h2>상위 단원</h2>
-                <p>이 페이지는 <a href="${parent.slug}.html">${parent.title}</a> 단원에 포함됩니다. 왼쪽 목차에서 같은 묶음의 앞뒤 주제를 함께 확인하세요.</p>
+                <p>이 페이지는 <a href="${parent.slug}.html">${parent.title}</a> 단원에 포함됩니다. 강의목차에서 같은 묶음의 앞뒤 주제를 함께 확인하세요.</p>
               </section>`;
 }
 
@@ -1804,12 +1822,9 @@ function renderPartHub(part) {
               <p>${lesson.lead}</p>
             </div>
             ${renderLessonInfographic(lesson, "classroom")}
-            <div class="classroom-panel-grid">
-              ${lesson.outline ? renderClassroomMiniBlock("강의 목차", summarizeOutlineItems(lesson.outline)) : ""}
-              ${renderClassroomMiniBlock("핵심 개념", lesson.concepts)}
-              ${renderClassroomMiniBlock("시험 포인트", lesson.examPoints)}
-              ${renderClassroomMiniBlock("복습 질문", makeReviewQuestions(lesson))}
-            </div>
+            ${renderClassroomPanelDetail(lesson)}
+            ${renderLessonStudyDock(lesson, "classroom")}
+            ${renderSampleProblems(lesson, 1, "classroom")}
             <div class="inline-actions">
               <a class="button primary" href="${lesson.slug}.html">상세 강의 보기</a>
               <a class="button secondary" href="practice-first.html">문제로 확인</a>
@@ -1825,16 +1840,17 @@ function renderPartHub(part) {
       <main id="top">
         <section class="section page-section classroom-hero">
           ${breadcrumb([["lecture.html", "기본강의"], [null, part.title]])}
-          <p class="eyebrow">${part.subject}</p>
-          <h1>${part.title}</h1>
+          <div class="course-quickbar">
+            <div>
+              <p class="eyebrow">${part.subject}</p>
+              <h1>${part.title}</h1>
+            </div>
+            <div class="hero-actions">
+              <a class="button primary" href="#classroom-${part.slug}">강의실 입장</a>
+              <a class="button secondary" href="practice-first.html">문제로 복습</a>
+            </div>
+          </div>
           <p class="hero-text">${part.lead}</p>
-          <div class="lecture-summary-band">
-            ${part.examFocus.map((item) => `<span>${item}</span>`).join("")}
-          </div>
-          <div class="hero-actions">
-            <a class="button primary" href="#classroom-${part.slug}">강의실 입장</a>
-            <a class="button secondary" href="practice-first.html">문제로 복습</a>
-          </div>
         </section>
         <section class="section classroom-section" id="classroom-${part.slug}" aria-labelledby="toc-${part.slug}">
           <div class="section-heading">
@@ -1844,8 +1860,7 @@ function renderPartHub(part) {
           </div>
           <div class="classroom-shell" data-classroom>
             <aside class="classroom-toc" aria-label="${part.shortTitle} 목차">
-              <h2>좌측 목차</h2>
-              <p>목차를 선택하면 우측 강의 패널의 내용이 바뀝니다.</p>
+              <h2>강의목차</h2>
               ${tocButtons}
             </aside>
             <div class="classroom-content">
@@ -1857,13 +1872,235 @@ function renderPartHub(part) {
   });
 }
 
-function renderClassroomMiniBlock(title, items) {
-  return `<section>
-            <h3>${title}</h3>
-            <ul>
-              ${(items || []).slice(0, 4).map((item) => `<li>${item}</li>`).join("")}
-            </ul>
+function renderClassroomPanelDetail(lesson) {
+  const paragraphs = makeDeepDiveParagraphs(lesson).slice(0, 2);
+  return `<section class="classroom-explainer" aria-label="${escapeHtml(lesson.title)} 이해하기">
+            <div>
+              <h3>이해하기</h3>
+              ${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+            </div>
+            <div class="classroom-explainer-steps">
+              ${makeDeepDiveCards(lesson)
+                .map(
+                  (card) => `<article>
+                    <span>${card.label}</span>
+                    <strong>${card.title}</strong>
+                    <p>${card.body}</p>
+                  </article>`
+                )
+                .join("")}
+            </div>
           </section>`;
+}
+
+function renderLessonStudyDock(lesson, mode = "detail") {
+  const groups = [
+    ["핵심 개념", lesson.concepts],
+    ["시험 포인트", lesson.examPoints],
+    ["복습 질문", makeReviewQuestions(lesson)],
+  ];
+  return `<section class="lesson-study-dock ${mode === "classroom" ? "compact" : ""}" aria-label="${escapeHtml(lesson.title)} 학습 정리">
+            ${groups
+              .map(
+                ([title, items]) => `<article>
+                  <h2>${title}</h2>
+                  <ul>
+                    ${(items || []).slice(0, mode === "classroom" ? 3 : 5).map((item) => `<li>${item}</li>`).join("")}
+                  </ul>
+                </article>`
+              )
+              .join("")}
+          </section>`;
+}
+
+function renderSampleProblems(lesson, count = 2, mode = "detail") {
+  const problems = makeSampleProblems(lesson).slice(0, count);
+  return `<section class="lesson-sample-problems ${mode === "classroom" ? "compact" : ""}" aria-label="${escapeHtml(lesson.title)} 예시 문제풀이">
+            <div class="lesson-problem-heading">
+              <p class="eyebrow">Past Exam Style</p>
+              <h2>과년도 유사 예시 문제풀이</h2>
+              <p>실제 기출에서 반복된 출제 포인트를 같은 구조의 예상문제로 바꾸어 정리했습니다.</p>
+            </div>
+            <div class="lesson-problem-grid">
+              ${problems
+                .map(
+                  (problem, index) => `<article class="sample-problem-card">
+                    <span class="problem-source">${problem.source}</span>
+                    <h3>예시 ${index + 1}. ${problem.stem}</h3>
+                    <ol>
+                      ${problem.choices.map((choice) => `<li>${choice}</li>`).join("")}
+                    </ol>
+                    <div class="problem-answer">
+                      <strong>정답 ${problem.answer}번</strong>
+                      <p>${problem.explanation}</p>
+                    </div>
+                  </article>`
+                )
+                .join("")}
+            </div>
+          </section>`;
+}
+
+function makeSampleProblems(lesson) {
+  if (lesson.part.slug === "civil") return makeCivilSampleProblems(lesson);
+  if (lesson.part.slug === "real-estate") return makeRealEstateSampleProblems(lesson);
+  if (lesson.part.slug === "compensation-law") return makeCompensationSampleProblems(lesson);
+  return [
+    {
+      source: "단원 복습 유사 유형",
+      stem: `${lesson.title} 학습법으로 가장 적절한 것은?`,
+      choices: ["법령명만 암기하고 사례 적용은 생략한다.", "핵심어, 요건, 효과를 나누어 정리한다.", "틀린 선택지는 다시 보지 않는다.", "조문과 절차를 구분하지 않는다."],
+      answer: 2,
+      explanation: "보충 단원은 핵심어를 줄이고, 요건과 효과를 구분한 뒤 문제풀이에 연결하는 방식으로 활용해야 합니다.",
+    },
+  ];
+}
+
+function makeCivilSampleProblems(lesson) {
+  if (lesson.title.includes("등기")) {
+    return [
+      {
+        source: "2018ㆍ2022 민법 반복 포인트 변형",
+        stem: "부동산 물권변동과 등기에 관한 설명으로 옳은 것은?",
+        choices: ["부동산 소유권 이전은 원칙적으로 등기 없이도 물권변동 효력이 생긴다.", "등기는 권리관계를 외부에 알리는 공시 기능을 가진다.", "가등기는 언제나 본등기와 같은 완전한 물권변동 효력을 가진다.", "말소등기는 새로운 소유권을 창설하는 등기이다."],
+        answer: 2,
+        explanation: "부동산 물권변동은 원칙적으로 등기가 있어야 효력이 생기며, 등기는 권리관계를 외부에 알리는 공시 기능을 합니다. 가등기는 주로 순위보전 기능으로 이해합니다.",
+      },
+      {
+        source: "과년도 등기 선택지 유사 유형",
+        stem: "다음 중 등기의 종류와 기능 연결이 가장 적절한 것은?",
+        choices: ["이전등기: 기존 권리의 소멸만 표시", "말소등기: 새로운 담보권 설정", "보존등기: 미등기 부동산에 최초 권리관계 표시", "변경등기: 등기부 자체를 폐쇄"],
+        answer: 3,
+        explanation: "보존등기는 미등기 부동산에 처음으로 소유권 등 권리관계를 올리는 등기입니다. 이전ㆍ변경ㆍ말소등기와 기능을 구분해야 합니다.",
+      },
+    ];
+  }
+  if (lesson.title.includes("시효") || lesson.title.includes("점유")) {
+    return [
+      {
+        source: "2018ㆍ2022 취득시효 유사 유형",
+        stem: "부동산 점유취득시효에 관한 설명으로 옳은 것은?",
+        choices: ["점유 기간과 관계없이 선의이면 바로 소유권을 취득한다.", "평온ㆍ공연하게 소유의 의사로 일정 기간 점유해야 한다.", "임차인은 언제나 소유의 의사로 점유한다고 본다.", "시효완성만으로 등기 없이 항상 소유권 이전을 주장할 수 있다."],
+        answer: 2,
+        explanation: "점유취득시효는 소유의 의사, 평온ㆍ공연한 점유, 법정 기간 등 요건을 함께 봅니다. 부동산은 등기 문제까지 연결해 판단해야 합니다.",
+      },
+      {
+        source: "과년도 점유자 비용상환 변형",
+        stem: "점유자의 비용상환 문제를 풀 때 먼저 확인할 기준은?",
+        choices: ["점유자가 선의인지 악의인지", "목적물이 동산인지 여부만", "매매대금 액수만", "등기부 표제부의 면적만"],
+        answer: 1,
+        explanation: "점유자 비용상환은 선의ㆍ악의 점유, 필요비ㆍ유익비의 성격, 회복자와의 관계를 차례로 확인합니다.",
+      },
+    ];
+  }
+  if (lesson.title.includes("공유") || lesson.title.includes("합유") || lesson.title.includes("총유")) {
+    return [
+      {
+        source: "2018 공유ㆍ합유 반복 포인트 변형",
+        stem: "공유에 관한 설명으로 옳은 것은?",
+        choices: ["공유자는 자기 지분을 원칙적으로 처분할 수 없다.", "공유물의 관리와 처분은 항상 같은 요건으로 결정한다.", "공유자는 지분을 가지며 분할청구가 문제될 수 있다.", "총유는 각 구성원이 독립된 지분을 자유롭게 처분하는 형태이다."],
+        answer: 3,
+        explanation: "공유는 지분을 전제로 하므로 지분 처분, 관리, 분할 문제가 자주 출제됩니다. 합유ㆍ총유와 지분 처분 가능성을 비교해야 합니다.",
+      },
+      {
+        source: "과년도 공동소유 비교 유사 유형",
+        stem: "합유와 총유를 구분할 때 핵심 기준으로 가장 적절한 것은?",
+        choices: ["토지가 농지인지 여부", "공동체 성격과 지분 처분 가능성", "등기소 위치", "건축물 층수"],
+        answer: 2,
+        explanation: "합유와 총유는 단순한 여러 사람의 소유가 아니라 공동체적 결합 정도와 지분 처분 가능성에서 차이가 납니다.",
+      },
+    ];
+  }
+  if (lesson.title.includes("상속")) {
+    return [
+      {
+        source: "상속ㆍ등기 유사 출제 유형",
+        stem: "상속에 관한 설명으로 옳은 것은?",
+        choices: ["상속은 상속인이 계약서에 서명한 때 비로소 개시된다.", "상속은 피상속인의 사망으로 개시된다.", "유류분은 언제나 상속포기와 같은 의미이다.", "한정승인은 상속재산 전부를 무조건 포기하는 절차이다."],
+        answer: 2,
+        explanation: "상속은 피상속인의 사망으로 개시됩니다. 상속포기, 한정승인, 유류분, 상속등기는 각각 효과가 다르므로 따로 정리해야 합니다.",
+      },
+      {
+        source: "보상실무 연결 유사 유형",
+        stem: "토지소유자가 사망한 뒤 보상협의를 진행할 때 우선 확인할 사항은?",
+        choices: ["상속인 범위와 상속분", "사업시행자의 사무실 위치", "토지의 색상", "건축물의 내부 인테리어"],
+        answer: 1,
+        explanation: "보상금 수령권자를 확정하려면 상속인의 범위, 상속분, 상속포기ㆍ한정승인 여부와 상속등기 문제를 먼저 확인해야 합니다.",
+      },
+    ];
+  }
+  if (lesson.title.includes("법률행위") || lesson.title.includes("권리변동")) {
+    return [
+      {
+        source: "2022 권리변동ㆍ물권변동 포인트 변형",
+        stem: "권리변동에 관한 설명으로 옳은 것은?",
+        choices: ["권리변동은 권리의 발생만 의미하고 변경ㆍ소멸은 포함하지 않는다.", "매매계약은 당사자의 의사표시에 기초한 법률행위의 예이다.", "상속은 언제나 당사자 사이의 계약으로만 발생한다.", "변제는 채권을 발생시키는 원인으로만 작용한다."],
+        answer: 2,
+        explanation: "권리변동은 발생ㆍ변경ㆍ소멸을 포함합니다. 매매는 의사표시에 기초한 법률행위이고, 상속은 법률규정에 의한 권리변동으로 봅니다.",
+      },
+      {
+        source: "2018ㆍ2022 민법 총칙 유사 유형",
+        stem: "다음 중 법률행위의 종류 연결이 가장 적절한 것은?",
+        choices: ["매매: 단독행위", "유언: 계약", "채무면제: 단독행위", "사단법인 설립행위: 물권행위가 아닌 사실행위"],
+        answer: 3,
+        explanation: "채무면제는 한쪽 의사표시로 성립할 수 있는 단독행위로 정리합니다. 매매는 계약, 유언은 단독행위, 사단법인 설립행위는 합동행위로 비교합니다.",
+      },
+    ];
+  }
+  return [
+    {
+      source: "2018ㆍ2022 민법 기본개념 변형",
+      stem: `${lesson.title}에 관한 설명으로 가장 적절한 것은?`,
+      choices: ["민법상 권리는 주체와 객체를 나누어 읽어야 한다.", "물권과 채권은 항상 같은 효력을 가진다.", "부동산 권리관계에서 등기와 점유는 고려하지 않는다.", "보상사례에서는 민법상 권리관계가 필요 없다."],
+      answer: 1,
+      explanation: "민법 문제는 권리의 주체, 객체, 효력, 공시수단을 나누어 읽어야 합니다. 보상사례에서도 소유자와 관계인을 확정하는 기초가 됩니다.",
+    },
+    {
+      source: "보상관리사 민법 유사 유형",
+      stem: "보상사례에서 민법 지식이 필요한 이유로 가장 적절한 것은?",
+      choices: ["보상금 지급 대상자와 권리관계를 판단하기 위해서", "토지보상법 조문을 모두 생략하기 위해서", "건축물 디자인을 평가하기 위해서", "세무신고만 처리하기 위해서"],
+      answer: 1,
+      explanation: "민법은 소유권, 제한물권, 채권, 상속관계를 통해 누가 어떤 권리를 주장할 수 있는지 판단하는 기준이 됩니다.",
+    },
+  ];
+}
+
+function makeRealEstateSampleProblems(lesson) {
+  return [
+    {
+      source: "최근 5개년 관계법규 유사 유형",
+      stem: `${lesson.title} 문제를 풀 때 가장 먼저 확인할 사항은?`,
+      choices: ["법률상 정의와 적용 대상", "수험생의 거주지", "토지 색상", "사업시행자의 홍보문구"],
+      answer: 1,
+      explanation: "관계법규 문제는 정의, 적용 대상, 허가권자, 제한 효과를 먼저 잡아야 선택지의 주체ㆍ절차 바꾸기를 걸러낼 수 있습니다.",
+    },
+    {
+      source: "보상평가 연결 유사 유형",
+      stem: "부동산 관계법규가 보상실무와 연결되는 이유로 옳은 것은?",
+      choices: ["토지의 이용가능성과 법적 제한이 가치 판단에 영향을 주기 때문이다.", "모든 토지는 법적 제한 없이 동일하게 이용되기 때문이다.", "등기부를 볼 필요가 없어지기 때문이다.", "공익사업 절차를 생략할 수 있기 때문이다."],
+      answer: 1,
+      explanation: "용도지역, 건축 제한, 농지ㆍ산지 전용 제한 등은 토지의 현실적 이용과 가치 판단에 영향을 주므로 보상관리에서 중요합니다.",
+    },
+  ];
+}
+
+function makeCompensationSampleProblems(lesson) {
+  return [
+    {
+      source: "토지보상법 절차형 유사 유형",
+      stem: `${lesson.title}와 관련한 절차형 문제의 기본 풀이 순서는?`,
+      choices: ["주체와 단계, 기간, 효과를 차례로 확인한다.", "조문 번호만 외우고 절차는 보지 않는다.", "협의와 재결을 같은 단계로 본다.", "수용개시일의 효과를 무시한다."],
+      answer: 1,
+      explanation: "토지보상법규는 절차 순서가 핵심입니다. 사업시행자, 토지소유자, 관계인, 수용위원회가 어느 단계에서 어떤 권한을 가지는지 확인해야 합니다.",
+    },
+    {
+      source: "손실보상 기준 유사 유형",
+      stem: "손실보상 문제에서 가장 먼저 분류해야 할 것은?",
+      choices: ["보상 대상이 토지, 물건, 영업, 이주, 잔여지 중 무엇인지", "사업시행자의 나이", "토지소유자의 직업", "감정평가서의 글자 크기"],
+      answer: 1,
+      explanation: "보상 대상에 따라 평가 기준과 절차가 달라집니다. 토지, 건물ㆍ입목 등 물건, 영업손실, 이주대책, 잔여지 보상을 먼저 나누어야 합니다.",
+    },
+  ];
 }
 
 function makeReviewQuestions(lesson) {
@@ -1881,9 +2118,9 @@ function partTocTitle(part) {
 
 function partTocDescription(part) {
   if (part.slug === "civil") {
-    return "각 단원 카드를 클릭하면 해당 강의로 이동하고, 카드 안의 세부 목차에서 장별·주제별 내용을 바로 열 수 있습니다.";
+    return "강의목차에서 단원을 선택하면 오른쪽에 핵심 설명, 아이소메트릭 인포그래픽, 유사기출 풀이가 함께 표시됩니다.";
   }
-  return "각 항목을 클릭하면 해당 강의 페이지로 이동합니다.";
+  return "강의목차에서 항목을 선택하면 오른쪽 강의 패널에서 바로 내용을 확인할 수 있습니다.";
 }
 
 function renderLessonPage(lesson) {
@@ -1911,12 +2148,10 @@ function renderLessonPage(lesson) {
             </aside>
             <article class="lesson-main">
               ${lesson.isGroupParent ? renderSubtopicBlock(currentGroup) : renderParentBlock(currentGroup)}
-              ${renderLessonOutlineBlock(lesson)}
               ${lesson.detailSections ? renderIntroSections(lesson.detailSections) : ""}
               ${renderDeepDiveBlock(lesson)}
-              ${renderBlock("핵심 개념", lesson.concepts)}
-              ${renderBlock("시험 포인트", lesson.examPoints)}
-              ${renderBlock("복습 방법", lesson.practice)}
+              ${renderLessonStudyDock(lesson)}
+              ${renderSampleProblems(lesson, 2)}
               <section class="lesson-block">
                 <h2>연결 학습</h2>
                 <p>이 단원을 읽은 뒤에는 문제풀이 페이지에서 같은 과목을 선택해 5문항 이상 풀어 보세요. 정답보다 중요한 것은 선택지마다 근거를 붙이는 연습입니다.</p>
