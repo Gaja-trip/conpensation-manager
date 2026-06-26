@@ -621,12 +621,27 @@ function renderLawUnderstanding() {
 
     lawUnderstanding.forEach((panel) => {
       const card = createElement("article", "law-panel");
-      card.append(createElement("h3", "", panel.title));
-      card.append(createElement("p", "law-subtitle", panel.subtitle));
+      const head = createElement("div", "law-panel-head");
+      if (panel.step) head.append(createElement("span", "law-step", panel.step));
+      const titleBox = createElement("div");
+      titleBox.append(createElement("h3", "", panel.title));
+      titleBox.append(createElement("p", "law-subtitle", panel.subtitle));
+      head.append(titleBox);
+      card.append(head);
+
+      if (panel.summary) {
+        card.append(createElement("p", "law-summary", panel.summary));
+      }
 
       const list = createElement("ul");
       panel.points.forEach((point) => list.append(createElement("li", "", point)));
       card.append(list);
+
+      if (panel.examTip) {
+        const tip = createElement("p", "law-exam-tip", panel.examTip);
+        tip.prepend(createElement("strong", "", "시험 포인트 "));
+        card.append(tip);
+      }
 
       const linked = createElement("div", "law-linked");
       panel.linked.forEach((label) => linked.append(createElement("span", "tag", label)));
