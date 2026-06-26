@@ -47,7 +47,7 @@
     </header>
     
       <main id="top">
-        <section class="section page-section">
+        <section class="section page-section classroom-hero">
           <nav class="breadcrumb" aria-label="현재 위치"><a href="lecture.html">기본강의</a><span>/</span><span>부록</span></nav>
           <p class="eyebrow">부록</p>
           <h1>부록</h1>
@@ -55,25 +55,194 @@
           <div class="lecture-summary-band">
             <span>법령 전문과 개정 연혁</span><span>핵심 용어 정리</span><span>법령별 비교표</span><span>시험 준비 체크리스트</span>
           </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#classroom-appendix">강의실 입장</a>
+            <a class="button secondary" href="practice-first.html">문제로 복습</a>
+          </div>
         </section>
-        <section class="section" aria-labelledby="toc-appendix">
+        <section class="section classroom-section" id="classroom-appendix" aria-labelledby="toc-appendix">
           <div class="section-heading">
-            <p class="eyebrow">Table of Contents</p>
+            <p class="eyebrow">Lecture Room</p>
             <h2 id="toc-appendix">단원별 강의</h2>
             <p>각 항목을 클릭하면 해당 강의 페이지로 이동합니다.</p>
           </div>
-          <div class="lecture-grid three">
-          <section class="lecture-card lesson-group-card">
-            <span>01</span>
-            <h3><a href="lecture-appendix-01.html">부록</a></h3>
-            <p>부록은 시험 직전 확인용 자료입니다. 조문, 용어, 비교표, 체크리스트를 짧게 반복해 암기 빈틈을 줄이는 데 초점을 둡니다.</p>
-            <ul class="lecture-subtopics"><li><a href="lecture-appendix-02.html">주요 법령 전문 및 개정 연혁</a></li><li><a href="lecture-appendix-03.html">용어정리, 법령별 비교표, 시험 준비 체크리스트</a></li></ul>
-          </section></div>
+          <div class="classroom-shell" data-classroom>
+            <aside class="classroom-toc" aria-label="부록 목차">
+              <h2>좌측 목차</h2>
+              <p>목차를 선택하면 우측 강의 패널의 내용이 바뀝니다.</p>
+              <div class="classroom-toc-group">
+                <button type="button" class="classroom-toc-main" data-classroom-tab="lecture-appendix-01" aria-selected="true">
+                  <span>01</span>
+                  부록
+                </button>
+                <div class="classroom-toc-children">
+                        <button type="button" data-classroom-tab="lecture-appendix-02" aria-selected="false">주요 법령 전문 및 개정 연혁</button><button type="button" data-classroom-tab="lecture-appendix-03" aria-selected="false">용어정리, 법령별 비교표, 시험 준비 체크리스트</button>
+                      </div>
+              </div>
+            </aside>
+            <div class="classroom-content">
+              <article class="classroom-panel" data-classroom-panel="lecture-appendix-01">
+            <div class="classroom-panel-copy">
+              <p class="eyebrow">부록</p>
+              <h2>부록</h2>
+              <p>부록은 시험 직전 확인용 자료입니다. 조문, 용어, 비교표, 체크리스트를 짧게 반복해 암기 빈틈을 줄이는 데 초점을 둡니다.</p>
+            </div>
+            <figure class="lesson-3d-figure compact" role="img" aria-label="부록 3D 인포그래픽">
+                <div class="infographic-stage" aria-hidden="true">
+                  <div class="info-axis"></div>
+                  <div class="info-cube cube-1">
+                        <span>01</span>
+                        <strong>부록의 법률상 위치와 핵심 용어를 먼저 확인합니다.</strong>
+                      </div><div class="info-cube cube-2">
+                        <span>02</span>
+                        <strong>정의, 요건, 효과를 나누어 읽으면 선택지의 말바…</strong>
+                      </div><div class="info-cube cube-3">
+                        <span>03</span>
+                        <strong>보상 실무에서는 권리자 확인, 이용상황 판단, 절…</strong>
+                      </div>
+                  <div class="info-platform">
+                    <span>부록</span>
+                    <strong>부록</strong>
+                  </div>
+                </div>
+                <figcaption>부록의 핵심 개념을 3D 카드 흐름으로 압축한 강의실 미리보기입니다.</figcaption>
+              </figure>
+            <div class="classroom-panel-grid">
+              
+              <section>
+            <h3>핵심 개념</h3>
+            <ul>
+              <li>부록의 법률상 위치와 핵심 용어를 먼저 확인합니다.</li><li>정의, 요건, 효과를 나누어 읽으면 선택지의 말바꾸기에 흔들리지 않습니다.</li><li>보상 실무에서는 권리자 확인, 이용상황 판단, 절차 진행 가능성으로 연결됩니다.</li>
+            </ul>
+          </section>
+              <section>
+            <h3>시험 포인트</h3>
+            <ul>
+              <li>개정 연혁은 시행일과 적용 대상을 함께 표시합니다.</li><li>용어정리는 비슷한 단어를 비교표로 묶어 암기합니다.</li><li>체크리스트는 시험 전날 확인할 최소 항목만 남깁니다.</li>
+            </ul>
+          </section>
+              <section>
+            <h3>복습 질문</h3>
+            <ul>
+              <li>부록에서 가장 먼저 확인해야 할 기준은 무엇인가요?</li><li>이 단원이 부록의 다른 단원과 연결되는 지점은 어디인가요?</li><li>기출 선택지에서 주체, 요건, 효과 중 무엇을 바꾸면 오답이 되나요?</li>
+            </ul>
+          </section>
+            </div>
+            <div class="inline-actions">
+              <a class="button primary" href="lecture-appendix-01.html">상세 강의 보기</a>
+              <a class="button secondary" href="practice-first.html">문제로 확인</a>
+            </div>
+          </article><article class="classroom-panel" data-classroom-panel="lecture-appendix-02" hidden>
+            <div class="classroom-panel-copy">
+              <p class="eyebrow">부록</p>
+              <h2>주요 법령 전문 및 개정 연혁</h2>
+              <p>주요 법령 전문 및 개정 연혁은 시험 직전 확인용 자료입니다. 조문, 용어, 비교표, 체크리스트를 짧게 반복해 암기 빈틈을 줄이는 데 초점을 둡니다.</p>
+            </div>
+            <figure class="lesson-3d-figure compact" role="img" aria-label="주요 법령 전문 및 개정 연혁 3D 인포그래픽">
+                <div class="infographic-stage" aria-hidden="true">
+                  <div class="info-axis"></div>
+                  <div class="info-cube cube-1">
+                        <span>01</span>
+                        <strong>주요 법령 전문 및 개정 연혁의 법률상 위치와 핵…</strong>
+                      </div><div class="info-cube cube-2">
+                        <span>02</span>
+                        <strong>정의, 요건, 효과를 나누어 읽으면 선택지의 말바…</strong>
+                      </div><div class="info-cube cube-3">
+                        <span>03</span>
+                        <strong>보상 실무에서는 권리자 확인, 이용상황 판단, 절…</strong>
+                      </div>
+                  <div class="info-platform">
+                    <span>부록</span>
+                    <strong>주요 법령 전문 및 개정 연혁</strong>
+                  </div>
+                </div>
+                <figcaption>주요 법령 전문 및 개정 연혁의 핵심 개념을 3D 카드 흐름으로 압축한 강의실 미리보기입니다.</figcaption>
+              </figure>
+            <div class="classroom-panel-grid">
+              
+              <section>
+            <h3>핵심 개념</h3>
+            <ul>
+              <li>주요 법령 전문 및 개정 연혁의 법률상 위치와 핵심 용어를 먼저 확인합니다.</li><li>정의, 요건, 효과를 나누어 읽으면 선택지의 말바꾸기에 흔들리지 않습니다.</li><li>보상 실무에서는 권리자 확인, 이용상황 판단, 절차 진행 가능성으로 연결됩니다.</li>
+            </ul>
+          </section>
+              <section>
+            <h3>시험 포인트</h3>
+            <ul>
+              <li>개정 연혁은 시행일과 적용 대상을 함께 표시합니다.</li><li>용어정리는 비슷한 단어를 비교표로 묶어 암기합니다.</li><li>체크리스트는 시험 전날 확인할 최소 항목만 남깁니다.</li>
+            </ul>
+          </section>
+              <section>
+            <h3>복습 질문</h3>
+            <ul>
+              <li>주요 법령 전문 및 개정 연혁에서 가장 먼저 확인해야 할 기준은 무엇인가요?</li><li>이 단원이 부록의 다른 단원과 연결되는 지점은 어디인가요?</li><li>기출 선택지에서 주체, 요건, 효과 중 무엇을 바꾸면 오답이 되나요?</li>
+            </ul>
+          </section>
+            </div>
+            <div class="inline-actions">
+              <a class="button primary" href="lecture-appendix-02.html">상세 강의 보기</a>
+              <a class="button secondary" href="practice-first.html">문제로 확인</a>
+            </div>
+          </article><article class="classroom-panel" data-classroom-panel="lecture-appendix-03" hidden>
+            <div class="classroom-panel-copy">
+              <p class="eyebrow">부록</p>
+              <h2>용어정리, 법령별 비교표, 시험 준비 체크리스트</h2>
+              <p>용어정리, 법령별 비교표, 시험 준비 체크리스트은 시험 직전 확인용 자료입니다. 조문, 용어, 비교표, 체크리스트를 짧게 반복해 암기 빈틈을 줄이는 데 초점을 둡니다.</p>
+            </div>
+            <figure class="lesson-3d-figure compact" role="img" aria-label="용어정리, 법령별 비교표, 시험 준비 체크리스트 3D 인포그래픽">
+                <div class="infographic-stage" aria-hidden="true">
+                  <div class="info-axis"></div>
+                  <div class="info-cube cube-1">
+                        <span>01</span>
+                        <strong>용어정리, 법령별 비교표, 시험 준비 체크리스트의…</strong>
+                      </div><div class="info-cube cube-2">
+                        <span>02</span>
+                        <strong>정의, 요건, 효과를 나누어 읽으면 선택지의 말바…</strong>
+                      </div><div class="info-cube cube-3">
+                        <span>03</span>
+                        <strong>보상 실무에서는 권리자 확인, 이용상황 판단, 절…</strong>
+                      </div>
+                  <div class="info-platform">
+                    <span>부록</span>
+                    <strong>용어정리, 법령별 비교표, 시험 준비 체크…</strong>
+                  </div>
+                </div>
+                <figcaption>용어정리, 법령별 비교표, 시험 준비 체크리스트의 핵심 개념을 3D 카드 흐름으로 압축한 강의실 미리보기입니다.</figcaption>
+              </figure>
+            <div class="classroom-panel-grid">
+              
+              <section>
+            <h3>핵심 개념</h3>
+            <ul>
+              <li>용어정리, 법령별 비교표, 시험 준비 체크리스트의 법률상 위치와 핵심 용어를 먼저 확인합니다.</li><li>정의, 요건, 효과를 나누어 읽으면 선택지의 말바꾸기에 흔들리지 않습니다.</li><li>보상 실무에서는 권리자 확인, 이용상황 판단, 절차 진행 가능성으로 연결됩니다.</li>
+            </ul>
+          </section>
+              <section>
+            <h3>시험 포인트</h3>
+            <ul>
+              <li>개정 연혁은 시행일과 적용 대상을 함께 표시합니다.</li><li>용어정리는 비슷한 단어를 비교표로 묶어 암기합니다.</li><li>체크리스트는 시험 전날 확인할 최소 항목만 남깁니다.</li>
+            </ul>
+          </section>
+              <section>
+            <h3>복습 질문</h3>
+            <ul>
+              <li>용어정리, 법령별 비교표, 시험 준비 체크리스트에서 가장 먼저 확인해야 할 기준은 무엇인가요?</li><li>이 단원이 부록의 다른 단원과 연결되는 지점은 어디인가요?</li><li>기출 선택지에서 주체, 요건, 효과 중 무엇을 바꾸면 오답이 되나요?</li>
+            </ul>
+          </section>
+            </div>
+            <div class="inline-actions">
+              <a class="button primary" href="lecture-appendix-03.html">상세 강의 보기</a>
+              <a class="button secondary" href="practice-first.html">문제로 확인</a>
+            </div>
+          </article>
+            </div>
+          </div>
         </section>
       </main>
     <footer class="footer">
       <p>보상관리사 기본강의는 기출분석, 예상문제, 법령 이해하기 페이지와 함께 회독하도록 구성했습니다.</p>
       <p><a href="lecture.html">기본강의 홈</a> · <a href="practice.html">문제풀이</a> · <a href="law.html">토지보상법 이해하기</a></p>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>

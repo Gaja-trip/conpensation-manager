@@ -141,12 +141,8 @@ const parts = [
     examFocus: ["법률행위와 의사표시", "대리와 무권대리 구분", "무효ㆍ취소와 조건ㆍ기한", "물권변동과 상속관계"],
     groups: [
       {
-        title: "법률행위",
-        children: ["권리변동의 의의와 원인", "법률행위의 의의 및 종류"],
-      },
-      {
-        title: "민법 기초와 법의 분류",
-        children: ["민법의 체계와 기본 원칙", "물권과 채권의 구분, 물건의 종류"],
+        title: "민법총칙",
+        children: ["제1장 법률행위", "제2장 대리", "제3장 무효와 취소", "제4장 조건과 기한", "민법의 체계와 기본 원칙", "물권과 채권의 구분, 물건의 종류"],
       },
       {
         title: "물권의 유형과 내용",
@@ -688,6 +684,149 @@ const civilGeneralContent = {
   },
 };
 
+const civilStructuredOutlines = {
+  민법총칙: [
+    {
+      title: "Chapter 1. 법률행위",
+      items: [
+        "1) 총설: 권리변동, 법률행위의 의의, 법률행위의 종류, 성립요건과 효력요건, 당사자의 능력",
+        "2) 법률행위의 목적: 목적의 확정성, 가능성, 적법성, 사회적 타당성, 부동산이중매매, 불공정한 법률행위",
+        "3) 비정상적 의사표시: 비진의표시, 통정허위표시, 착오, 사기ㆍ강박에 의한 의사표시",
+        "4) 의사표시의 효력발생시기: 도달주의, 의사표시의 수령능력",
+      ],
+    },
+    {
+      title: "Chapter 2. 대리",
+      items: [
+        "1) 총설: 대리제도의 의의, 대리의 종류",
+        "2) 대리권: 임의대리권의 범위, 대리권의 제한, 대리권의 소멸",
+        "3) 대리행위: 현명주의, 대리행위의 하자, 대리인의 능력",
+        "4) 복대리: 복대리의 의의, 대리인의 복임권과 책임",
+        "5) 무권대리: 무권대리의 의의, 협의의 무권대리, 표현대리",
+      ],
+    },
+    {
+      title: "Chapter 3. 무효와 취소",
+      items: [
+        "1) 총설: 무효와 취소의 구별, 무효인 법률행위와 취소할 수 있는 법률행위, 제3자에 대한 효력, 확정적 무효와 유동적 무효",
+        "2) 무효: 무효의 일반적 효과, 일부무효의 법리, 무효행위의 전환, 무효행위의 추인",
+        "3) 취소: 취소할 수 있는 법률행위의 효과, 취소권자, 취소권의 행사, 취소의 효과, 추인, 법정추인, 취소권 행사기간의 경과",
+      ],
+    },
+  ],
+  "제1장 법률행위": [
+    {
+      title: "1) 총설",
+      items: [
+        "권리변동: 권리의 발생, 변경, 소멸을 먼저 구분합니다.",
+        "법률행위의 의의: 의사표시를 중심으로 법률효과를 발생시키는 행위입니다.",
+        "법률행위의 종류: 단독행위, 계약, 합동행위를 의사표시의 구조로 나눕니다.",
+        "법률행위의 성립요건과 효력요건: 성립 자체와 유효하게 효력을 내는 문제를 구분합니다.",
+        "당사자의 능력: 권리능력, 의사능력, 행위능력을 사례 속 인물에게 적용합니다.",
+      ],
+    },
+    {
+      title: "2) 법률행위의 목적",
+      items: [
+        "목적의 확정성 또는 확정가능성: 무엇을 하려는 행위인지 객관적으로 정할 수 있어야 합니다.",
+        "목적의 가능성: 처음부터 실현할 수 없는 급부를 목적으로 하면 효력이 문제됩니다.",
+        "목적의 적법성: 강행규정에 반하는 목적은 유효하게 인정되기 어렵습니다.",
+        "목적의 사회적 타당성: 선량한 풍속 기타 사회질서에 반하는 행위는 무효가 될 수 있습니다.",
+        "부동산이중매매: 제2매수인이 매도인의 배임행위에 적극 가담했는지 확인합니다.",
+        "불공정한 법률행위: 궁박, 경솔, 무경험과 현저한 불균형을 함께 봅니다.",
+      ],
+    },
+    {
+      title: "3) 비정상적 의사표시",
+      items: [
+        "진의 아닌 의사표시(비진의표시): 표시자가 진의 아님을 알면서 한 표시입니다.",
+        "통정허위표시: 상대방과 짜고 한 거짓 의사표시이며 선의의 제3자 보호가 문제됩니다.",
+        "착오로 인한 의사표시: 법률행위 내용의 중요 부분에 착오가 있는지 봅니다.",
+        "사기ㆍ강박에 의한 의사표시: 하자 있는 의사표시로서 취소 가능성과 제3자 관계를 함께 정리합니다.",
+      ],
+    },
+    {
+      title: "4) 의사표시의 효력발생시기",
+      items: [
+        "도달주의: 의사표시는 상대방에게 도달한 때 효력이 발생하는 것이 원칙입니다.",
+        "의사표시의 수령능력: 상대방이 의사표시 내용을 이해하고 받을 수 있는 상태인지 확인합니다.",
+      ],
+    },
+  ],
+  "제2장 대리": [
+    {
+      title: "1) 총설",
+      items: [
+        "대리제도의 의의: 대리인이 한 의사표시의 효과가 본인에게 직접 귀속되는 제도입니다.",
+        "대리의 종류: 임의대리와 법정대리, 능동대리와 수동대리를 구분합니다.",
+      ],
+    },
+    {
+      title: "2) 대리권",
+      items: [
+        "임의대리권의 범위: 수권행위와 위임장 문구를 기준으로 권한 범위를 정합니다.",
+        "대리권의 제한: 자기계약, 쌍방대리, 공동대리 같은 제한을 확인합니다.",
+        "대리권의 소멸: 본인의 사망, 대리인의 사망, 성년후견 개시, 수권행위 철회 등을 정리합니다.",
+      ],
+    },
+    {
+      title: "3) 대리행위",
+      items: [
+        "현명주의(대리의사의 표시): 대리인이 본인을 위한 행위임을 상대방에게 표시해야 합니다.",
+        "대리행위의 하자: 착오, 사기, 강박 등 하자는 원칙적으로 대리인을 기준으로 판단합니다.",
+        "대리인의 능력: 대리인은 행위능력자일 필요는 없지만 의사능력은 필요합니다.",
+      ],
+    },
+    {
+      title: "4) 복대리",
+      items: [
+        "복대리의 의의: 대리인이 자신의 이름으로 다시 대리인을 선임하는 구조입니다.",
+        "대리인의 복임권과 책임: 임의대리와 법정대리에서 복임권과 책임 범위를 나누어 봅니다.",
+      ],
+    },
+    {
+      title: "5) 무권대리",
+      items: [
+        "무권대리의 의의: 대리권 없이 본인을 위한 대리행위를 한 경우입니다.",
+        "협의의 무권대리: 본인의 추인 또는 추인 거절에 따라 효과가 달라집니다.",
+        "표현대리: 대리권이 있는 것처럼 보인 데 본인의 귀책이 있어 상대방을 보호하는 제도입니다.",
+      ],
+    },
+  ],
+  "제3장 무효와 취소": [
+    {
+      title: "1) 총설",
+      items: [
+        "무효와 취소의 구별: 무효는 처음부터 효력이 없고, 취소는 취소 전까지 일단 유효합니다.",
+        "무효인 법률행위와 취소할 수 있는 법률행위: 사유와 효과를 표로 비교합니다.",
+        "제3자에 대한 효력: 무효ㆍ취소가 거래 안전과 충돌할 때 보호되는 제3자가 있는지 봅니다.",
+        "확정적 무효와 유동적 무효: 허가나 추인 등 사후 사정으로 효력이 달라지는지를 구분합니다.",
+      ],
+    },
+    {
+      title: "2) 무효",
+      items: [
+        "무효의 일반적 효과: 법률행위는 처음부터 법률효과를 발생시키지 않습니다.",
+        "일부무효의 법리: 일부가 무효일 때 나머지 부분을 유지할 수 있는지 판단합니다.",
+        "무효행위의 전환: 다른 법률행위의 요건을 갖추면 그 행위로 효력을 인정할 수 있습니다.",
+        "무효행위의 추인: 원칙적으로 소급하여 유효가 되지는 않고 새로운 행위로 볼 수 있습니다.",
+      ],
+    },
+    {
+      title: "3) 취소",
+      items: [
+        "취소할 수 있는 법률행위의 효과: 취소 전에는 유효하지만 취소되면 처음부터 무효였던 것처럼 됩니다.",
+        "취소권자: 제한능력자, 착오ㆍ사기ㆍ강박의 표의자, 법정대리인 등 행사 주체를 확인합니다.",
+        "취소권의 행사: 취소의 의사표시가 상대방에게 도달해야 합니다.",
+        "취소의 효과: 부당이득 반환, 원상회복, 제3자 관계를 함께 정리합니다.",
+        "취소할 수 있는 법률행위의 추인: 취소 원인이 소멸한 뒤 추인하면 확정적으로 유효가 됩니다.",
+        "법정추인: 이행, 이행청구, 담보제공 등 일정한 행위가 있으면 추인으로 봅니다.",
+        "취소권 행사기간의 경과: 추인할 수 있는 날부터 3년, 법률행위를 한 날부터 10년을 기준으로 정리합니다.",
+      ],
+    },
+  ],
+};
+
 const lessonPages = [];
 for (const part of parts) {
   let lessonIndex = 0;
@@ -733,6 +872,7 @@ function buildLesson(part, item) {
     eyebrow: part.title,
     lead: makeLead(part, title),
     detailSections: makeDetailSections(part, title),
+    outline: makeLessonOutline(part, title),
     concepts: makeConcepts(part, title),
     examPoints: makeExamPoints(part, title),
     practice: makePractice(part, title),
@@ -749,7 +889,14 @@ function getCivilGeneralContent(part, title) {
   return civilGeneralContent[title] || null;
 }
 
+function makeLessonOutline(part, title) {
+  if (part.slug !== "civil") return null;
+  return civilStructuredOutlines[title] || null;
+}
+
 function makeLead(part, title) {
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral?.lead) return civilGeneral.lead;
   if (part.slug === "civil" && title === "법률행위") {
     return "법률행위는 권리가 왜 생기고, 어떻게 바뀌며, 언제 사라지는지를 이해한 뒤 당사자의 의사표시로 이루어지는 권리변동을 공부하는 민법 총칙의 출발 단원입니다.";
   }
@@ -1095,6 +1242,8 @@ function makeDetailSections(part, title) {
 }
 
 function makeConcepts(part, title) {
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral?.concepts) return civilGeneral.concepts;
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "권리변동은 권리의 발생, 변경, 소멸을 말합니다.",
@@ -1152,6 +1301,8 @@ function makeConcepts(part, title) {
 }
 
 function makeExamPoints(part, title) {
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral?.examPoints) return civilGeneral.examPoints;
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "법률행위 문제는 권리변동 전체 그림에서 출발해야 합니다.",
@@ -1231,6 +1382,8 @@ function makeExamPoints(part, title) {
 }
 
 function makePractice(part, title) {
+  const civilGeneral = getCivilGeneralContent(part, title);
+  if (civilGeneral?.practice) return civilGeneral.practice;
   if (part.slug === "civil" && title === "법률행위") {
     return [
       "매매, 상속, 변제, 시효취득, 저당권 설정을 권리의 발생ㆍ변경ㆍ소멸로 분류합니다.",
@@ -1290,6 +1443,7 @@ function renderLectureHome() {
             <span>${part.title}</span>
             <h3>${lectureHomeLabel(part)}</h3>
             <p>${part.lead}</p>
+            <strong class="lecture-room-entry">강의실 입장</strong>
           </a>`
     )
     .join("");
@@ -1438,6 +1592,141 @@ function renderLessonSummaryBand(group) {
           </div>`;
 }
 
+function renderLessonOutlineBlock(lesson) {
+  if (!lesson.outline) return "";
+  return `<section class="lesson-block structured-outline-block">
+                <h2>강의 목차</h2>
+                <p>${lesson.title}${topicParticle(lesson.title)} 아래 순서로 공부합니다. 먼저 큰 분류를 잡고, 각 항목의 요건과 효과를 사례에 연결해 보세요.</p>
+                ${renderStructuredOutline(lesson.outline)}
+              </section>`;
+}
+
+function renderStructuredOutline(outline) {
+  return `<ol class="structured-outline">
+                  ${outline
+                    .map(
+                      (section) => `<li>
+                        <h3>${section.title}</h3>
+                        <ul>
+                          ${section.items.map((item) => `<li>${item}</li>`).join("")}
+                        </ul>
+                      </li>`
+                    )
+                    .join("")}
+                </ol>`;
+}
+
+function summarizeOutlineItems(outline) {
+  return outline.slice(0, 4).map((section) => `${section.title}: ${section.items.slice(0, 3).join(", ")}`);
+}
+
+function renderLessonInfographic(lesson, mode = "detail") {
+  const concepts = (lesson.concepts || []).slice(0, 3);
+  const labels = concepts.length ? concepts : [lesson.title, lesson.groupTitle, lesson.part.shortTitle];
+  const caption =
+    mode === "classroom"
+      ? `${lesson.title}의 핵심 개념을 3D 카드 흐름으로 압축한 강의실 미리보기입니다.`
+      : `${lesson.title}${topicParticle(lesson.title)} 핵심 개념, 사례 적용, 시험 포인트를 한 덩어리로 묶어 이해하면 기억이 오래갑니다.`;
+  return `<figure class="lesson-3d-figure ${mode === "classroom" ? "compact" : ""}" role="img" aria-label="${escapeHtml(lesson.title)} 3D 인포그래픽">
+                <div class="infographic-stage" aria-hidden="true">
+                  <div class="info-axis"></div>
+                  ${labels
+                    .map(
+                      (label, index) => `<div class="info-cube cube-${index + 1}">
+                        <span>0${index + 1}</span>
+                        <strong>${escapeHtml(shortenText(label, 28))}</strong>
+                      </div>`
+                    )
+                    .join("")}
+                  <div class="info-platform">
+                    <span>${escapeHtml(lesson.part.shortTitle)}</span>
+                    <strong>${escapeHtml(shortenText(lesson.title, 24))}</strong>
+                  </div>
+                </div>
+                <figcaption>${caption}</figcaption>
+              </figure>`;
+}
+
+function renderDeepDiveBlock(lesson) {
+  const paragraphs = makeDeepDiveParagraphs(lesson);
+  return `<section class="lesson-block deep-dive-block">
+                <h2>상세 강의 해설</h2>
+                ${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+                <div class="deep-dive-grid">
+                  ${makeDeepDiveCards(lesson)
+                    .map(
+                      (card) => `<article>
+                        <span>${card.label}</span>
+                        <h3>${card.title}</h3>
+                        <p>${card.body}</p>
+                      </article>`
+                    )
+                    .join("")}
+                </div>
+              </section>`;
+}
+
+function makeDeepDiveParagraphs(lesson) {
+  const childText = lesson.groupChildren?.length
+    ? ` 이 단원은 ${lesson.groupChildren.slice(0, 3).join(", ")}${lesson.groupChildren.length > 3 ? " 등" : ""}으로 이어지므로, 큰 제목을 먼저 잡고 세부 주제를 내려가며 읽는 것이 좋습니다.`
+    : "";
+  const base = `${lesson.title}${topicParticle(lesson.title)} ${lesson.part.shortTitle}에서 독립적으로 외울 항목이 아니라, 사례를 읽는 순서와 판단 기준을 함께 익혀야 하는 주제입니다.${childText}`;
+  if (lesson.part.slug === "civil") {
+    return [
+      base,
+      "민법 단원은 먼저 권리의 주체와 객체를 찾고, 그다음 권리가 발생했는지, 변경됐는지, 소멸했는지를 나누어 읽습니다. 특히 부동산 보상 사례에서는 등기부, 점유 상태, 계약관계, 상속관계가 서로 맞물리므로 하나의 사례 안에서 여러 권리가 동시에 움직일 수 있습니다.",
+      "공부할 때는 조문 문구를 바로 암기하기보다 ‘누가 누구에게 무엇을 주장할 수 있는가’라는 질문으로 바꾸어 보세요. 이 질문이 잡히면 물권과 채권의 차이, 무효와 취소의 차이, 상속과 등기의 연결이 훨씬 선명해집니다.",
+    ];
+  }
+  if (lesson.part.slug === "real-estate") {
+    return [
+      base,
+      "부동산관계법규는 토지를 실제로 어떻게 이용할 수 있는지 판단하는 법령 묶음입니다. 같은 토지라도 용도지역, 허가 여부, 공부상 표시, 건축 가능성, 농지ㆍ산지 제한에 따라 보상평가와 사업 진행 가능성이 달라집니다.",
+      "각 법령을 공부할 때는 정의, 지정ㆍ허가권자, 절차, 제한 효과, 위반 시 처리 순서로 정리하세요. 시험 선택지는 법률명은 맞게 두고 주체나 효과만 바꾸는 경우가 많아, 표로 비교해 두면 오답을 빠르게 거를 수 있습니다.",
+    ];
+  }
+  if (lesson.part.slug === "compensation-law") {
+    return [
+      base,
+      "토지보상법규는 공익사업이 토지와 물건을 취득하거나 사용할 때 어떤 절차를 거쳐야 하는지 설명하는 과목입니다. 절차의 순서가 곧 문제풀이의 기준이므로 사전조사, 보상계획, 협의, 재결, 수용개시일, 불복 절차를 시간표처럼 연결해야 합니다.",
+      "강의를 읽을 때는 사업시행자, 토지소유자, 관계인, 수용위원회가 각각 어느 단계에서 무엇을 할 수 있는지 표시해 보세요. 주체와 기간이 정리되면 손실보상 항목과 권리구제 절차도 같은 틀 안에서 이해됩니다.",
+    ];
+  }
+  return [
+    base,
+    "이 단원은 기본강의에서 배운 개념을 문제풀이와 회독 자료로 연결하기 위한 보충 단원입니다. 핵심어를 짧게 정리하고, 같은 표현이 기출 선택지에서 어떻게 바뀌는지 확인하는 방식으로 활용하세요.",
+  ];
+}
+
+function makeDeepDiveCards(lesson) {
+  if (lesson.part.slug === "civil") {
+    return [
+      { label: "Step 1", title: "권리관계 찾기", body: "소유자, 점유자, 채권자, 상속인처럼 등장인물의 지위를 먼저 표시합니다." },
+      { label: "Step 2", title: "변동 원인 구분", body: "매매ㆍ증여 같은 법률행위인지, 상속ㆍ시효취득 같은 법률규정인지 나눕니다." },
+      { label: "Step 3", title: "보상 절차 연결", body: "권리자가 누구인지 확인한 뒤 보상금 지급, 관계인 통지, 등기 정리와 연결합니다." },
+    ];
+  }
+  if (lesson.part.slug === "real-estate") {
+    return [
+      { label: "Step 1", title: "토지 상태 확인", body: "용도지역, 지목, 건축 가능성, 농지ㆍ산지 여부를 먼저 읽습니다." },
+      { label: "Step 2", title: "허가와 제한", body: "누가 허가하는지, 어떤 행위가 제한되는지, 예외가 있는지 비교합니다." },
+      { label: "Step 3", title: "평가 영향", body: "법적 제한이 이용상황과 가치 판단에 어떤 영향을 주는지 보상 사례로 연결합니다." },
+    ];
+  }
+  if (lesson.part.slug === "compensation-law") {
+    return [
+      { label: "Step 1", title: "절차 위치", body: "현재 쟁점이 사업인정 전인지, 협의 단계인지, 재결 이후인지 먼저 잡습니다." },
+      { label: "Step 2", title: "주체와 기간", body: "사업시행자, 토지소유자, 관계인, 수용위원회의 권한과 기간을 표시합니다." },
+      { label: "Step 3", title: "보상 항목", body: "토지, 물건, 영업, 이주, 잔여지, 환매권 중 어느 항목과 연결되는지 정리합니다." },
+    ];
+  }
+  return [
+    { label: "Step 1", title: "핵심어 추출", body: "긴 문장을 시험에서 반복되는 핵심어 중심으로 줄입니다." },
+    { label: "Step 2", title: "오답 연결", body: "기출 선택지에서 같은 개념이 어떻게 바뀌는지 확인합니다." },
+    { label: "Step 3", title: "회독 표시", body: "다음 회독 때 다시 볼 부분만 표시해 학습 부담을 줄입니다." },
+  ];
+}
+
 function renderSubtopicBlock(group) {
   if (!group || group.lessons.length <= 1) return "";
   return `<section class="lesson-block subtopic-block">
@@ -1457,7 +1746,7 @@ function renderParentBlock(group) {
   const parent = group.lessons[0];
   return `<section class="lesson-block subtopic-block">
                 <h2>상위 단원</h2>
-                <p>이 페이지는 <a href="${parent.slug}.html">${parent.title}</a> 단원에 포함됩니다. 오른쪽 목차에서 같은 묶음의 앞뒤 주제를 함께 확인하세요.</p>
+                <p>이 페이지는 <a href="${parent.slug}.html">${parent.title}</a> 단원에 포함됩니다. 왼쪽 목차에서 같은 묶음의 앞뒤 주제를 함께 확인하세요.</p>
               </section>`;
 }
 
@@ -1483,19 +1772,49 @@ function renderGroupedAside(groups, currentLesson) {
 }
 
 function renderPartHub(part) {
-  const lessonCards = part.groups
+  const tocButtons = part.groups
+    .map((group) => {
+      const parent = group.lessons[0];
+      const children = group.lessons.slice(1);
+      return `<div class="classroom-toc-group">
+                <button type="button" class="classroom-toc-main" data-classroom-tab="${parent.slug}" aria-selected="${group.index === 0 ? "true" : "false"}">
+                  <span>${String(group.index + 1).padStart(2, "0")}</span>
+                  ${parent.title}
+                </button>
+                ${
+                  children.length
+                    ? `<div class="classroom-toc-children">
+                        ${children
+                          .map(
+                            (lesson) => `<button type="button" data-classroom-tab="${lesson.slug}" aria-selected="false">${lesson.title}</button>`
+                          )
+                          .join("")}
+                      </div>`
+                    : ""
+                }
+              </div>`;
+    })
+    .join("");
+  const classroomPanels = part.lessons
     .map(
-      (group) => {
-        const parent = group.lessons[0];
-        const children = group.lessons.slice(1);
-        return `
-          <section class="lecture-card lesson-group-card">
-            <span>${String(group.index + 1).padStart(2, "0")}</span>
-            <h3><a href="${parent.slug}.html">${group.title}</a></h3>
-            <p>${parent.lead}</p>
-            ${children.length ? `<ul class="lecture-subtopics">${children.map((lesson) => `<li><a href="${lesson.slug}.html">${lesson.title}</a></li>`).join("")}</ul>` : ""}
-          </section>`;
-      }
+      (lesson, index) => `<article class="classroom-panel" data-classroom-panel="${lesson.slug}"${index === 0 ? "" : " hidden"}>
+            <div class="classroom-panel-copy">
+              <p class="eyebrow">${lesson.groupTitle}</p>
+              <h2>${lesson.title}</h2>
+              <p>${lesson.lead}</p>
+            </div>
+            ${renderLessonInfographic(lesson, "classroom")}
+            <div class="classroom-panel-grid">
+              ${lesson.outline ? renderClassroomMiniBlock("강의 목차", summarizeOutlineItems(lesson.outline)) : ""}
+              ${renderClassroomMiniBlock("핵심 개념", lesson.concepts)}
+              ${renderClassroomMiniBlock("시험 포인트", lesson.examPoints)}
+              ${renderClassroomMiniBlock("복습 질문", makeReviewQuestions(lesson))}
+            </div>
+            <div class="inline-actions">
+              <a class="button primary" href="${lesson.slug}.html">상세 강의 보기</a>
+              <a class="button secondary" href="practice-first.html">문제로 확인</a>
+            </div>
+          </article>`
     )
     .join("");
   return layout({
@@ -1504,7 +1823,7 @@ function renderPartHub(part) {
     current: part.hub,
     body: `
       <main id="top">
-        <section class="section page-section">
+        <section class="section page-section classroom-hero">
           ${breadcrumb([["lecture.html", "기본강의"], [null, part.title]])}
           <p class="eyebrow">${part.subject}</p>
           <h1>${part.title}</h1>
@@ -1512,17 +1831,47 @@ function renderPartHub(part) {
           <div class="lecture-summary-band">
             ${part.examFocus.map((item) => `<span>${item}</span>`).join("")}
           </div>
+          <div class="hero-actions">
+            <a class="button primary" href="#classroom-${part.slug}">강의실 입장</a>
+            <a class="button secondary" href="practice-first.html">문제로 복습</a>
+          </div>
         </section>
-        <section class="section" aria-labelledby="toc-${part.slug}">
+        <section class="section classroom-section" id="classroom-${part.slug}" aria-labelledby="toc-${part.slug}">
           <div class="section-heading">
-            <p class="eyebrow">Table of Contents</p>
+            <p class="eyebrow">Lecture Room</p>
             <h2 id="toc-${part.slug}">${partTocTitle(part)}</h2>
             <p>${partTocDescription(part)}</p>
           </div>
-          <div class="lecture-grid three">${lessonCards}</div>
+          <div class="classroom-shell" data-classroom>
+            <aside class="classroom-toc" aria-label="${part.shortTitle} 목차">
+              <h2>좌측 목차</h2>
+              <p>목차를 선택하면 우측 강의 패널의 내용이 바뀝니다.</p>
+              ${tocButtons}
+            </aside>
+            <div class="classroom-content">
+              ${classroomPanels}
+            </div>
+          </div>
         </section>
       </main>`,
   });
+}
+
+function renderClassroomMiniBlock(title, items) {
+  return `<section>
+            <h3>${title}</h3>
+            <ul>
+              ${(items || []).slice(0, 4).map((item) => `<li>${item}</li>`).join("")}
+            </ul>
+          </section>`;
+}
+
+function makeReviewQuestions(lesson) {
+  return [
+    `${lesson.title}에서 가장 먼저 확인해야 할 기준은 무엇인가요?`,
+    `이 단원이 ${lesson.part.shortTitle}의 다른 단원과 연결되는 지점은 어디인가요?`,
+    "기출 선택지에서 주체, 요건, 효과 중 무엇을 바꾸면 오답이 되나요?",
+  ];
 }
 
 function partTocTitle(part) {
@@ -1554,10 +1903,17 @@ function renderLessonPage(lesson) {
           <h1>${lesson.title}</h1>
           <p class="hero-text">${lesson.lead}</p>
           ${currentGroup ? renderLessonSummaryBand(currentGroup) : ""}
-          <div class="lesson-layout">
+          ${renderLessonInfographic(lesson)}
+          <div class="lesson-layout lesson-layout-left-aside">
+            <aside class="lesson-aside">
+              <h2>${lesson.part.shortTitle} 목차</h2>
+              ${renderGroupedAside(lesson.part.groups, lesson)}
+            </aside>
             <article class="lesson-main">
               ${lesson.isGroupParent ? renderSubtopicBlock(currentGroup) : renderParentBlock(currentGroup)}
+              ${renderLessonOutlineBlock(lesson)}
               ${lesson.detailSections ? renderIntroSections(lesson.detailSections) : ""}
+              ${renderDeepDiveBlock(lesson)}
               ${renderBlock("핵심 개념", lesson.concepts)}
               ${renderBlock("시험 포인트", lesson.examPoints)}
               ${renderBlock("복습 방법", lesson.practice)}
@@ -1570,10 +1926,6 @@ function renderLessonPage(lesson) {
                 </div>
               </section>
             </article>
-            <aside class="lesson-aside">
-              <h2>${lesson.part.shortTitle} 목차</h2>
-              ${renderGroupedAside(lesson.part.groups, lesson)}
-            </aside>
           </div>
           <nav class="lesson-nav" aria-label="이전 다음 강의">
             ${prev ? `<a href="${prev.slug}.html">이전: ${prev.title}</a>` : `<span></span>`}
@@ -1675,6 +2027,12 @@ function escapeHtml(value) {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
+}
+
+function shortenText(value, maxLength) {
+  const text = String(value || "").trim();
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 1)}…`;
 }
 
 function topicParticle(text) {

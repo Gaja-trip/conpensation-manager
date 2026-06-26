@@ -895,6 +895,34 @@ function setupImageLightbox() {
   });
 }
 
+function setupClassroomTabs() {
+  document.querySelectorAll("[data-classroom]").forEach((classroom) => {
+    const buttons = [...classroom.querySelectorAll("[data-classroom-tab]")];
+    const panels = [...classroom.querySelectorAll("[data-classroom-panel]")];
+    if (!buttons.length || !panels.length) return;
+
+    const panelIds = new Set(panels.map((panel) => panel.dataset.classroomPanel));
+    const activate = (id) => {
+      if (!panelIds.has(id)) return;
+      buttons.forEach((button) => {
+        button.setAttribute("aria-selected", String(button.dataset.classroomTab === id));
+      });
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.classroomPanel !== id;
+      });
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activate(button.dataset.classroomTab);
+      });
+    });
+
+    const fromHash = decodeURIComponent(location.hash.replace(/^#/, ""));
+    activate(panelIds.has(fromHash) ? fromHash : buttons[0].dataset.classroomTab);
+  });
+}
+
 function init() {
   renderExamMap();
   renderArchive();
@@ -911,6 +939,7 @@ function init() {
   renderQuiz();
   renderPlan();
   setupImageLightbox();
+  setupClassroomTabs();
 }
 
 init();
