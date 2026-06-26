@@ -2197,7 +2197,7 @@ function layout({ title, description, current, body }) {
 function header(current) {
   return `<header class="topbar">
       <a class="brand" href="index.html" aria-label="보상관리사 기출분석 홈">
-        <span class="brand-mark" aria-hidden="true">補</span>
+        <span class="brand-mark" aria-hidden="true"></span>
         <span>보상관리사 기출분석</span>
       </a>
       <nav class="nav" aria-label="주요 메뉴">
