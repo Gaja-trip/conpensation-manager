@@ -107,22 +107,12 @@ input {
 }
 
 .nav-group {
+  display: inline-flex;
   position: relative;
 }
 
 .nav-group::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 29;
-  width: max(100%, 190px);
-  height: 12px;
-}
-
-.nav-group:last-child::after {
-  right: 0;
-  left: auto;
+  display: none;
 }
 
 .nav-trigger {
@@ -146,6 +136,15 @@ input {
   transform: translateY(-4px);
   transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
   visibility: hidden;
+}
+
+.nav-menu::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: 10px;
 }
 
 .nav-menu a {
@@ -2596,6 +2595,31 @@ h3 {
   padding: 12px;
 }
 
+.lesson-image-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 18px 0 0;
+}
+
+.lesson-hero-gallery {
+  margin: 22px 0 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.lesson-hero-gallery.compact {
+  margin: 0;
+  padding: 12px;
+}
+
+.lesson-image-gallery .lesson-figure {
+  margin: 0;
+}
+
 .lesson-figure img {
   display: block;
   width: 100%;
@@ -2612,6 +2636,21 @@ h3 {
 
 .lesson-hero-image.compact img {
   max-height: 330px;
+}
+
+.lesson-hero-gallery img {
+  max-height: 520px;
+  object-fit: contain;
+}
+
+.lesson-hero-gallery.compact img {
+  max-height: 300px;
+}
+
+@media (max-width: 760px) {
+  .lesson-image-gallery {
+    grid-template-columns: 1fr;
+  }
 }
 
 .lesson-figure img[data-lightbox-image],
@@ -3019,6 +3058,10 @@ body.lightbox-open {
     pointer-events: auto;
     transform: none;
     visibility: visible;
+  }
+
+  .nav-menu::before {
+    display: none;
   }
 
   .nav-menu a {
