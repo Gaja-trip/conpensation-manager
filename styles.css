@@ -2567,6 +2567,20 @@ h3 {
   margin: 18px 0 0;
 }
 
+.lesson-hero-image {
+  margin: 22px 0 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.lesson-hero-image.compact {
+  margin: 0;
+  padding: 12px;
+}
+
 .lesson-figure img {
   display: block;
   width: 100%;
@@ -2574,6 +2588,15 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
+}
+
+.lesson-hero-image img {
+  max-height: 520px;
+  object-fit: contain;
+}
+
+.lesson-hero-image.compact img {
+  max-height: 330px;
 }
 
 .lesson-figure img[data-lightbox-image],
