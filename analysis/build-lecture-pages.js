@@ -2161,6 +2161,29 @@ const realEstateLawContent = {
   },
   "용도지역ㆍ용도지구ㆍ용도구역과 토지이용계획": {
     lead: "용도지역ㆍ용도지구ㆍ용도구역은 토지 이용 제한을 읽는 핵심 틀입니다. 기본 구분, 보완ㆍ강화 규제, 광역적 특별 규제를 나누어 이해합니다.",
+    classroomSections: "all",
+    heroImages: [
+      {
+        src: "assets/land-use-zoning-overview-221.png",
+        alt: "용도지역, 용도지구, 용도구역과 토지이용계획의 관계를 층위별로 설명한 인포그래픽",
+        caption: "2.2-1 용도지역ㆍ용도지구ㆍ용도구역은 큰 틀, 세부 조건, 특별 규칙이 층처럼 겹쳐 적용됩니다.",
+      },
+      {
+        src: "assets/land-use-zones-222.png",
+        alt: "도시지역, 관리지역, 농림지역, 자연환경보전지역과 각 세분을 설명한 인포그래픽",
+        caption: "2.2-2 용도지역은 토지 이용의 가장 큰 분류입니다. 도시지역, 관리지역, 농림지역, 자연환경보전지역을 먼저 구분합니다.",
+      },
+      {
+        src: "assets/land-use-districts-223.png",
+        alt: "경관지구, 고도지구, 방화지구, 방재지구, 보호지구, 취락지구, 개발진흥지구, 특정용도제한지구를 설명한 인포그래픽",
+        caption: "2.2-3 용도지구는 같은 용도지역 안에서도 경관, 높이, 안전, 보호, 개발 촉진 같은 세부 규칙을 더합니다.",
+      },
+      {
+        src: "assets/land-use-districts-check-224.png",
+        alt: "개발제한구역, 도시자연공원구역, 시가화조정구역과 토지이용계획 확인 방법을 설명한 인포그래픽",
+        caption: "2.2-4 용도구역과 토지이용계획 확인은 실제 건축 가능성과 토지 활용 가능성을 판단하는 첫 단계입니다.",
+      },
+    ],
     heroImage: {
       src: "assets/land-use-zoning-overview-221.png",
       alt: "용도지역, 용도지구, 용도구역과 토지이용계획의 관계를 층위별로 설명한 인포그래픽",
@@ -2221,12 +2244,27 @@ const realEstateLawContent = {
           "용도구역은 용도지역ㆍ용도지구보다 더 넓은 범위에서 특정 지역 전체의 개발을 제한하거나 특정 목적의 보호를 위해 설정됩니다.",
           "개발제한구역은 도시의 무질서한 팽창을 막고 주변 자연환경을 보존하기 위해 지정하는 구역입니다. 도시 주변 녹지 확보와 국가 안보 등도 중요한 목적이 될 수 있습니다.",
           "도시자연공원구역은 도시 안의 산지 중 식생이 양호한 곳의 개발을 제한하여 도시민에게 녹지와 휴식 공간을 제공하는 구역입니다. 시가화조정구역은 일정 기간 도시화를 억제해 계획적인 개발과 단계적 도시 성장을 도모합니다.",
+          "기타 용도구역에는 수산자원보호구역, 방재구역, 항만구역 등 다른 법률에 따라 지정되는 구역들이 연결될 수 있습니다. 따라서 한 필지를 볼 때에는 용도지역만 확인하지 말고, 용도지구와 용도구역이 추가로 겹쳐 있는지까지 함께 확인해야 합니다.",
         ],
+        image: {
+          src: "assets/land-use-districts-check-224.png",
+          alt: "개발제한구역, 도시자연공원구역, 시가화조정구역과 토지이용계획 확인 방법을 설명한 인포그래픽",
+          caption: "용도구역은 특정 지역 전체의 개발을 억제하거나 자연ㆍ안전ㆍ공익 목적을 보호하는 강한 규제 장치입니다.",
+        },
         cards: [
           { label: "개발제한구역", title: "그린벨트", body: "도시의 무질서한 확산을 막고 자연환경과 녹지를 보전합니다." },
           { label: "도시자연공원구역", title: "도시 속 녹지", body: "식생이 양호한 산지 등을 보전해 휴식 공간을 제공합니다." },
           { label: "시가화조정구역", title: "도시화 속도 조절", body: "일정 기간 도시화를 억제해 단계적 성장을 유도합니다." },
         ],
+        table: {
+          headers: ["용도구역", "핵심 기능", "토지이용계획에서 볼 점"],
+          rows: [
+            ["개발제한구역", "도시 확산 억제와 녹지ㆍ자연환경 보전", "건축ㆍ형질변경 등 개발행위 제한 여부"],
+            ["도시자연공원구역", "도시 안 자연공간과 휴식 기능 보전", "공원 기능 보전과 건축 제한"],
+            ["시가화조정구역", "일정 기간 도시화 억제와 단계적 개발 유도", "개발 가능 시기와 허용 행위"],
+            ["기타 용도구역", "수산자원, 방재, 항만 등 개별 법률상 보호 목적", "해당 특별법상 제한과 중첩 규제"],
+          ],
+        },
       },
       {
         title: "4. 토지이용계획과 공시",
@@ -4749,6 +4787,12 @@ function renderPartHub(part) {
 }
 
 function renderClassroomPanelDetail(lesson) {
+  const customContent = getCustomLessonContent(lesson.part, lesson.title);
+  if (customContent?.classroomSections === "all" && lesson.detailSections?.length) {
+    return `<section class="classroom-explainer classroom-explainer-full" aria-label="${escapeHtml(lesson.title)} 이해하기 전체">
+            ${renderIntroSections(lesson.detailSections)}
+          </section>`;
+  }
   const firstSection = lesson.detailSections?.[0];
   const paragraphs = firstSection?.paragraphs?.length ? firstSection.paragraphs.slice(0, 2) : makeDeepDiveParagraphs(lesson).slice(0, 2);
   const heading = firstSection?.title || "이해하기";

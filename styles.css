@@ -1967,6 +1967,29 @@ h3 {
   object-fit: contain;
 }
 
+.classroom-explainer-full {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.classroom-explainer-full .lesson-block {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid rgba(205, 222, 219, 0.95);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.classroom-explainer-full .lesson-block h2 {
+  font-size: 20px;
+}
+
+.classroom-explainer-full .lesson-figure img {
+  max-height: 420px;
+  object-fit: contain;
+}
+
 .classroom-panel-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
