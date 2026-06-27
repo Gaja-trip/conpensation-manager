@@ -1930,6 +1930,16 @@ h3 {
   line-height: 1.65;
 }
 
+.classroom-explainer .lesson-card-grid {
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.classroom-explainer .lesson-mini-card {
+  padding: 12px;
+}
+
 .classroom-explainer-steps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
