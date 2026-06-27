@@ -110,6 +110,21 @@ input {
   position: relative;
 }
 
+.nav-group::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 29;
+  width: max(100%, 190px);
+  height: 12px;
+}
+
+.nav-group:last-child::after {
+  right: 0;
+  left: auto;
+}
+
 .nav-trigger {
   white-space: nowrap;
 }
@@ -2979,6 +2994,10 @@ body.lightbox-open {
     display: grid;
     width: 100%;
     gap: 6px;
+  }
+
+  .nav-group::after {
+    display: none;
   }
 
   .nav-trigger {
