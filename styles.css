@@ -1940,29 +1940,17 @@ h3 {
   padding: 12px;
 }
 
-.classroom-explainer-steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
+.classroom-explainer-visual {
+  min-width: 0;
 }
 
-.classroom-explainer-steps article {
-  padding: 12px;
-  border: 1px solid rgba(217, 225, 231, 0.9);
-  border-radius: 8px;
-  background: var(--surface);
+.classroom-explainer-visual .lesson-figure {
+  margin: 0;
 }
 
-.classroom-explainer-steps span {
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.classroom-explainer-steps strong {
-  display: block;
-  margin-top: 4px;
-  font-size: 15px;
+.classroom-explainer-visual .lesson-figure img {
+  max-height: 360px;
+  object-fit: contain;
 }
 
 .classroom-panel-grid {
@@ -2133,38 +2121,6 @@ h3 {
 .deep-dive-block p {
   margin: 14px 0 0;
   color: var(--ink);
-}
-
-.deep-dive-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 18px;
-}
-
-.deep-dive-grid article {
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-2);
-}
-
-.deep-dive-grid span {
-  color: var(--teal);
-  font-size: 12px;
-  font-weight: 900;
-  text-transform: uppercase;
-}
-
-.deep-dive-grid h3 {
-  margin-top: 6px;
-  font-size: 17px;
-}
-
-.deep-dive-grid p {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 15px;
 }
 
 .lesson-3d-figure {
@@ -2907,8 +2863,6 @@ body.lightbox-open {
   }
 
   .classroom-panel-grid,
-  .classroom-explainer-steps,
-  .deep-dive-grid,
   .lesson-card-grid {
     grid-template-columns: 1fr;
   }

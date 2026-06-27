@@ -1775,10 +1775,11 @@ const realEstateLawContent = {
     lead: "부동산과 법의 관계는 부동산을 개인의 재산으로 보호하면서도 국토 전체의 질서와 공공복리를 위해 이용을 제한하는 균형 구조를 이해하는 단원입니다.",
     sections: [
       {
-        title: "1. 부동산의 의미와 특성",
+        title: "1.1 부동산과 법의 관계",
         paragraphs: [
-          "부동산은 토지와 그 위에 정착된 건물 또는 건축물을 중심으로 이해합니다. 토지는 위치가 고정되어 있고 양이 제한되어 있으며, 주거ㆍ산업ㆍ교통ㆍ환경의 기반이 됩니다. 건물은 사람의 생활과 안전에 직접 연결되므로 구조, 방화, 피난, 위생 같은 공적 기준이 중요합니다.",
-          "이런 특성 때문에 부동산은 일반 동산보다 훨씬 강한 공시와 규제를 받습니다. 토지는 등기와 지적공부로 권리와 표시를 관리하고, 건축물은 허가ㆍ신고와 사용승인을 통해 안전과 도시질서를 확인합니다.",
+          "부동산은 토지와 그 위에 정착된 건물(건축물)을 말하며, 국민 생활의 터전일 뿐만 아니라 중요한 재산적 가치가 있습니다. 토지는 국가 전체의 제한된 자원이므로 개인의 소유권에도 공공성이 반영됩니다.",
+          "이에 따라 국가는 국토의 계획 및 이용에 관한 법률을 통해 토지의 용도를 구분하고 개발행위를 관리합니다. 2026년 현재 이 법은 도시ㆍ농업ㆍ자연환경 보전 등 여러 용도지역과 용도구역을 설정하여 사용 가능한 범위를 정하고, 개발행위가 도시관리계획에 맞도록 규제합니다. 이러한 계획법은 사유재산권과 공공복리의 균형을 맞추기 위한 기반입니다.",
+          "쉽게 말해 부동산 법제는 ‘누가 주인인지’, ‘어떻게 사용할 수 있는지’, ‘안전하고 공정하게 거래되는지’, ‘분쟁이 생기면 어떻게 해결하는지’를 정하는 약속의 체계입니다.",
         ],
         image: {
           src: "assets/real-estate-law-foundation.jpg",
@@ -3616,17 +3617,6 @@ function renderDeepDiveBlock(lesson) {
   return `<section class="lesson-block deep-dive-block">
                 <h2>상세 강의 해설</h2>
                 ${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-                <div class="deep-dive-grid">
-                  ${makeDeepDiveCards(lesson)
-                    .map(
-                      (card) => `<article>
-                        <span>${card.label}</span>
-                        <h3>${card.title}</h3>
-                        <p>${card.body}</p>
-                      </article>`
-                    )
-                    .join("")}
-                </div>
               </section>`;
 }
 
@@ -3675,35 +3665,6 @@ function makeDeepDiveParagraphs(lesson) {
     focus,
     examGuide,
     "이 단원은 기본강의에서 배운 개념을 문제풀이와 회독 자료로 연결하기 위한 보충 단원입니다. 핵심어를 짧게 정리하고, 같은 표현이 기출 선택지에서 어떻게 바뀌는지 확인하는 방식으로 활용하세요.",
-  ];
-}
-
-function makeDeepDiveCards(lesson) {
-  if (lesson.part.slug === "civil") {
-    return [
-      { label: "Step 1", title: "권리관계 찾기", body: "소유자, 점유자, 채권자, 상속인처럼 등장인물의 지위를 먼저 표시합니다." },
-      { label: "Step 2", title: "변동 원인 구분", body: "매매ㆍ증여 같은 법률행위인지, 상속ㆍ시효취득 같은 법률규정인지 나눕니다." },
-      { label: "Step 3", title: "보상 절차 연결", body: "권리자가 누구인지 확인한 뒤 보상금 지급, 관계인 통지, 등기 정리와 연결합니다." },
-    ];
-  }
-  if (lesson.part.slug === "real-estate") {
-    return [
-      { label: "Step 1", title: "토지 상태 확인", body: "용도지역, 지목, 건축 가능성, 농지ㆍ산지 여부를 먼저 읽습니다." },
-      { label: "Step 2", title: "허가와 제한", body: "누가 허가하는지, 어떤 행위가 제한되는지, 예외가 있는지 비교합니다." },
-      { label: "Step 3", title: "평가 영향", body: "법적 제한이 이용상황과 가치 판단에 어떤 영향을 주는지 보상 사례로 연결합니다." },
-    ];
-  }
-  if (lesson.part.slug === "compensation-law") {
-    return [
-      { label: "Step 1", title: "절차 위치", body: "현재 쟁점이 사업인정 전인지, 협의 단계인지, 재결 이후인지 먼저 잡습니다." },
-      { label: "Step 2", title: "주체와 기간", body: "사업시행자, 토지소유자, 관계인, 수용위원회의 권한과 기간을 표시합니다." },
-      { label: "Step 3", title: "보상 항목", body: "토지, 물건, 영업, 이주, 잔여지, 환매권 중 어느 항목과 연결되는지 정리합니다." },
-    ];
-  }
-  return [
-    { label: "Step 1", title: "핵심어 추출", body: "긴 문장을 시험에서 반복되는 핵심어 중심으로 줄입니다." },
-    { label: "Step 2", title: "오답 연결", body: "기출 선택지에서 같은 개념이 어떻게 바뀌는지 확인합니다." },
-    { label: "Step 3", title: "회독 표시", body: "다음 회독 때 다시 볼 부분만 표시해 학습 부담을 줄입니다." },
   ];
 }
 
@@ -3869,7 +3830,9 @@ function renderClassroomPanelDetail(lesson) {
   const firstSection = lesson.detailSections?.[0];
   const paragraphs = firstSection?.paragraphs?.length ? firstSection.paragraphs.slice(0, 2) : makeDeepDiveParagraphs(lesson).slice(0, 2);
   const heading = firstSection?.title || "이해하기";
-  const sectionVisual = firstSection?.cards
+  const sectionVisual = firstSection?.image
+    ? renderLessonImage(firstSection.image)
+    : firstSection?.cards
     ? renderLessonCards(firstSection.cards)
     : firstSection?.steps
       ? renderLessonSteps(firstSection.steps.slice(0, 3))
@@ -3878,19 +3841,8 @@ function renderClassroomPanelDetail(lesson) {
             <div>
               <h3>${heading}</h3>
               ${paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-              ${sectionVisual}
             </div>
-            <div class="classroom-explainer-steps">
-              ${makeDeepDiveCards(lesson)
-                .map(
-                  (card) => `<article>
-                    <span>${card.label}</span>
-                    <strong>${card.title}</strong>
-                    <p>${card.body}</p>
-                  </article>`
-                )
-                .join("")}
-            </div>
+            ${sectionVisual ? `<div class="classroom-explainer-visual">${sectionVisual}</div>` : ""}
           </section>`;
 }
 
