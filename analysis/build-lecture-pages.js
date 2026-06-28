@@ -145,9 +145,9 @@ const parts = [
         children: ["민법의 체계와 기본 원칙", "물권과 채권의 구분, 물건의 종류"],
       },
       {
-        title: "민법의 기초(입문자를 위한 쉬운 민법)",
+        title: "민법의 기초",
         children: [
-          "CHAPTER1. 권리변동이란 무엇인가?",
+          "제1장 권리변동이란 무엇인가",
           "CHAPTER2. 법률행위란 무엇인가?",
           "CHAPTER3. 법률행위의 종류",
           "CHAPTER4. 채권행위와 물권행위",
@@ -282,8 +282,8 @@ const civilLessonSlugs = {
   "제4장 조건과 기한": "lecture-civil-general-condition",
   "민법의 체계와 기본 원칙": "lecture-civil-02",
   "물권과 채권의 구분, 물건의 종류": "lecture-civil-03",
-  "민법의 기초(입문자를 위한 쉬운 민법)": "lecture-civil-beginner",
-  "CHAPTER1. 권리변동이란 무엇인가?": "lecture-civil-beginner-rights-change",
+  "민법의 기초": "lecture-civil-beginner",
+  "제1장 권리변동이란 무엇인가": "lecture-civil-beginner-rights-change",
   "CHAPTER2. 법률행위란 무엇인가?": "lecture-civil-beginner-juristic-act",
   "CHAPTER3. 법률행위의 종류": "lecture-civil-beginner-act-types",
   "CHAPTER4. 채권행위와 물권행위": "lecture-civil-beginner-obligation-real-act",
@@ -378,10 +378,53 @@ function makeCivilBeginnerContent() {
       ["가등기", "장래 본등기를 위한 순위 보전 장치", "줄 서기 표이지 실제 입장권은 아님"],
     ],
     image: {
-      src: "assets/legal-act-rights-change.png",
-      alt: "권리변동의 발생, 변경, 소멸과 원인을 설명한 인포그래픽",
-      caption: "권리변동은 물건이 움직이는 것이 아니라 법적인 힘이 움직이는 일입니다. 원인, 절차, 효과를 순서대로 보세요.",
+      src: "assets/civil-rights-change-chapter1.png",
+      alt: "제1장 권리변동을 발생, 변경, 이전, 소멸로 설명한 인포그래픽",
+      caption: "권리변동은 집이 움직이는 것이 아니라 권리가 생기고, 바뀌고, 넘어가고, 사라지는 과정입니다.",
     },
+    heroImage: null,
+    sectionImage: null,
+    leadingSections: [
+      {
+        title: "제1절 권리변동",
+        paragraphs: [
+          "이 절의 핵심은 한 문장으로 정리할 수 있습니다. 물건이 움직이는 것이 아니라, 그 물건에 붙어 있는 법적인 힘이 움직이는 것이 권리변동입니다. 집은 그대로 서 있어도 누가 소유자인지, 누가 사용ㆍ수익할 수 있는지, 누가 담보로 잡았는지가 바뀌면 법적으로는 큰 변화가 일어난 것입니다.",
+          "권리는 법이 ‘그래도 된다’고 인정해 준 힘입니다. 집을 소유할 힘, 돈을 받을 힘, 빌린 물건을 돌려받을 힘이 모두 권리입니다. 민법은 결국 이러한 권리가 어떻게 생기고, 바뀌고, 사라지는지를 설명하는 법입니다.",
+          "권리변동은 권리가 새로 생기거나, 권리의 주체ㆍ내용ㆍ범위가 바뀌거나, 기존 권리가 없어지는 것을 말합니다. 중학생 눈높이로 바꾸면 ‘법적인 주인이 바뀌는 일’, ‘법적인 약속의 내용이 달라지는 일’, ‘법적인 힘이 사라지는 일’입니다.",
+          "권리변동을 공부할 때는 네 질문을 던지면 됩니다. 무엇이 바뀌었는가, 무엇 때문에 바뀌었는가, 어떤 절차가 더 필요한가, 누구에게까지 주장할 수 있는가입니다. 이 네 질문만 익숙해져도 매매, 증여, 상속, 경매, 수용, 시효취득 문제를 훨씬 쉽게 읽을 수 있습니다.",
+          "권리변동은 늘 원인, 절차, 효과의 순서로 이해해야 합니다. 예를 들어 집을 파는 계약을 했다고 해서 곧바로 집주인이 바뀌는 것은 아닙니다. 계약은 ‘넘겨주겠다’는 약속을 만들고, 등기는 ‘이제 진짜 바뀌었다’는 표지판을 세웁니다.",
+          "반대로 상속, 형성판결, 경매, 공용수용처럼 법이 특별히 정한 경우에는 등기 없이도 권리변동이 생길 수 있습니다. 따라서 시험에서는 ‘원칙은 등기, 예외는 법률의 특별규정’이라는 큰 틀을 먼저 잡아야 합니다.",
+        ],
+        image: {
+          src: "assets/civil-rights-change-chapter1.png",
+          alt: "제1장 권리변동 설명 이미지",
+          caption: "집은 그대로 있어도 소유권, 사용권, 담보권 같은 권리가 움직이면 권리변동이 일어납니다.",
+        },
+        cards: [
+          { label: "발생", title: "없던 권리가 새로 생김", body: "매매계약으로 대금지급청구권이 생기거나, 저당권 설정으로 담보권이 생기는 경우입니다." },
+          { label: "변경", title: "권리의 주체ㆍ내용ㆍ범위가 달라짐", body: "채권자가 바뀌거나, 갚는 날짜가 연장되거나, 담보 범위가 달라지는 경우입니다." },
+          { label: "이전", title: "권리가 다른 사람에게 넘어감", body: "소유권이 매도인에서 매수인에게 옮겨 가거나, 상속으로 재산권이 승계되는 경우입니다." },
+          { label: "소멸", title: "있던 권리가 없어짐", body: "채무를 갚아 저당권이 사라지거나, 목적물이 없어져 사용권이 소멸하는 경우입니다." },
+        ],
+        table: {
+          headers: ["권리변동 원인", "쉬운 뜻", "대표 사례"],
+          rows: [
+            ["법률행위", "사람의 의사표시로 법률효과를 만드는 경우", "매매, 증여, 계약, 유언"],
+            ["법률의 규정", "법이 직접 권리변동을 일으키는 경우", "상속, 시효취득, 부합, 혼동"],
+            ["판결ㆍ재판", "법원의 판단으로 법률관계가 바뀌는 경우", "형성판결, 공유물분할판결"],
+            ["행정처분ㆍ공권력", "국가 작용으로 권리관계가 바뀌는 경우", "압류, 경매, 공매, 수용"],
+            ["공시행위", "바뀐 권리를 밖으로 드러내는 장치", "등기, 인도, 통지"],
+          ],
+        },
+        items: [
+          "계약은 안쪽의 약속, 등기는 바깥쪽의 표지판입니다.",
+          "부동산 매매는 원칙적으로 소유권이전등기까지 보아야 합니다.",
+          "상속ㆍ형성판결ㆍ경매ㆍ수용은 등기 없는 권리변동 예외와 연결됩니다.",
+          "가등기는 순위보전이지, 물권변동이 가등기 시로 소급하는 것은 아닙니다.",
+          "부동산 점유취득시효는 시간뿐 아니라 등기 절차까지 함께 확인해야 합니다.",
+        ],
+      },
+    ],
     diagramSteps: ["원인 발생: 매매, 상속, 판결, 경매, 수용", "절차 확인: 등기, 인도, 통지, 완납, 수용개시일", "효과 판단: 소유권 취득, 권리 소멸, 제3자 대항"],
     cases: [
       "매매: 계약만으로 끝내지 말고 소유권이전등기까지 보아야 합니다.",
@@ -444,7 +487,7 @@ function makeCivilBeginnerContent() {
   });
 
   const chapters = {
-    "민법의 기초(입문자를 위한 쉬운 민법)": {
+    "민법의 기초": {
       lead: "이 입문 강의는 ‘법률행위란 무엇인가’라는 정의에서 바로 시작하지 않습니다. 집을 샀는데 왜 아직 내 집이 아닐까, 농담과 약속은 왜 다를까 같은 질문에서 출발해 생활사례, 개념, 기출 연결, 실전 적용 순서로 민법을 읽습니다.",
       sections: [
         {
@@ -464,12 +507,12 @@ function makeCivilBeginnerContent() {
         {
           title: "2. 전체 목차",
           paragraphs: [
-            "CHAPTER1은 권리변동, CHAPTER2는 법률행위, CHAPTER3은 법률행위의 종류를 다룹니다. 이어서 채권행위와 물권행위, 요식행위와 불요식행위, 성립요건, 효력요건, 당사자의 능력으로 확장합니다.",
+            "제1장은 권리변동, CHAPTER2는 법률행위, CHAPTER3은 법률행위의 종류를 다룹니다. 이어서 채권행위와 물권행위, 요식행위와 불요식행위, 성립요건, 효력요건, 당사자의 능력으로 확장합니다.",
           ],
           table: {
             headers: ["장", "출발 질문", "핵심 개념"],
             rows: [
-              ["CHAPTER1", "집을 샀는데 왜 아직 내 집이 아닐까?", "권리변동, 등기, 공시"],
+              ["제1장", "집을 샀는데 왜 아직 내 집이 아닐까?", "권리변동, 등기, 공시"],
               ["CHAPTER2", "이 자전거 줄게, 왜 어떤 말은 법이 될까?", "법률행위, 의사표시, 법률효과"],
               ["CHAPTER3", "혼자 한 말과 서로 한 약속은 무엇이 다를까?", "단독행위, 계약, 합동행위"],
               ["CHAPTER4", "약속과 권리이전은 같은 일일까?", "채권행위, 물권행위"],
@@ -485,7 +528,7 @@ function makeCivilBeginnerContent() {
       examPoints: ["정의를 외우기 전에 사례의 권리관계를 먼저 찾습니다.", "각 장의 확인문제는 개념 구분용으로 활용합니다.", "기존 민법총칙 강의와 함께 보면 법률행위 단원이 쉬워집니다."],
       practice: ["각 장의 첫 질문에 스스로 답해 봅니다.", "생활사례를 권리의 발생ㆍ변경ㆍ소멸로 바꾸어 말합니다.", "확인문제의 오답 이유를 한 줄로 적습니다."],
     },
-    "CHAPTER1. 권리변동이란 무엇인가?": chapter1,
+    "제1장 권리변동이란 무엇인가": chapter1,
     "CHAPTER2. 법률행위란 무엇인가?": makeBeginnerChapter({
       lead: "사람이 어떤 말을 하거나 계약서를 쓰면, 왜 법이 그 말에 힘을 실어 줄까요? 법률행위는 당사자가 일정한 법률효과를 바라며 의사를 표시하고, 법이 그 의사에 맞추어 권리와 의무의 변화를 인정하는 행위입니다.",
       story: [
@@ -694,8 +737,9 @@ function makeCivilBeginnerContent() {
 function makeBeginnerChapter(config) {
   return {
     lead: config.lead,
-    heroImage: config.image || null,
+    heroImage: config.heroImage === undefined ? config.image || null : config.heroImage,
     sections: [
+      ...(config.leadingSections || []),
       { title: "1. 이야기(실제사례)", paragraphs: config.story },
       { title: "2. 개념", paragraphs: config.concept },
       {
@@ -706,7 +750,7 @@ function makeBeginnerChapter(config) {
       {
         title: "4. 그림",
         paragraphs: ["이 장의 흐름을 그림처럼 떠올리면 긴 선택지도 짧은 순서 문제로 바뀝니다."],
-        image: config.image,
+        image: config.sectionImage === undefined ? config.image : config.sectionImage,
         steps: config.diagramSteps,
       },
       { title: "5. 생활 속 사례", paragraphs: ["추상적인 개념은 생활 장면에 붙이면 훨씬 쉽게 이해됩니다."], items: config.cases },
@@ -5454,7 +5498,7 @@ function renderLessonInfographic(lesson, mode = "detail") {
   const concepts = (lesson.concepts || []).slice(0, 3);
   const labels = concepts.length ? concepts : [lesson.title, lesson.groupTitle, lesson.part.shortTitle];
   const detailCaption =
-    lesson.part.slug === "civil" && lesson.groupTitle === "민법의 기초(입문자를 위한 쉬운 민법)"
+    lesson.part.slug === "civil" && lesson.groupTitle === "민법의 기초"
       ? `${lesson.title} 강의는 질문, 생활사례, 개념, 기출 연결을 한 흐름으로 이해하도록 구성했습니다.`
       : `${lesson.title}${topicParticle(lesson.title)} 개념 정의에서 사례 판단, 시험 선택지 검토까지 한 흐름으로 이해하면 기억이 오래갑니다.`;
   const caption =
@@ -5512,12 +5556,12 @@ function makeDeepDiveParagraphs(lesson) {
   const examGuide = examText
     ? `기출형 선택지에서는 ${examText}처럼 주체, 요건, 효과 중 하나만 바꾸는 방식이 자주 쓰입니다. 따라서 정답을 고른 뒤에도 틀린 선택지가 왜 틀렸는지 한 줄로 적어 두는 것이 좋습니다.`
     : "기출형 선택지는 주체, 요건, 절차, 효과 중 하나만 바꾸는 방식이 많습니다. 정답을 고른 뒤에도 틀린 선택지의 오답 이유를 한 줄로 적어 보세요.";
-  if (lesson.part.slug === "civil" && lesson.groupTitle === "민법의 기초(입문자를 위한 쉬운 민법)") {
-    if (lesson.title === "민법의 기초(입문자를 위한 쉬운 민법)") {
+  if (lesson.part.slug === "civil" && lesson.groupTitle === "민법의 기초") {
+    if (lesson.title === "민법의 기초") {
       return [
         "이 과정은 민법을 처음 접하는 학습자가 생활 장면에서 법 개념으로 자연스럽게 이동하도록 만든 입문 강의입니다. 먼저 질문을 던지고, 이야기로 상황을 잡은 뒤, 개념과 기출 연결로 정리합니다.",
         "각 장은 이야기, 생활사례, 개념, 그림, 판례, 시험 포인트, 확인문제로 이어집니다. 정의를 먼저 외우기보다 사례 속에서 누가 어떤 권리를 얻고 잃는지 찾는 연습을 하도록 구성했습니다.",
-        "CHAPTER1에서는 권리변동을 원인, 절차, 효과로 나누어 읽고, CHAPTER2부터는 법률행위와 의사표시가 어떻게 권리변동으로 이어지는지 살펴봅니다. 이후 법률행위의 종류, 채권행위와 물권행위, 요식행위, 성립요건, 효력요건, 당사자의 능력으로 확장합니다.",
+        "제1장에서는 권리변동을 원인, 절차, 효과로 나누어 읽고, CHAPTER2부터는 법률행위와 의사표시가 어떻게 권리변동으로 이어지는지 살펴봅니다. 이후 법률행위의 종류, 채권행위와 물권행위, 요식행위, 성립요건, 효력요건, 당사자의 능력으로 확장합니다.",
         "공부할 때는 각 장의 첫 질문에 먼저 자기 말로 답해 보세요. 그런 다음 확인문제에서 오답 이유를 한 줄로 적으면 기출 선택지를 읽는 힘이 훨씬 빨리 붙습니다.",
       ];
     }
