@@ -299,6 +299,42 @@ const civilLessonSlugs = {
   "부동산 상속 등기의 방법과 유의점": "lecture-civil-21",
 };
 
+const lessonProblemTitles = new Set([
+  "제1장 법률행위",
+  "물권과 채권의 구분, 물건의 종류",
+  "제2장 물권변동",
+  "제3장 점유권",
+  "제4장 소유권",
+  "제6장 담보물권",
+  "제7장 지상권",
+  "제8장 지역권",
+  "제9장 전세권",
+  "상속법",
+  "국토계획법의 목적과 계획체계",
+  "용도지역ㆍ용도지구ㆍ용도구역과 토지이용계획",
+  "부동산공시법",
+  "농지법",
+  "공간정보의 구축 및 관리 등에 관한 법률",
+  "토지보상법의 기초",
+  "보상 절차",
+  "손실보상 기준과 산정",
+]);
+
+const legacyLessonRedirects = [
+  ["lecture-civil-05.html", "lecture-civil-04.html", "물권법"],
+  ["lecture-civil-06.html", "lecture-civil-usufruct.html", "제5장 용익물권"],
+  ["lecture-civil-07.html", "lecture-civil-security.html", "제6장 담보물권"],
+  ["lecture-civil-08.html", "lecture-civil-property-change.html", "제2장 물권변동"],
+  ["lecture-civil-09.html", "lecture-civil-property-change.html", "제2장 물권변동"],
+  ["lecture-civil-10.html", "lecture-civil-property-change.html", "제2장 물권변동"],
+  ["lecture-civil-11.html", "lecture-civil-possession.html", "제3장 점유권"],
+  ["lecture-civil-12.html", "lecture-civil-possession.html", "제3장 점유권"],
+  ["lecture-civil-13.html", "lecture-civil-possession.html", "제3장 점유권"],
+  ["lecture-civil-14.html", "lecture-civil-04.html", "물권법"],
+  ["lecture-civil-15.html", "lecture-civil-04.html", "물권법"],
+  ["lecture-civil-16.html", "lecture-civil-04.html", "물권법"],
+];
+
 const civilGeneralContent = {
   민법총칙: {
     lead: "민법총칙은 민법 전체에 공통으로 적용되는 기본 규칙입니다. 법률행위, 대리, 무효와 취소, 조건과 기한을 먼저 잡아야 물권ㆍ채권ㆍ상속 단원에서 권리 변동을 정확히 읽을 수 있습니다.",
@@ -4214,8 +4250,9 @@ writePage("lecture.html", renderLectureHome());
 for (const page of introPages) writePage(`${page.slug}.html`, renderIntroPage(page));
 for (const part of parts) writePage(part.hub, renderPartHub(part));
 for (const lesson of lessonPages) writePage(`${lesson.slug}.html`, renderLessonPage(lesson));
+for (const [file, href, title] of legacyLessonRedirects) writePage(file, renderLegacyLessonRedirect(href, title));
 
-console.log(JSON.stringify({ generated: 1 + introPages.length + parts.length + lessonPages.length }, null, 2));
+console.log(JSON.stringify({ generated: 1 + introPages.length + parts.length + lessonPages.length + legacyLessonRedirects.length }, null, 2));
 
 function buildLesson(part, item) {
   const { title, index, groupIndex, groupTitle, groupChildren, isGroupParent } = item;
@@ -5314,12 +5351,14 @@ function renderLessonStudyDock(lesson, mode = "detail") {
 }
 
 function renderSampleProblems(lesson, count = 2, mode = "detail") {
+  if (!shouldShowSampleProblems(lesson)) return "";
   const problems = makeSampleProblems(lesson).slice(0, count);
+  if (!problems.length) return "";
   return `<section class="lesson-sample-problems ${mode === "classroom" ? "compact" : ""}" aria-label="${escapeHtml(lesson.title)} 예시 문제풀이">
             <div class="lesson-problem-heading">
-              <p class="eyebrow">Past Exam Style</p>
-              <h2>과년도 유사 예시 문제풀이</h2>
-              <p>실제 기출에서 반복된 출제 포인트를 같은 구조의 예상문제로 바꾸어 정리했습니다.</p>
+              <p class="eyebrow">Check Point</p>
+              <h2>이해 확인 문제</h2>
+              <p>이 단원에서 헷갈리기 쉬운 개념만 골라 사례형 문제로 확인합니다.</p>
             </div>
             <div class="lesson-problem-grid">
               ${problems
@@ -5341,33 +5380,144 @@ function renderSampleProblems(lesson, count = 2, mode = "detail") {
           </section>`;
 }
 
+function shouldShowSampleProblems(lesson) {
+  return lessonProblemTitles.has(lesson.title);
+}
+
 function makeSampleProblems(lesson) {
   if (lesson.part.slug === "civil") return makeCivilSampleProblems(lesson);
   if (lesson.part.slug === "real-estate") return makeRealEstateSampleProblems(lesson);
   if (lesson.part.slug === "compensation-law") return makeCompensationSampleProblems(lesson);
-  return [
-    {
-      source: "단원 복습 유사 유형",
-      stem: `${lesson.title} 학습법으로 가장 적절한 것은?`,
-      choices: ["법령명만 암기하고 사례 적용은 생략한다.", "핵심어, 요건, 효과를 나누어 정리한다.", "틀린 선택지는 다시 보지 않는다.", "조문과 절차를 구분하지 않는다."],
-      answer: 2,
-      explanation: "보충 단원은 핵심어를 줄이고, 요건과 효과를 구분한 뒤 문제풀이에 연결하는 방식으로 활용해야 합니다.",
-    },
-  ];
+  return [];
 }
 
 function makeCivilSampleProblems(lesson) {
+  const directProblems = {
+    "물권과 채권의 구분, 물건의 종류": [
+      {
+        source: "개념 구분",
+        stem: "A가 B에게 토지를 팔기로 계약했지만 아직 소유권이전등기를 하지 않았다. 이때 A에 대한 B의 지위로 가장 적절한 것은?",
+        choices: ["토지 소유권을 이미 취득한 물권자", "소유권이전등기를 청구할 수 있는 채권자", "토지를 점유하지 않아 아무 권리도 없는 사람", "저당권을 취득한 담보권자"],
+        answer: 2,
+        explanation: "부동산 매매계약만으로 곧바로 소유권이라는 물권이 이전되는 것은 아닙니다. 매수인은 매도인에게 소유권이전등기를 청구할 채권적 지위를 가집니다.",
+      },
+      {
+        source: "사례 판단",
+        stem: "다음 중 물권에 가장 가까운 것은?",
+        choices: ["매매대금을 달라고 요구하는 권리", "임대차계약에 따라 차임을 청구하는 권리", "등기된 저당권", "계약 위반으로 손해배상을 청구하는 권리"],
+        answer: 3,
+        explanation: "저당권은 특정 부동산의 교환가치를 직접 지배하는 담보물권입니다. 나머지는 특정 상대방에게 급부를 청구하는 채권입니다.",
+      },
+    ],
+    "제2장 물권변동": [
+      {
+        source: "절차 이해",
+        stem: "부동산 매매로 소유권을 이전하려는 경우, 물권변동의 효력이 원칙적으로 완성되는 시점은?",
+        choices: ["매매 의사를 마음속으로 정한 때", "매매계약서에 서명한 때", "매매대금을 일부 지급한 때", "소유권이전등기를 마친 때"],
+        answer: 4,
+        explanation: "법률행위로 인한 부동산 물권변동은 원칙적으로 등기해야 효력이 생깁니다. 계약과 등기는 서로 다른 단계입니다.",
+      },
+      {
+        source: "예외 확인",
+        stem: "다음 중 등기 없이도 물권변동이 발생할 수 있는 경우로 볼 수 있는 것은?",
+        choices: ["일반적인 토지 매매", "저당권 설정계약", "상속으로 인한 권리 취득", "전세권 설정계약"],
+        answer: 3,
+        explanation: "상속, 경매, 공용수용처럼 법률규정에 의한 물권변동은 등기 없이 발생할 수 있습니다. 다만 처분하려면 등기 정리가 필요합니다.",
+      },
+    ],
+    "제4장 소유권": [
+      {
+        source: "권능 구분",
+        stem: "소유권의 권능을 설명한 것으로 가장 적절한 것은?",
+        choices: ["사용은 물건을 직접 이용하는 권능이다.", "수익은 물건을 팔아 권리를 없애는 권능만 말한다.", "처분은 물건에서 임대료를 얻는 권능만 말한다.", "소유권은 공익상 제한을 전혀 받지 않는다."],
+        answer: 1,
+        explanation: "소유권은 사용ㆍ수익ㆍ처분 권능을 포함합니다. 사용은 직접 이용, 수익은 이익 취득, 처분은 매매ㆍ증여ㆍ담보 제공처럼 권리를 이전하거나 변경하는 권능입니다.",
+      },
+      {
+        source: "보상 연결",
+        stem: "공익사업으로 토지가 수용될 때 소유권 단원과 가장 직접적으로 연결되는 질문은?",
+        choices: ["누가 토지소유자로서 보상금 귀속의 출발점이 되는가", "건축물의 색채가 도시미관에 맞는가", "공인중개사의 중개보수가 얼마인가", "사업시행자의 홍보자료가 충분한가"],
+        answer: 1,
+        explanation: "토지보상에서는 먼저 소유자가 누구인지 확인해야 합니다. 다만 저당권자, 전세권자, 임차인 등 관계인도 함께 검토합니다.",
+      },
+    ],
+    "제6장 담보물권": [
+      {
+        source: "비교 확인",
+        stem: "유치권, 질권, 저당권의 구분으로 가장 적절한 것은?",
+        choices: ["유치권은 등기로만 성립한다.", "질권은 목적물 인도가 중요한 약정담보물권이다.", "저당권은 채권자가 반드시 목적물을 점유해야 한다.", "세 권리는 모두 동일한 성립요건을 가진다."],
+        answer: 2,
+        explanation: "질권은 질권설정계약과 목적물 인도가 중요합니다. 유치권은 법정담보물권, 저당권은 점유 이전 없이 등기로 담보를 설정하는 권리입니다.",
+      },
+      {
+        source: "등기부 판단",
+        stem: "은행이 주택을 담보로 대출해 주면서 채무자가 계속 그 주택에 살도록 한 경우, 가장 가까운 담보물권은?",
+        choices: ["유치권", "질권", "저당권", "지역권"],
+        answer: 3,
+        explanation: "저당권은 목적물을 채권자에게 넘기지 않고 등기로 담보를 설정합니다. 채무자는 목적물을 계속 사용하면서도 채권자는 교환가치를 담보로 확보합니다.",
+      },
+    ],
+    "제7장 지상권": [
+      {
+        source: "권리 목적",
+        stem: "지상권이 문제되는 사례로 가장 적절한 것은?",
+        choices: ["남의 토지 위에 창고를 소유하기 위해 토지를 사용하는 경우", "전세금을 지급하고 아파트에 거주하는 경우", "수리비를 받을 때까지 자동차를 보관하는 경우", "내 토지의 통행을 위해 이웃 토지를 지나가는 경우"],
+        answer: 1,
+        explanation: "지상권은 타인의 토지를 이용해 건물ㆍ공작물ㆍ수목을 소유하기 위한 권리입니다. 전세권, 유치권, 지역권과 목적을 구분해야 합니다.",
+      },
+      {
+        source: "임차권 비교",
+        stem: "지상권과 임차권을 구분하는 기준으로 가장 적절한 것은?",
+        choices: ["지상권은 물권이고 임차권은 원칙적으로 채권이다.", "지상권은 언제나 무상이고 임차권은 언제나 유상이다.", "지상권은 건물을 소유할 수 없고 임차권은 반드시 건물을 소유한다.", "두 권리는 등기 여부와 관계없이 항상 같은 효력을 가진다."],
+        answer: 1,
+        explanation: "지상권은 물권이므로 등기되면 제3자에게 강하게 주장할 수 있습니다. 임차권은 기본적으로 채권관계이고 대항요건을 별도로 봅니다.",
+      },
+    ],
+    "제8장 지역권": [
+      {
+        source: "용어 확인",
+        stem: "지역권에서 편익을 얻는 토지와 부담을 지는 토지의 연결로 옳은 것은?",
+        choices: ["요역지: 부담을 지는 토지, 승역지: 편익을 얻는 토지", "요역지: 편익을 얻는 토지, 승역지: 부담을 지는 토지", "요역지와 승역지는 모두 사람을 뜻한다.", "지역권에는 요역지와 승역지 개념이 없다."],
+        answer: 2,
+        explanation: "요역지는 지역권으로 편익을 얻는 토지이고, 승역지는 그 이용을 받아들이는 부담 토지입니다.",
+      },
+      {
+        source: "구별 판단",
+        stem: "지역권 설명으로 가장 적절한 것은?",
+        choices: ["단순히 사람이 편리하면 언제나 지역권이 성립한다.", "지역권은 자기 토지의 편익을 위해 타인의 토지를 이용하는 권리이다.", "지역권은 전세금을 보호하기 위한 담보권이다.", "지역권은 동산을 맡기고 돈을 빌릴 때 성립한다."],
+        answer: 2,
+        explanation: "지역권은 토지와 토지 사이의 편익 관계에 초점이 있습니다. 통행지역권, 용수지역권처럼 이용 목적을 구체적으로 봅니다.",
+      },
+    ],
+    "제9장 전세권": [
+      {
+        source: "임대차 비교",
+        stem: "전세권에 관한 설명으로 가장 적절한 것은?",
+        choices: ["전세권은 등기된 물권이라는 점에서 임대차와 구별된다.", "전세권은 전세금을 지급하지 않아도 언제나 성립한다.", "전세권자는 목적 부동산의 소유권을 취득한다.", "전세권은 동산을 담보로 맡기는 권리이다."],
+        answer: 1,
+        explanation: "전세권은 전세금을 지급하고 타인의 부동산을 사용ㆍ수익하는 물권입니다. 등기가 핵심이고 임대차와 구별해야 합니다.",
+      },
+      {
+        source: "담보 기능",
+        stem: "전세권의 담보적 성격을 보여 주는 설명으로 가장 적절한 것은?",
+        choices: ["전세권자는 전세금 반환이 지체되면 경매청구와 우선변제를 검토할 수 있다.", "전세권자는 언제나 토지를 마음대로 매각할 수 있다.", "전세권은 요역지와 승역지의 관계만 문제된다.", "전세권은 점유가 없어도 동산질권처럼 성립한다."],
+        answer: 1,
+        explanation: "전세권은 사용ㆍ수익 권리이면서 전세금 반환을 담보하는 기능도 있습니다. 그래서 용익물권과 담보 기능을 함께 이해해야 합니다.",
+      },
+    ],
+  };
+  if (directProblems[lesson.title]) return directProblems[lesson.title];
   if (lesson.title.includes("등기")) {
     return [
       {
-        source: "2018ㆍ2022 민법 반복 포인트 변형",
+        source: "개념 확인",
         stem: "부동산 물권변동과 등기에 관한 설명으로 옳은 것은?",
         choices: ["부동산 소유권 이전은 원칙적으로 등기 없이도 물권변동 효력이 생긴다.", "등기는 권리관계를 외부에 알리는 공시 기능을 가진다.", "가등기는 언제나 본등기와 같은 완전한 물권변동 효력을 가진다.", "말소등기는 새로운 소유권을 창설하는 등기이다."],
         answer: 2,
         explanation: "부동산 물권변동은 원칙적으로 등기가 있어야 효력이 생기며, 등기는 권리관계를 외부에 알리는 공시 기능을 합니다. 가등기는 주로 순위보전 기능으로 이해합니다.",
       },
       {
-        source: "과년도 등기 선택지 유사 유형",
+        source: "등기 종류 확인",
         stem: "다음 중 등기의 종류와 기능 연결이 가장 적절한 것은?",
         choices: ["이전등기: 기존 권리의 소멸만 표시", "말소등기: 새로운 담보권 설정", "보존등기: 미등기 부동산에 최초 권리관계 표시", "변경등기: 등기부 자체를 폐쇄"],
         answer: 3,
@@ -5378,14 +5528,14 @@ function makeCivilSampleProblems(lesson) {
   if (lesson.title.includes("시효") || lesson.title.includes("점유")) {
     return [
       {
-        source: "2018ㆍ2022 취득시효 유사 유형",
+        source: "점유ㆍ시효 확인",
         stem: "부동산 점유취득시효에 관한 설명으로 옳은 것은?",
         choices: ["점유 기간과 관계없이 선의이면 바로 소유권을 취득한다.", "평온ㆍ공연하게 소유의 의사로 일정 기간 점유해야 한다.", "임차인은 언제나 소유의 의사로 점유한다고 본다.", "시효완성만으로 등기 없이 항상 소유권 이전을 주장할 수 있다."],
         answer: 2,
         explanation: "점유취득시효는 소유의 의사, 평온ㆍ공연한 점유, 법정 기간 등 요건을 함께 봅니다. 부동산은 등기 문제까지 연결해 판단해야 합니다.",
       },
       {
-        source: "과년도 점유자 비용상환 변형",
+        source: "비용상환 판단",
         stem: "점유자의 비용상환 문제를 풀 때 먼저 확인할 기준은?",
         choices: ["점유자가 선의인지 악의인지", "목적물이 동산인지 여부만", "매매대금 액수만", "등기부 표제부의 면적만"],
         answer: 1,
@@ -5396,14 +5546,14 @@ function makeCivilSampleProblems(lesson) {
   if (lesson.title.includes("공유") || lesson.title.includes("합유") || lesson.title.includes("총유")) {
     return [
       {
-        source: "2018 공유ㆍ합유 반복 포인트 변형",
+        source: "공동소유 비교",
         stem: "공유에 관한 설명으로 옳은 것은?",
         choices: ["공유자는 자기 지분을 원칙적으로 처분할 수 없다.", "공유물의 관리와 처분은 항상 같은 요건으로 결정한다.", "공유자는 지분을 가지며 분할청구가 문제될 수 있다.", "총유는 각 구성원이 독립된 지분을 자유롭게 처분하는 형태이다."],
         answer: 3,
         explanation: "공유는 지분을 전제로 하므로 지분 처분, 관리, 분할 문제가 자주 출제됩니다. 합유ㆍ총유와 지분 처분 가능성을 비교해야 합니다.",
       },
       {
-        source: "과년도 공동소유 비교 유사 유형",
+        source: "개념 구분",
         stem: "합유와 총유를 구분할 때 핵심 기준으로 가장 적절한 것은?",
         choices: ["토지가 농지인지 여부", "공동체 성격과 지분 처분 가능성", "등기소 위치", "건축물 층수"],
         answer: 2,
@@ -5414,14 +5564,14 @@ function makeCivilSampleProblems(lesson) {
   if (lesson.title.includes("상속")) {
     return [
       {
-        source: "상속ㆍ등기 유사 출제 유형",
+        source: "상속 기본 확인",
         stem: "상속에 관한 설명으로 옳은 것은?",
         choices: ["상속은 상속인이 계약서에 서명한 때 비로소 개시된다.", "상속은 피상속인의 사망으로 개시된다.", "유류분은 언제나 상속포기와 같은 의미이다.", "한정승인은 상속재산 전부를 무조건 포기하는 절차이다."],
         answer: 2,
         explanation: "상속은 피상속인의 사망으로 개시됩니다. 상속포기, 한정승인, 유류분, 상속등기는 각각 효과가 다르므로 따로 정리해야 합니다.",
       },
       {
-        source: "보상실무 연결 유사 유형",
+        source: "보상실무 연결",
         stem: "토지소유자가 사망한 뒤 보상협의를 진행할 때 우선 확인할 사항은?",
         choices: ["상속인 범위와 상속분", "사업시행자의 사무실 위치", "토지의 색상", "건축물의 내부 인테리어"],
         answer: 1,
@@ -5432,14 +5582,14 @@ function makeCivilSampleProblems(lesson) {
   if (lesson.title.includes("법률행위") || lesson.title.includes("권리변동")) {
     return [
       {
-        source: "2022 권리변동ㆍ물권변동 포인트 변형",
+        source: "권리변동 확인",
         stem: "권리변동에 관한 설명으로 옳은 것은?",
         choices: ["권리변동은 권리의 발생만 의미하고 변경ㆍ소멸은 포함하지 않는다.", "매매계약은 당사자의 의사표시에 기초한 법률행위의 예이다.", "상속은 언제나 당사자 사이의 계약으로만 발생한다.", "변제는 채권을 발생시키는 원인으로만 작용한다."],
         answer: 2,
         explanation: "권리변동은 발생ㆍ변경ㆍ소멸을 포함합니다. 매매는 의사표시에 기초한 법률행위이고, 상속은 법률규정에 의한 권리변동으로 봅니다.",
       },
       {
-        source: "2018ㆍ2022 민법 총칙 유사 유형",
+        source: "법률행위 구분",
         stem: "다음 중 법률행위의 종류 연결이 가장 적절한 것은?",
         choices: ["매매: 단독행위", "유언: 계약", "채무면제: 단독행위", "사단법인 설립행위: 물권행위가 아닌 사실행위"],
         answer: 3,
@@ -5449,14 +5599,14 @@ function makeCivilSampleProblems(lesson) {
   }
   return [
     {
-      source: "2018ㆍ2022 민법 기본개념 변형",
+      source: "민법 기본개념 확인",
       stem: `${lesson.title}에 관한 설명으로 가장 적절한 것은?`,
       choices: ["민법상 권리는 주체와 객체를 나누어 읽어야 한다.", "물권과 채권은 항상 같은 효력을 가진다.", "부동산 권리관계에서 등기와 점유는 고려하지 않는다.", "보상사례에서는 민법상 권리관계가 필요 없다."],
       answer: 1,
       explanation: "민법 문제는 권리의 주체, 객체, 효력, 공시수단을 나누어 읽어야 합니다. 보상사례에서도 소유자와 관계인을 확정하는 기초가 됩니다.",
     },
     {
-      source: "보상관리사 민법 유사 유형",
+      source: "보상사례 연결",
       stem: "보상사례에서 민법 지식이 필요한 이유로 가장 적절한 것은?",
       choices: ["보상금 지급 대상자와 권리관계를 판단하기 위해서", "토지보상법 조문을 모두 생략하기 위해서", "건축물 디자인을 평가하기 위해서", "세무신고만 처리하기 위해서"],
       answer: 1,
@@ -5466,16 +5616,99 @@ function makeCivilSampleProblems(lesson) {
 }
 
 function makeRealEstateSampleProblems(lesson) {
+  const directProblems = {
+    "국토계획법의 목적과 계획체계": [
+      {
+        source: "계획체계 확인",
+        stem: "국토계획법상 도시ㆍ군계획의 설명으로 가장 적절한 것은?",
+        choices: ["도시ㆍ군기본계획은 장기 방향을 제시하고, 도시ㆍ군관리계획은 구체적 개발ㆍ보전 계획을 담는다.", "도시ㆍ군관리계획은 토지 이용과 전혀 관련이 없다.", "광역도시계획은 한 필지의 건축허가만 정하는 계획이다.", "기본계획과 관리계획은 명칭만 다르고 기능은 완전히 같다."],
+        answer: 1,
+        explanation: "기본계획은 장기적 지침, 관리계획은 용도지역ㆍ지구ㆍ구역 지정과 기반시설 등 구체적 실행 계획으로 이해합니다.",
+      },
+      {
+        source: "절차 이해",
+        stem: "도시ㆍ군관리계획을 공부할 때 함께 확인할 내용으로 가장 적절한 것은?",
+        choices: ["용도지역ㆍ용도지구ㆍ용도구역 지정 여부", "토지소유자의 취미", "건축물 실내 가구 배치", "부동산 광고 문구"],
+        answer: 1,
+        explanation: "도시ㆍ군관리계획은 토지 이용의 구체적 제한과 연결됩니다. 용도지역ㆍ지구ㆍ구역, 기반시설, 지구단위계획 등을 함께 봅니다.",
+      },
+    ],
+    "용도지역ㆍ용도지구ㆍ용도구역과 토지이용계획": [
+      {
+        source: "분류 확인",
+        stem: "용도지역, 용도지구, 용도구역의 구분으로 가장 적절한 것은?",
+        choices: ["용도지역은 토지의 기본 용도 구분이다.", "용도지구는 언제나 용도지역보다 넓은 광역 규제만 뜻한다.", "용도구역은 개별 건축물 내부 구조만 정한다.", "세 개념은 법적으로 구별할 필요가 없다."],
+        answer: 1,
+        explanation: "용도지역은 기본 틀, 용도지구는 그 제한의 보완ㆍ강화 또는 완화, 용도구역은 광역적 개발 제한ㆍ보전 목적의 규제로 정리하면 쉽습니다.",
+      },
+      {
+        source: "실무 확인",
+        stem: "토지를 사거나 개발하기 전에 토지이용계획을 확인해야 하는 이유로 가장 적절한 것은?",
+        choices: ["한 필지에 여러 규제가 동시에 적용될 수 있기 때문이다.", "용도지역은 거래 후에만 알 수 있기 때문이다.", "토지이용계획은 건축 가능성과 무관하기 때문이다.", "규제 정보는 등기부에 절대 표시되지 않기 때문이다."],
+        answer: 1,
+        explanation: "하나의 토지에는 용도지역, 지구, 구역, 개별 법령상 제한이 함께 적용될 수 있습니다. 토지이음 등으로 미리 확인해야 합니다.",
+      },
+    ],
+    부동산공시법: [
+      {
+        source: "공시 구조 확인",
+        stem: "부동산공시법을 공부할 때 가장 먼저 나누어 볼 축은?",
+        choices: ["지적공부와 등기, 가격공시", "토지 색상과 건물 외관", "중개업소의 위치와 간판", "세대 구성원의 직업"],
+        answer: 1,
+        explanation: "부동산공시법은 토지 표시를 정리하는 지적제도, 권리관계를 공시하는 등기, 가격공시 제도를 나누어 보면 이해가 쉽습니다.",
+      },
+      {
+        source: "권리공시 확인",
+        stem: "부동산 등기제도의 기능으로 가장 적절한 것은?",
+        choices: ["소유권ㆍ저당권 등 권리관계를 외부에서 확인하게 한다.", "건축물의 색상을 정한다.", "농지전용허가를 자동으로 대신한다.", "사업인정 절차를 생략하게 한다."],
+        answer: 1,
+        explanation: "등기는 소유권, 저당권, 전세권 등 권리관계를 공시하여 거래 안전과 권리순위 판단에 도움을 줍니다.",
+      },
+    ],
+    농지법: [
+      {
+        source: "적용대상 확인",
+        stem: "농지법 문제를 풀 때 가장 먼저 확인할 사항은?",
+        choices: ["해당 토지가 법상 농지인지 여부", "토지소유자의 나이", "건물의 창문 개수", "주변 도로의 차선 색상"],
+        answer: 1,
+        explanation: "농지법은 먼저 해당 토지가 법상 농지인지 확인해야 합니다. 그 다음 소유ㆍ이용 요건과 전용허가 여부를 봅니다.",
+      },
+      {
+        source: "전용 규제 확인",
+        stem: "농지를 주택지나 공장용지로 바꾸어 사용하려는 경우 주로 문제되는 절차는?",
+        choices: ["농지전용허가 또는 협의", "전세권 설정등기", "유류분 반환청구", "점유취득시효"],
+        answer: 1,
+        explanation: "농지를 농업 외 용도로 사용하려면 농지전용허가 등 전용 규제가 문제됩니다. 농업진흥지역과 농지보전부담금도 함께 확인합니다.",
+      },
+    ],
+    "공간정보의 구축 및 관리 등에 관한 법률": [
+      {
+        source: "지적공부 확인",
+        stem: "공간정보법과 보상실무가 연결되는 지점으로 가장 적절한 것은?",
+        choices: ["토지의 지번, 지목, 경계, 면적을 확인하는 지적공부", "전세금 반환청구", "상속포기 신고", "건물 내부 인테리어 평가"],
+        answer: 1,
+        explanation: "보상 대상 토지를 특정하려면 지번, 지목, 경계, 면적 등 지적정보가 중요합니다. 지적공부와 지적측량을 함께 봅니다.",
+      },
+      {
+        source: "경계 판단",
+        stem: "보상 대상 토지의 실제 경계와 공부상 경계가 다투어질 때 연결되는 주제는?",
+        choices: ["지적측량과 경계 정정", "유치권 반환거절", "전세권 경매청구", "법정상속분 계산만"],
+        answer: 1,
+        explanation: "토지 경계와 면적은 보상 대상 확정에 직접 영향을 줍니다. 지적측량, 토지이동, 경계ㆍ면적 정정 절차를 확인해야 합니다.",
+      },
+    ],
+  };
+  if (directProblems[lesson.title]) return directProblems[lesson.title];
   return [
     {
-      source: "최근 5개년 관계법규 유사 유형",
+      source: "관계법규 기본 확인",
       stem: `${lesson.title} 문제를 풀 때 가장 먼저 확인할 사항은?`,
       choices: ["법률상 정의와 적용 대상", "수험생의 거주지", "토지 색상", "사업시행자의 홍보문구"],
       answer: 1,
       explanation: "관계법규 문제는 정의, 적용 대상, 허가권자, 제한 효과를 먼저 잡아야 선택지의 주체ㆍ절차 바꾸기를 걸러낼 수 있습니다.",
     },
     {
-      source: "보상평가 연결 유사 유형",
+      source: "보상평가 연결",
       stem: "부동산 관계법규가 보상실무와 연결되는 이유로 옳은 것은?",
       choices: ["토지의 이용가능성과 법적 제한이 가치 판단에 영향을 주기 때문이다.", "모든 토지는 법적 제한 없이 동일하게 이용되기 때문이다.", "등기부를 볼 필요가 없어지기 때문이다.", "공익사업 절차를 생략할 수 있기 때문이다."],
       answer: 1,
@@ -5485,16 +5718,67 @@ function makeRealEstateSampleProblems(lesson) {
 }
 
 function makeCompensationSampleProblems(lesson) {
+  const directProblems = {
+    "토지보상법의 기초": [
+      {
+        source: "기본 구조 확인",
+        stem: "토지보상법을 처음 공부할 때 가장 먼저 잡아야 할 구조는?",
+        choices: ["공익사업, 권리자, 절차, 보상기준", "건축물의 외관 디자인", "토지소유자의 취미", "중개보수 계산만"],
+        answer: 1,
+        explanation: "토지보상법은 공익사업인지, 누가 권리자인지, 어떤 절차를 거치는지, 무엇을 어떻게 보상하는지를 한 흐름으로 봅니다.",
+      },
+      {
+        source: "사업인정 이해",
+        stem: "사업인정 절차가 중요한 이유로 가장 적절한 것은?",
+        choices: ["공익사업으로 토지를 취득하거나 수용할 수 있는 법적 기초와 연결되기 때문이다.", "모든 협의 절차를 생략하기 위해서이다.", "상속분을 자동으로 계산하기 위해서이다.", "건축허가 면적을 정하기 위해서이다."],
+        answer: 1,
+        explanation: "사업인정은 공익사업의 필요성과 범위를 확정하고 이후 재결ㆍ수용 절차의 기초가 됩니다.",
+      },
+    ],
+    "보상 절차": [
+      {
+        source: "절차 순서 확인",
+        stem: "보상 절차를 공부할 때 가장 적절한 흐름은?",
+        choices: ["사전조사 → 보상계획 공고 → 협의 → 재결 → 수용개시일", "재결 → 사전조사 → 협의 → 보상계획 공고", "수용개시일 → 사업인정 전 협의 생략", "보상금 지급 후에 처음 사업인정"],
+        answer: 1,
+        explanation: "절차형 문제는 순서가 핵심입니다. 사전조사, 보상계획, 협의, 재결, 수용개시일을 시간표처럼 연결하세요.",
+      },
+      {
+        source: "수용개시일 확인",
+        stem: "수용개시일에 관한 설명으로 가장 적절한 것은?",
+        choices: ["재결에서 정한 수용개시일은 권리 변동과 연결되는 중요한 기준일이다.", "수용개시일은 아무 법적 효과가 없다.", "수용개시일은 토지소유자가 임의로 정한다.", "수용개시일은 항상 보상계획 공고 전이다."],
+        answer: 1,
+        explanation: "수용개시일은 소유권 등 권리 변동과 보상금 지급 관계를 이해하는 데 중요한 기준입니다.",
+      },
+    ],
+    "손실보상 기준과 산정": [
+      {
+        source: "보상대상 분류",
+        stem: "손실보상 기준을 적용하기 전에 가장 먼저 할 일은?",
+        choices: ["보상 대상이 토지, 물건, 영업, 이주, 잔여지 중 무엇인지 분류한다.", "사업시행자의 홍보자료를 평가한다.", "토지소유자의 직업을 먼저 본다.", "등기부를 보지 않고 보상액만 외운다."],
+        answer: 1,
+        explanation: "보상 대상에 따라 평가 기준과 필요한 자료가 달라집니다. 토지, 건물ㆍ입목 등 물건, 영업손실, 이주대책, 잔여지 보상을 먼저 나누어야 합니다.",
+      },
+      {
+        source: "잔여지 판단",
+        stem: "공익사업에 일부 토지만 편입되고 남은 토지의 가치나 이용이 현저히 곤란해지는 경우 연결되는 주제는?",
+        choices: ["잔여지 보상 또는 매수청구", "전세권 설정", "유언의 방식", "채무면제"],
+        answer: 1,
+        explanation: "일부 편입 후 남은 토지가 종래 목적대로 이용하기 어려워지는 경우 잔여지 보상이나 매수청구 문제가 연결됩니다.",
+      },
+    ],
+  };
+  if (directProblems[lesson.title]) return directProblems[lesson.title];
   return [
     {
-      source: "토지보상법 절차형 유사 유형",
+      source: "절차형 확인",
       stem: `${lesson.title}와 관련한 절차형 문제의 기본 풀이 순서는?`,
       choices: ["주체와 단계, 기간, 효과를 차례로 확인한다.", "조문 번호만 외우고 절차는 보지 않는다.", "협의와 재결을 같은 단계로 본다.", "수용개시일의 효과를 무시한다."],
       answer: 1,
       explanation: "토지보상법규는 절차 순서가 핵심입니다. 사업시행자, 토지소유자, 관계인, 수용위원회가 어느 단계에서 어떤 권한을 가지는지 확인해야 합니다.",
     },
     {
-      source: "손실보상 기준 유사 유형",
+      source: "손실보상 확인",
       stem: "손실보상 문제에서 가장 먼저 분류해야 할 것은?",
       choices: ["보상 대상이 토지, 물건, 영업, 이주, 잔여지 중 무엇인지", "사업시행자의 나이", "토지소유자의 직업", "감정평가서의 글자 크기"],
       answer: 1,
@@ -5518,7 +5802,7 @@ function partTocTitle(part) {
 
 function partTocDescription(part) {
   if (part.slug === "civil") {
-    return "강의목차에서 단원을 선택하면 오른쪽에 핵심 설명, 아이소메트릭 인포그래픽, 유사기출 풀이가 함께 표시됩니다.";
+    return "강의목차에서 단원을 선택하면 오른쪽에 핵심 설명과 인포그래픽이 표시되고, 꼭 필요한 장에는 이해 확인 문제가 함께 제공됩니다.";
   }
   return "강의목차에서 항목을 선택하면 오른쪽 강의 패널에서 바로 내용을 확인할 수 있습니다.";
 }
@@ -5567,6 +5851,28 @@ function renderLessonPage(lesson) {
             ${prev ? `<a href="${prev.slug}.html">이전: ${prev.title}</a>` : `<span></span>`}
             ${next ? `<a href="${next.slug}.html">다음: ${next.title}</a>` : `<a href="${lesson.part.hub}">목차로 돌아가기</a>`}
           </nav>
+        </section>
+      </main>`,
+  });
+}
+
+function renderLegacyLessonRedirect(href, title) {
+  return layout({
+    title: `${title} | 강의 이동 안내`,
+    description: `${title} 강의의 현재 페이지로 이동합니다.`,
+    current: href,
+    body: `
+      <main id="top">
+        <section class="section page-section lesson-page">
+          ${breadcrumb([["lecture.html", "기본강의"], ["lecture-civil.html", "제1부 민법: 총칙, 물권과 상속"], [href, title]])}
+          <p class="eyebrow">Moved</p>
+          <h1>강의 페이지가 이동되었습니다</h1>
+          <p class="hero-text">이전 주소의 강의 내용은 현재 목차에 맞게 <a href="${href}">${title}</a> 페이지로 정리되었습니다.</p>
+          <div class="inline-actions">
+            <a class="button primary" href="${href}">현재 강의로 이동</a>
+            <a class="button secondary" href="lecture-civil.html">민법 강의실</a>
+          </div>
+          <script>window.location.replace("${href}");</script>
         </section>
       </main>`,
   });
