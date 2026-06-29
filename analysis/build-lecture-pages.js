@@ -6590,10 +6590,15 @@ function layout({ title, description, current, body }) {
 function header(current) {
   return `<header class="topbar">
       <a class="brand" href="index.html" aria-label="보상관리사 학습 홈">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-mark" aria-hidden="true"><span class="brand-mark-text">보상</span></span>
         <span>보상관리사 학습</span>
       </a>
-      <nav class="nav" aria-label="주요 메뉴">
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="주요 메뉴">
         ${renderNavGroups(current)}
       </nav>
     </header>`;

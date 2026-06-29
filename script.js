@@ -986,7 +986,45 @@ function setupNavDropdowns() {
   });
 }
 
+function setupMobileNav() {
+  const topbar = document.querySelector(".topbar");
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector("#site-nav");
+  if (!topbar || !toggle || !nav) return;
+
+  const closeGroups = () => {
+    document.querySelectorAll(".nav-group.is-open").forEach((group) => {
+      group.classList.remove("is-open");
+      group.querySelector(".nav-trigger")?.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  const setOpen = (open) => {
+    topbar.classList.toggle("nav-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "메뉴 닫기" : "메뉴 열기");
+    if (!open) closeGroups();
+  };
+
+  toggle.addEventListener("click", () => {
+    setOpen(!topbar.classList.contains("nav-open"));
+  });
+
+  nav.querySelectorAll(".nav-menu a").forEach((link) => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setOpen(false);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700) setOpen(false);
+  });
+}
+
 function init() {
+  setupMobileNav();
   setupNavDropdowns();
   renderExamMap();
   renderArchive();

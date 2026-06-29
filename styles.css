@@ -87,6 +87,49 @@ input {
   text-indent: -999px;
 }
 
+.brand-mark-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 8px 18px rgba(24, 33, 43, 0.08);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.topbar.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.topbar.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.topbar.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -3042,21 +3085,64 @@ body.lightbox-open {
 
 @media (max-width: 700px) {
   .topbar {
-    position: static;
-    align-items: flex-start;
+    position: sticky;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 62px;
+    padding: 10px 14px;
+  }
+
+  .brand {
+    max-width: calc(100% - 58px);
+    min-width: 0;
+    font-size: 16px;
+  }
+
+  .brand > span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .brand-mark {
+    flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
     flex-direction: column;
-    padding: 16px 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-left: auto;
+  }
+
+  .nav-toggle:hover,
+  .nav-toggle:focus-visible {
+    border-color: var(--teal);
+    outline: none;
   }
 
   .nav {
-    justify-content: flex-start;
+    display: none;
     width: 100%;
+    justify-content: stretch;
+    gap: 8px;
+    padding: 8px 0 4px;
+  }
+
+  .topbar.nav-open .nav {
+    display: grid;
   }
 
   .nav-group {
     display: grid;
     width: 100%;
-    gap: 6px;
+    gap: 0;
   }
 
   .nav-group::after {
@@ -3066,21 +3152,32 @@ body.lightbox-open {
   .nav-trigger {
     justify-content: space-between;
     width: 100%;
-    background: rgba(255, 255, 255, 0.64);
+    min-height: 42px;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.82);
   }
 
   .nav-menu {
     position: static;
-    display: flex;
-    flex-wrap: wrap;
+    display: none;
     min-width: 0;
-    padding: 0 0 4px;
-    border: 0;
-    background: transparent;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+    background: rgba(255, 255, 255, 0.72);
     box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+    transform: none;
+    visibility: hidden;
+  }
+
+  .nav-group.is-open .nav-menu {
+    display: grid;
     opacity: 1;
     pointer-events: auto;
-    transform: none;
     visibility: visible;
   }
 
@@ -3089,9 +3186,9 @@ body.lightbox-open {
   }
 
   .nav-menu a {
-    width: auto;
-    min-height: 32px;
-    padding: 6px 9px;
+    width: 100%;
+    min-height: 34px;
+    padding: 7px 10px;
     font-size: 13px;
   }
 

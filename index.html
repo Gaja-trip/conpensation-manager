@@ -13,10 +13,15 @@
   <body>
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="보상관리사 학습 홈">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-mark" aria-hidden="true"><span class="brand-mark-text">보상</span></span>
         <span>보상관리사 학습</span>
       </a>
-      <nav class="nav" aria-label="주요 메뉴">
+      <button class="nav-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="주요 메뉴">
         <div class="nav-group">
           <a class="nav-trigger" href="lecture.html">기본강의</a>
           <div class="nav-menu" aria-label="기본강의 하위 메뉴">
@@ -31,9 +36,7 @@
         <div class="nav-group">
           <a class="nav-trigger" href="practice.html">문제풀이</a>
           <div class="nav-menu" aria-label="문제풀이 하위 메뉴">
-            <a href="practice.html">문제풀이 홈</a>
-            <a href="practice-first.html">1차 문제풀이</a>
-            <a href="practice-second.html">2차 문제풀이</a>
+            <a href="practice.html">문제풀이</a>
             <a href="exam-map.html">시험지도</a>
             <a href="archive.html">기출정리</a>
           </div>
