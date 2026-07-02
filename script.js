@@ -1109,7 +1109,7 @@ function setupMobileNav() {
     setOpen(!topbar.classList.contains("nav-open"));
   });
 
-  nav.querySelectorAll(".nav-menu a").forEach((link) => {
+  nav.querySelectorAll(".nav-menu a, .nav-group-direct .nav-trigger").forEach((link) => {
     link.addEventListener("click", () => setOpen(false));
   });
 

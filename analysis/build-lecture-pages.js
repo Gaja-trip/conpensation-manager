@@ -39,6 +39,13 @@ const navGroups = [
       ["plan.html", "회독계획"],
     ],
   },
+  {
+    href: "law-info.html",
+    label: "법령정보",
+    current: ["law-info.html"],
+    direct: true,
+    items: [],
+  },
 ];
 
 const introPages = [
@@ -7248,6 +7255,13 @@ function renderNavGroups(current) {
 }
 
 function renderNavGroup(group, current) {
+  if (group.direct || group.external) {
+    const groupCurrent = isGroupCurrent(group, current);
+    const externalAttrs = group.external ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `<div class="nav-group nav-group-direct">
+          <a class="nav-trigger" href="${group.href}"${groupCurrent ? ' aria-current="page"' : ""}${externalAttrs}>${group.label}</a>
+        </div>`;
+  }
   const groupCurrent = isGroupCurrent(group, current);
   return `<div class="nav-group">
           <a class="nav-trigger" href="${group.href}"${groupCurrent ? ' aria-current="page"' : ""}>${group.label}</a>

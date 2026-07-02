@@ -36,6 +36,12 @@ const navGroups = [
       ["plan.html", "회독계획"],
     ],
   },
+  {
+    href: "law-info.html",
+    label: "법령정보",
+    direct: true,
+    items: [],
+  },
 ];
 
 function renderHeader(current) {
@@ -56,6 +62,13 @@ function renderHeader(current) {
 }
 
 function renderGroup(group, current) {
+  if (group.direct || group.external) {
+    const active = isGroupCurrent(group.href, current);
+    const externalAttrs = group.external ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `<div class="nav-group nav-group-direct">
+          <a class="nav-trigger" href="${group.href}"${active ? ' aria-current="page"' : ""}${externalAttrs}>${group.label}</a>
+        </div>`;
+  }
   const active = isGroupCurrent(group.href, current);
   return `<div class="nav-group">
           <a class="nav-trigger" href="${group.href}"${active ? ' aria-current="page"' : ""}>${group.label}</a>
@@ -69,6 +82,7 @@ function isGroupCurrent(href, current) {
   if (href === "lecture.html") return current === "lecture.html" || current.startsWith("lecture-");
   if (href === "practice.html") return ["practice.html", "practice-first.html", "practice-second.html", "exam-map.html", "archive.html"].includes(current);
   if (href === "analysis.html") return ["analysis.html", "law.html", "frequency.html", "strategy.html", "drill.html", "plan.html"].includes(current);
+  if (href === "law-info.html") return current === "law-info.html";
   return false;
 }
 
