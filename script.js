@@ -481,6 +481,9 @@ function normalizeExplanationText(text) {
     .replace(/\r/g, "")
     .replace(/\*\*(문제 요약|해설 및 풀이|실생활 예시|오답 노트)\s*:\*\*/g, "$1:")
     .replace(/\*\*오답 노트\*\*/g, "오답 노트:")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^>\s?/gm, "")
+    .replace(/^\s*---+\s*$/gm, "")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
 }
@@ -489,8 +492,18 @@ function appendExplanationBlock(root, block) {
   const lines = block.split("\n").map((line) => line.trim()).filter(Boolean);
   if (!lines.length) return;
 
+  if (isMarkdownTable(lines)) {
+    appendMarkdownTable(root, lines);
+    return;
+  }
+
+  if (lines.every(isMarkdownImageLine)) {
+    appendMarkdownImages(root, lines);
+    return;
+  }
+
   const first = lines[0];
-  const labelMatch = first.match(/^(공유 페이지 크롤링 해설|보완 해설|문제 요약|해설 및 풀이|실생활 예시|오답 노트):?\s*(.*)$/);
+  const labelMatch = first.match(/^(공유 페이지 크롤링 해설|보완 해설|문제 요약|해설 및 풀이|실생활 예시|오답 노트|정답|이유|핵심 정의 정리|용어 비교|시각 자료로 이해하기|시험 포인트|정상가격|시장가치|적정가격|시가|기준가치|② 다세대주택의 정의|시험에서 가장 많이 나오는 함정|따라서 정답은):?\s*(.*)$/);
   if (labelMatch) {
     const section = createElement("section", "explanation-section");
     section.append(createElement("h4", "", labelMatch[1]));
@@ -511,12 +524,87 @@ function appendExplanationBlock(root, block) {
   root.append(section);
 }
 
+function isMarkdownImageLine(line) {
+  return /^!\[([^\]]*)\]\(([^)]+)\)$/.test(line);
+}
+
+function appendMarkdownImages(root, lines) {
+  const section = createElement("section", "explanation-image-gallery");
+  lines.forEach((line) => {
+    const imageMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
+    if (!imageMatch) return;
+    const [, alt, src] = imageMatch;
+    const figure = createElement("figure", "explanation-figure lesson-figure");
+    const image = document.createElement("img");
+    image.src = src;
+    image.alt = alt;
+    image.loading = "lazy";
+    image.dataset.lightboxImage = "true";
+    image.tabIndex = 0;
+    image.setAttribute("role", "button");
+    image.setAttribute("aria-label", `${alt || "해설 이미지"} 크게 보기`);
+    const caption = createElement("figcaption", "", alt);
+    figure.append(image, caption);
+    section.append(figure);
+  });
+  root.append(section);
+}
+
+function isMarkdownTable(lines) {
+  return (
+    lines.length >= 2 &&
+    lines[0].includes("|") &&
+    /^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$/.test(lines[1])
+  );
+}
+
+function appendMarkdownTable(root, lines) {
+  const section = createElement("section", "explanation-section explanation-table-section");
+  const table = createElement("table", "explanation-table");
+  const thead = document.createElement("thead");
+  const tbody = document.createElement("tbody");
+  const headerRow = document.createElement("tr");
+
+  parseMarkdownRow(lines[0]).forEach((cell) => {
+    const th = document.createElement("th");
+    th.innerHTML = formatInlineExplanation(cell);
+    headerRow.append(th);
+  });
+
+  thead.append(headerRow);
+  lines.slice(2).forEach((line) => {
+    const cells = parseMarkdownRow(line);
+    if (!cells.length) return;
+    const tr = document.createElement("tr");
+    cells.forEach((cell) => {
+      const td = document.createElement("td");
+      td.innerHTML = formatInlineExplanation(cell);
+      tr.append(td);
+    });
+    tbody.append(tr);
+  });
+
+  table.append(thead, tbody);
+  section.append(table);
+  root.append(section);
+}
+
+function parseMarkdownRow(line) {
+  return line
+    .trim()
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((cell) => cell.trim())
+    .filter(Boolean);
+}
+
 function appendExplanationLines(parent, lines) {
   const listItems = [];
   const paragraphs = [];
 
   lines.forEach((line) => {
-    const listMatch = line.match(/^(\d+\.|[①②③④⑤⑥⑦⑧⑨⑩]|[-•])\s*(.*)$/);
+    const listMatch = line.match(/^(\d+\.|[①②③④⑤⑥⑦⑧⑨⑩]|[-•*])\s*(.*)$/);
     if (listMatch) {
       listItems.push(listMatch[2] || line);
     } else {
@@ -841,9 +929,6 @@ function updatePlanProgress() {
 }
 
 function setupImageLightbox() {
-  const images = [...document.querySelectorAll(".lesson-figure img, img[data-lightbox-image]")];
-  if (!images.length) return;
-
   let previouslyFocused = null;
   const lightbox = createElement("div", "image-lightbox");
   lightbox.hidden = true;
@@ -889,17 +974,31 @@ function setupImageLightbox() {
     closeButton.focus({ preventScroll: true });
   };
 
-  images.forEach((image) => {
+  const prepareImage = (image) => {
+    if (!image || image.dataset.lightboxReady === "true") return;
     image.dataset.lightboxImage = "true";
+    image.dataset.lightboxReady = "true";
     image.tabIndex = 0;
     image.setAttribute("role", "button");
     image.setAttribute("aria-label", `${image.alt || "강의 이미지"} 크게 보기`);
-    image.addEventListener("click", () => open(image));
-    image.addEventListener("keydown", (event) => {
-      if (event.key !== "Enter" && event.key !== " ") return;
-      event.preventDefault();
-      open(image);
-    });
+  };
+
+  document.querySelectorAll(".lesson-figure img, img[data-lightbox-image]").forEach(prepareImage);
+
+  document.addEventListener("click", (event) => {
+    const image = event.target.closest?.(".lesson-figure img, img[data-lightbox-image]");
+    if (!image) return;
+    prepareImage(image);
+    open(image);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const image = event.target.closest?.(".lesson-figure img, img[data-lightbox-image]");
+    if (!image) return;
+    event.preventDefault();
+    prepareImage(image);
+    open(image);
   });
 
   closeButton.addEventListener("click", close);
