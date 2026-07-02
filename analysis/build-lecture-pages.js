@@ -39,6 +39,13 @@ const navGroups = [
       ["plan.html", "회독계획"],
     ],
   },
+  {
+    href: "https://www.law.go.kr/",
+    label: "법령정보",
+    current: [],
+    external: true,
+    items: [],
+  },
 ];
 
 const introPages = [
@@ -7248,6 +7255,11 @@ function renderNavGroups(current) {
 }
 
 function renderNavGroup(group, current) {
+  if (group.external) {
+    return `<div class="nav-group nav-group-direct">
+          <a class="nav-trigger" href="${group.href}" target="_blank" rel="noopener noreferrer">${group.label}</a>
+        </div>`;
+  }
   const groupCurrent = isGroupCurrent(group, current);
   return `<div class="nav-group">
           <a class="nav-trigger" href="${group.href}"${groupCurrent ? ' aria-current="page"' : ""}>${group.label}</a>
