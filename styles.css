@@ -716,6 +716,11 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.practice-top-menu-grid {
+  max-width: 1120px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .section {
   padding: 56px 0;
 }
