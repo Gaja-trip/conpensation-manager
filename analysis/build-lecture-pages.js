@@ -40,10 +40,10 @@ const navGroups = [
     ],
   },
   {
-    href: "https://www.law.go.kr/",
+    href: "law-info.html",
     label: "법령정보",
-    current: [],
-    external: true,
+    current: ["law-info.html"],
+    direct: true,
     items: [],
   },
 ];
@@ -7255,9 +7255,11 @@ function renderNavGroups(current) {
 }
 
 function renderNavGroup(group, current) {
-  if (group.external) {
+  if (group.direct || group.external) {
+    const groupCurrent = isGroupCurrent(group, current);
+    const externalAttrs = group.external ? ' target="_blank" rel="noopener noreferrer"' : "";
     return `<div class="nav-group nav-group-direct">
-          <a class="nav-trigger" href="${group.href}" target="_blank" rel="noopener noreferrer">${group.label}</a>
+          <a class="nav-trigger" href="${group.href}"${groupCurrent ? ' aria-current="page"' : ""}${externalAttrs}>${group.label}</a>
         </div>`;
   }
   const groupCurrent = isGroupCurrent(group, current);

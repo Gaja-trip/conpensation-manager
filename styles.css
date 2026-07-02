@@ -826,6 +826,55 @@ h3 {
   text-decoration: none;
 }
 
+.law-info-page {
+  width: min(100% - 48px, 1440px);
+  margin: 0 auto;
+  padding: 28px 0 42px;
+}
+
+.law-info-toolbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.law-info-toolbar h1 {
+  margin-bottom: 8px;
+}
+
+.law-info-toolbar p:last-child {
+  margin: 0;
+  color: var(--muted);
+}
+
+.law-info-frame-shell {
+  position: relative;
+  min-height: calc(100vh - 230px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.law-info-frame {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  min-height: calc(100vh - 230px);
+  border: 0;
+  background: #fff;
+}
+
+.law-info-fallback {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .practice-shell {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
@@ -3195,6 +3244,25 @@ body.lightbox-open {
     min-height: 34px;
     padding: 7px 10px;
     font-size: 13px;
+  }
+
+  .law-info-page {
+    width: min(100% - 28px, 1440px);
+    padding: 20px 0 30px;
+  }
+
+  .law-info-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .law-info-toolbar .button {
+    width: 100%;
+  }
+
+  .law-info-frame-shell,
+  .law-info-frame {
+    min-height: calc(100vh - 260px);
   }
 
   .section,

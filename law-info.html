@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>제3장 점유권 | 강의 이동 안내</title>
-    <meta name="description" content="제3장 점유권 강의의 현재 페이지로 이동합니다.">
+    <title>법령정보 | 보상관리사 학습</title>
+    <meta name="description" content="보상관리사 학습 페이지 안에서 법제처 국가법령정보센터를 확인하는 법령정보 화면">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -20,10 +20,10 @@
       </button>
       <nav class="nav" id="site-nav" aria-label="주요 메뉴">
         <div class="nav-group">
-          <a class="nav-trigger" href="lecture.html" aria-current="page">기본강의</a>
+          <a class="nav-trigger" href="lecture.html">기본강의</a>
           <div class="nav-menu" aria-label="기본강의 하위 메뉴">
             <a href="lecture.html">강의 홈</a>
-            <a href="lecture-civil.html" aria-current="page">민법강의</a>
+            <a href="lecture-civil.html">민법강의</a>
             <a href="lecture-real-estate.html">부동산관계법규</a>
             <a href="lecture-compensation-law.html">토지보상법규</a>
             <a href="lecture-practice-guide.html">기출·연습</a>
@@ -49,28 +49,41 @@
           </div>
         </div>
         <div class="nav-group nav-group-direct">
-          <a class="nav-trigger" href="law-info.html">법령정보</a>
+          <a class="nav-trigger" href="law-info.html" aria-current="page">법령정보</a>
         </div>
       </nav>
     </header>
-    
-      <main id="top">
-        <section class="section page-section lesson-page">
-          <nav class="breadcrumb" aria-label="현재 위치"><a href="lecture.html">기본강의</a><span>/</span><a href="lecture-civil.html">제1부 민법: 총칙, 물권과 상속</a><span>/</span><a href="lecture-civil-possession.html">제3장 점유권</a></nav>
-          <p class="eyebrow">Moved</p>
-          <h1>강의 페이지가 이동되었습니다</h1>
-          <p class="hero-text">이전 주소의 강의 내용은 현재 목차에 맞게 <a href="lecture-civil-possession.html">제3장 점유권</a> 페이지로 정리되었습니다.</p>
-          <div class="inline-actions">
-            <a class="button primary" href="lecture-civil-possession.html">현재 강의로 이동</a>
-            <a class="button secondary" href="lecture-civil.html">민법 강의실</a>
+
+    <main id="top">
+      <section class="law-info-page" aria-labelledby="law-info-title">
+        <div class="law-info-toolbar">
+          <div>
+            <p class="eyebrow">National Law Information Center</p>
+            <h1 id="law-info-title">법령정보</h1>
+            <p>법제처 국가법령정보센터를 보상관리사 학습 화면 안에서 바로 확인합니다.</p>
           </div>
-          <script>window.location.replace("lecture-civil-possession.html");</script>
-        </section>
-      </main>
+          <a class="button secondary" href="https://www.law.go.kr/" target="_blank" rel="noopener noreferrer">공식 사이트 새 창</a>
+        </div>
+        <div class="law-info-frame-shell">
+          <iframe
+            class="law-info-frame"
+            src="https://www.law.go.kr/"
+            title="법제처 국가법령정보센터"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <p class="law-info-fallback">
+          외부 사이트의 보안 정책에 따라 내장 표시가 제한되면 위 버튼으로 공식 사이트를 열어 확인하세요.
+        </p>
+      </section>
+    </main>
+
     <footer class="footer">
-      <p>보상관리사 기본강의는 기출분석, 예상문제, 법령 이해하기 페이지와 함께 회독하도록 구성했습니다.</p>
-      <p><a href="lecture.html">기본강의 홈</a> · <a href="practice.html">문제풀이</a> · <a href="law.html">토지보상법 이해하기</a></p>
+      <p>법령 원문 확인이 필요할 때 이 화면에서 바로 검색할 수 있습니다.</p>
+      <p><a href="law.html">토지보상법 이해하기</a> · <a href="lecture-compensation-law.html">토지보상법규 강의</a></p>
     </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
