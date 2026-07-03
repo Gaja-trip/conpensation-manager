@@ -386,7 +386,33 @@ function renderPractice() {
   [item.bank, item.source, `${practiceIndex + 1} / ${practiceItems.length}`, `문항 ${item.no}`].forEach((text) => {
     meta.append(createElement("span", "tag", text));
   });
-  root.append(meta);
+
+  const nav = createElement("div", "practice-nav");
+  const prev = createElement("button", "", "");
+  prev.type = "button";
+  prev.disabled = practiceIndex === 0;
+  prev.setAttribute("aria-label", "이전 문제");
+  prev.title = "이전 문제";
+  prev.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg>';
+  prev.addEventListener("click", () => {
+    practiceIndex = Math.max(0, practiceIndex - 1);
+    renderPractice();
+  });
+  const next = createElement("button", "", "");
+  next.type = "button";
+  next.disabled = practiceIndex === practiceItems.length - 1;
+  next.setAttribute("aria-label", "다음 문제");
+  next.title = "다음 문제";
+  next.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg>';
+  next.addEventListener("click", () => {
+    practiceIndex = Math.min(practiceItems.length - 1, practiceIndex + 1);
+    renderPractice();
+  });
+  nav.append(prev, next);
+
+  const head = createElement("div", "practice-card-head");
+  head.append(meta, nav);
+  root.append(head);
   root.append(createElement("p", "practice-question", item.question));
 
   const list = createElement("ol", "choice-list");
@@ -424,23 +450,6 @@ function renderPractice() {
     root.append(createAnswerExplanation(item, chosen));
   }
 
-  const nav = createElement("div", "practice-nav");
-  const prev = createElement("button", "", "이전");
-  prev.type = "button";
-  prev.disabled = practiceIndex === 0;
-  prev.addEventListener("click", () => {
-    practiceIndex = Math.max(0, practiceIndex - 1);
-    renderPractice();
-  });
-  const next = createElement("button", "", "다음");
-  next.type = "button";
-  next.disabled = practiceIndex === practiceItems.length - 1;
-  next.addEventListener("click", () => {
-    practiceIndex = Math.min(practiceItems.length - 1, practiceIndex + 1);
-    renderPractice();
-  });
-  nav.append(prev, next);
-  root.append(nav);
 }
 
 function createAnswerExplanation(item, chosen) {
