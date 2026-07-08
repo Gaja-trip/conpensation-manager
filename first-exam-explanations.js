@@ -376,3 +376,63 @@ Object.assign(window.QUESTION_EXPLANATIONS, {
 - 관리와 처분: 정관 또는 총회 결의 기준
 - 보존행위: 각 사원이 단독으로 할 수 있다고 단정하면 오답입니다.`
 });
+
+const civil2020ExplanationImages = {
+  "2020-1차-민법-1": [
+    ["2020 민법 1번 물권의 의의 시각 정리", "assets/practice-2020-civil/2020-civil-q01-property-meaning.png"],
+  ],
+  "2020-1차-민법-2": [
+    ["2020 민법 2번 시효취득과 등기 필요 시각 정리", "assets/practice-2020-civil/2020-civil-q02-registration-needed.png"],
+  ],
+  "2020-1차-민법-3": [
+    ["2020 민법 3번 공시방법 시각 정리", "assets/practice-2020-civil/2020-civil-q03-public-notice-method.png"],
+  ],
+  "2020-1차-민법-4": [
+    ["2020 민법 4번 독립한 물건 정답 정리", "assets/practice-2020-civil/2020-civil-q04-independent-property.png"],
+    ["2020 민법 4번 독립한 물건 핵심 정리", "assets/practice-2020-civil/2020-civil-q04-independent-property-summary.png"],
+    ["2020 민법 4번 포푸라와 배추 비교 정리", "assets/practice-2020-civil/2020-civil-q04-independent-property-compare.png"],
+  ],
+  "2020-1차-민법-5": [
+    ["2020 민법 5번 부동산물권변동 시각 정리", "assets/practice-2020-civil/2020-civil-q05-real-right-change.png"],
+  ],
+  "2020-1차-민법-6": [
+    ["2020 민법 6번 등기부와 대장 시각 정리", "assets/practice-2020-civil/2020-civil-q06-register-ledger.png"],
+  ],
+  "2020-1차-민법-9": [
+    ["2020 민법 9번 본등기의 효력 시각 정리", "assets/practice-2020-civil/2020-civil-q09-main-registration-effect.png"],
+  ],
+  "2020-1차-민법-11": [
+    ["2020 민법 11번 간접점유자 시각 정리", "assets/practice-2020-civil/2020-civil-q11-indirect-possession.png"],
+  ],
+  "2020-1차-민법-12": [
+    ["2020 민법 12번 선의점유와 악의점유 시각 정리", "assets/practice-2020-civil/2020-civil-q12-good-bad-faith-possession.png"],
+  ],
+  "2020-1차-민법-13": [
+    ["2020 민법 13번 점유권의 효력 시각 정리", "assets/practice-2020-civil/2020-civil-q13-possession-effect.png"],
+  ],
+  "2020-1차-민법-14": [
+    ["2020 민법 14번 토지소유권 시각 정리", "assets/practice-2020-civil/2020-civil-q14-land-ownership.png"],
+  ],
+  "2020-1차-민법-15": [
+    ["2020 민법 15번 점유취득시효 시각 정리", "assets/practice-2020-civil/2020-civil-q15-acquisitive-prescription.png"],
+  ],
+  "2020-1차-민법-17": [
+    ["2020 민법 17번 공유 시각 정리", "assets/practice-2020-civil/2020-civil-q17-coownership.png"],
+  ],
+  "2020-1차-민법-18": [
+    ["2020 민법 18번 공유물 시각 정리", "assets/practice-2020-civil/2020-civil-q18-common-property.png"],
+  ],
+  "2020-1차-민법-19": [
+    ["2020 민법 19번 합유 시각 정리", "assets/practice-2020-civil/2020-civil-q19-joint-ownership.png"],
+  ],
+  "2020-1차-민법-20": [
+    ["2020 민법 20번 총유 시각 정리", "assets/practice-2020-civil/2020-civil-q20-collective-ownership.png"],
+  ],
+};
+
+Object.entries(civil2020ExplanationImages).forEach(([id, images]) => {
+  const current = window.QUESTION_EXPLANATIONS[id] || "";
+  const imageBlock = images.map(([alt, src]) => `![${alt}](${src})`).join("\n");
+  if (current.includes(imageBlock)) return;
+  window.QUESTION_EXPLANATIONS[id] = `${current}\n\n시각 자료\n\n${imageBlock}`.trim();
+});
