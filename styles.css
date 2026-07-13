@@ -46,6 +46,108 @@ input {
   font: inherit;
 }
 
+html[data-access-scope="protected"].access-locked {
+  background: var(--bg);
+}
+
+html[data-access-scope="protected"].access-locked body > :not(.access-gate) {
+  visibility: hidden;
+}
+
+.access-gate {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  overflow: auto;
+  background:
+    linear-gradient(135deg, rgba(23, 107, 99, 0.13), rgba(49, 95, 135, 0.12)),
+    var(--bg);
+}
+
+.access-gate__panel {
+  width: min(100%, 440px);
+  padding: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.access-gate__logo {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 18px;
+  background: transparent url("assets/compensation-manager-logo.png") center / contain no-repeat;
+}
+
+.access-gate__panel h1 {
+  margin: 4px 0 10px;
+  font-size: 30px;
+}
+
+.access-gate__description {
+  margin: 0;
+  color: var(--muted);
+}
+
+.access-gate__form {
+  margin-top: 28px;
+  text-align: left;
+}
+
+.access-gate__form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.access-gate__field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.access-gate__field input {
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.access-gate__field input:focus-visible {
+  border-color: var(--teal);
+  outline: 2px solid rgba(23, 107, 99, 0.22);
+  outline-offset: 2px;
+}
+
+.access-gate__field .button {
+  min-height: 44px;
+  margin: 0;
+}
+
+.access-gate__error {
+  margin: 10px 0 0;
+  color: #a42d20;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.access-gate__home {
+  display: inline-block;
+  margin-top: 24px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .topbar {
   position: sticky;
   top: 0;
