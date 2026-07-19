@@ -423,8 +423,8 @@ function renderPractice() {
     button.type = "button";
     button.disabled = chosen !== undefined;
     button.innerHTML = `<span class="number">${choiceNo}</span><span>${choice}</span>`;
-    if (chosen !== undefined && choiceNo === item.answer) button.classList.add("correct");
-    if (chosen === choiceNo && choiceNo !== item.answer) button.classList.add("wrong");
+    if (chosen !== undefined && isCorrectChoice(item, choiceNo)) button.classList.add("correct");
+    if (chosen === choiceNo && !isCorrectChoice(item, choiceNo)) button.classList.add("wrong");
     button.addEventListener("click", () => {
       practiceAnswers.set(item.id, choiceNo);
       renderPractice();
@@ -436,11 +436,12 @@ function renderPractice() {
 
   const result = createElement("p", "practice-result");
   if (chosen !== undefined) {
-    const isCorrect = chosen === item.answer;
+    const correctAnswers = getCorrectAnswers(item);
+    const isCorrect = isCorrectChoice(item, chosen);
     result.classList.add(isCorrect ? "good" : "bad");
     result.textContent = isCorrect
-      ? `정답입니다. ${item.answer}번`
-      : `오답입니다. 정답은 ${item.answer}번입니다.`;
+      ? `정답입니다. ${formatAnswerNumbers(correctAnswers)}`
+      : `오답입니다. 정답은 ${formatAnswerNumbers(correctAnswers)}입니다.`;
   } else {
     result.textContent = "보기를 선택하면 바로 채점됩니다.";
   }
@@ -452,15 +453,35 @@ function renderPractice() {
 
 }
 
+function getCorrectAnswers(item) {
+  const raw = Array.isArray(item.answers) ? item.answers : Array.isArray(item.answer) ? item.answer : [item.answer];
+  return raw.map((value) => Number(value)).filter((value) => Number.isInteger(value) && value > 0);
+}
+
+function isCorrectChoice(item, choiceNo) {
+  return getCorrectAnswers(item).includes(Number(choiceNo));
+}
+
+function formatAnswerNumbers(answers) {
+  return answers.map((answer) => `${answer}번`).join(", ");
+}
+
+function getCorrectChoiceText(item) {
+  return getCorrectAnswers(item)
+    .map((answer) => `${answer}번 ${item.choices?.[answer - 1] || ""}`.trim())
+    .join(" / ");
+}
+
 function createAnswerExplanation(item, chosen) {
-  const correctChoice = item.choices?.[item.answer - 1] || "";
+  const correctAnswers = getCorrectAnswers(item);
+  const correctChoice = getCorrectChoiceText(item);
   const chosenChoice = item.choices?.[chosen - 1] || "";
   const box = createElement("div", "answer-explanation");
   box.append(createElement("h3", "", "답안 해석"));
 
   const summary = createElement("div", "answer-summary");
-  summary.append(createAnswerSummaryCard("내가 고른 답", `${chosen}번`, chosenChoice, chosen === item.answer ? "good" : "bad"));
-  summary.append(createAnswerSummaryCard("정답", `${item.answer}번`, correctChoice, "good"));
+  summary.append(createAnswerSummaryCard("내가 고른 답", `${chosen}번`, chosenChoice, isCorrectChoice(item, chosen) ? "good" : "bad"));
+  summary.append(createAnswerSummaryCard("정답", formatAnswerNumbers(correctAnswers), correctChoice, "good"));
   box.append(summary);
 
   box.append(createFormattedExplanation(getQuestionExplanation(item, correctChoice)));
