@@ -5514,6 +5514,7 @@ for (const lesson of lessonPages) writePage(`${lesson.slug}.html`, renderLessonP
 for (const [file, href, title] of legacyLessonRedirects) writePage(file, renderLegacyLessonRedirect(href, title));
 
 console.log(JSON.stringify({ generated: 1 + introPages.length + parts.length + lessonPages.length + legacyLessonRedirects.length }, null, 2));
+require('./build-search-index.js');
 
 function buildLesson(part, item) {
   const { title, index, groupIndex, groupTitle, groupChildren, isGroupParent } = item;

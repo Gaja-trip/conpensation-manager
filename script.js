@@ -341,7 +341,26 @@ function setupPracticeFilters() {
     if (control) control.addEventListener("change", resetPractice);
   });
   $("#practice-reset").addEventListener("click", resetPractice);
-  resetPractice();
+
+  const params = new URLSearchParams(window.location.search);
+  [
+    ["#practice-bank", "bank"],
+    ["#practice-year", "year"],
+    ["#practice-round", "round"],
+    ["#practice-subject", "subject"],
+  ].forEach(([selector, parameter]) => {
+    const control = $(selector);
+    const value = params.get(parameter);
+    if (!control || !value) return;
+    if ([...control.options].some((option) => option.value === value)) control.value = value;
+  });
+
+  practiceItems = selectedPracticeItems();
+  practiceAnswers = new Map();
+  const requestedQuestion = params.get("question");
+  const requestedIndex = requestedQuestion ? practiceItems.findIndex((item) => item.id === requestedQuestion) : -1;
+  practiceIndex = requestedIndex >= 0 ? requestedIndex : 0;
+  renderPractice();
 }
 
 function selectedPracticeItems() {
@@ -1067,6 +1086,214 @@ function setupClassroomTabs() {
   });
 }
 
+let siteSearchIndexPromise;
+
+function loadSiteSearchIndex() {
+  if (Array.isArray(window.SITE_SEARCH_INDEX)) return Promise.resolve(window.SITE_SEARCH_INDEX);
+  if (siteSearchIndexPromise) return siteSearchIndexPromise;
+
+  siteSearchIndexPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "search-index.js";
+    script.dataset.siteSearchIndex = "true";
+    script.addEventListener("load", () => resolve(window.SITE_SEARCH_INDEX || []), { once: true });
+    script.addEventListener("error", () => reject(new Error("검색 색인을 불러오지 못했습니다.")), { once: true });
+    document.head.append(script);
+  });
+
+  return siteSearchIndexPromise;
+}
+
+function normalizeSearchText(value) {
+  return String(value || "")
+    .normalize("NFKC")
+    .toLocaleLowerCase("ko")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function searchSiteIndex(index, query) {
+  const tokens = normalizeSearchText(query).split(" ").filter(Boolean);
+  if (!tokens.length) return { items: [], total: 0 };
+
+  const matches = index.flatMap((record) => {
+    const title = normalizeSearchText(record.title);
+    const snippet = normalizeSearchText(record.snippet);
+    const text = normalizeSearchText(`${record.title || ""} ${record.snippet || ""} ${record.text || ""}`);
+    if (!tokens.every((token) => text.includes(token))) return [];
+
+    let score = record.kind === "페이지" ? 8 : 0;
+    tokens.forEach((token) => {
+      if (title === token) score += 180;
+      else if (title.startsWith(token)) score += 110;
+      else if (title.includes(token)) score += 70;
+      if (snippet.includes(token)) score += 25;
+      else score += 5;
+    });
+
+    return [{ record, score }];
+  });
+
+  matches.sort((left, right) => right.score - left.score || left.record.title.localeCompare(right.record.title, "ko"));
+  return { items: matches.slice(0, 8).map((match) => match.record), total: matches.length };
+}
+
+function makeSearchSnippet(record, query) {
+  const source = String(record.text || record.snippet || "").replace(/\s+/g, " ").trim();
+  if (!source) return "";
+  const firstToken = normalizeSearchText(query).split(" ").find(Boolean) || "";
+  const sourceLower = source.toLocaleLowerCase("ko");
+  const matchIndex = firstToken ? sourceLower.indexOf(firstToken) : -1;
+  const start = Math.max(0, matchIndex >= 0 ? matchIndex - 54 : 0);
+  const end = Math.min(source.length, start + 150);
+  return `${start > 0 ? "…" : ""}${source.slice(start, end)}${end < source.length ? "…" : ""}`;
+}
+
+function setupSiteSearch() {
+  const topbar = document.querySelector(".topbar");
+  const brand = topbar?.querySelector(".brand");
+  if (!topbar || !brand || topbar.querySelector(".site-search")) return;
+
+  const form = document.createElement("form");
+  form.className = "site-search";
+  form.setAttribute("role", "search");
+  form.innerHTML = `
+    <div class="site-search__field">
+      <svg class="site-search__icon" aria-hidden="true" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m16 16 4 4"></path>
+      </svg>
+      <input id="site-search-input" type="search" placeholder="전체 검색" aria-label="보상관리사 학습 전체 검색" aria-controls="site-search-results" aria-expanded="false" autocomplete="off" spellcheck="false">
+      <button class="site-search__clear" type="button" aria-label="검색어 지우기" title="검색어 지우기" hidden>×</button>
+    </div>
+    <section class="site-search__panel" id="site-search-results" aria-label="검색 결과" hidden>
+      <p class="site-search__status" aria-live="polite">검색어를 입력하세요.</p>
+      <ul class="site-search__list"></ul>
+    </section>
+  `;
+  brand.insertAdjacentElement("afterend", form);
+
+  const input = form.querySelector("input");
+  const clearButton = form.querySelector(".site-search__clear");
+  const panel = form.querySelector(".site-search__panel");
+  const status = form.querySelector(".site-search__status");
+  const list = form.querySelector(".site-search__list");
+  let currentResults = [];
+  let activeIndex = -1;
+
+  const setPanelOpen = (open) => {
+    panel.hidden = !open;
+    input.setAttribute("aria-expanded", String(open));
+    if (!open) {
+      activeIndex = -1;
+      input.removeAttribute("aria-activedescendant");
+    }
+  };
+
+  const updateActiveResult = (nextIndex) => {
+    const links = [...list.querySelectorAll("a")];
+    if (!links.length) return;
+    activeIndex = (nextIndex + links.length) % links.length;
+    links.forEach((link, index) => link.classList.toggle("is-active", index === activeIndex));
+    input.setAttribute("aria-activedescendant", links[activeIndex].id);
+    links[activeIndex].scrollIntoView({ block: "nearest" });
+  };
+
+  const renderResults = (query, result) => {
+    currentResults = result.items;
+    activeIndex = -1;
+    list.replaceChildren();
+    input.removeAttribute("aria-activedescendant");
+
+    if (!result.total) {
+      status.textContent = `“${query}” 검색 결과가 없습니다.`;
+      setPanelOpen(true);
+      return;
+    }
+
+    status.textContent = result.total > currentResults.length
+      ? `${result.total}개 중 관련도 높은 ${currentResults.length}개 결과`
+      : `${result.total}개 결과`;
+
+    currentResults.forEach((record, index) => {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.id = `site-search-option-${index}`;
+      link.href = record.href;
+      link.setAttribute("role", "option");
+      link.innerHTML = `
+        <span class="site-search__result-meta">${record.section} · ${record.kind}${record.protected ? " · 암호 필요" : ""}</span>
+        <strong></strong>
+        <span class="site-search__snippet"></span>
+      `;
+      link.querySelector("strong").textContent = record.title;
+      link.querySelector(".site-search__snippet").textContent = makeSearchSnippet(record, query);
+      link.addEventListener("mouseenter", () => updateActiveResult(index));
+      item.append(link);
+      list.append(item);
+    });
+    setPanelOpen(true);
+  };
+
+  const runSearch = async () => {
+    const query = input.value.trim();
+    clearButton.hidden = !query;
+    if (!query) {
+      currentResults = [];
+      list.replaceChildren();
+      status.textContent = "검색어를 입력하세요.";
+      setPanelOpen(document.activeElement === input);
+      return;
+    }
+
+    status.textContent = "검색 중…";
+    list.replaceChildren();
+    setPanelOpen(true);
+
+    try {
+      const index = await loadSiteSearchIndex();
+      const currentQuery = input.value.trim();
+      if (!currentQuery) return;
+      renderResults(currentQuery, searchSiteIndex(index, currentQuery));
+    } catch {
+      status.textContent = "검색 데이터를 불러오지 못했습니다.";
+      currentResults = [];
+    }
+  };
+
+  input.addEventListener("focus", runSearch);
+  input.addEventListener("input", runSearch);
+  input.addEventListener("search", runSearch);
+  input.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      updateActiveResult(activeIndex + 1);
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      updateActiveResult(activeIndex - 1);
+    } else if (event.key === "Escape") {
+      setPanelOpen(false);
+      input.blur();
+    }
+  });
+
+  clearButton.addEventListener("click", () => {
+    input.value = "";
+    input.focus();
+    runSearch();
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const target = currentResults[activeIndex >= 0 ? activeIndex : 0];
+    if (target) window.location.href = target.href;
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!form.contains(event.target)) setPanelOpen(false);
+  });
+}
+
 function setupNavDropdowns() {
   const groups = [...document.querySelectorAll(".nav-group")];
   if (!groups.length) return;
@@ -1153,6 +1380,7 @@ function setupMobileNav() {
 }
 
 function init() {
+  setupSiteSearch();
   setupMobileNav();
   setupNavDropdowns();
   renderExamMap();
